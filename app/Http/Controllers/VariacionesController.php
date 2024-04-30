@@ -16,6 +16,23 @@ class VariacionesController extends Controller
         return response()->json($variaciones);
     }
 
+    public function obtenerProductosXname($name){
+     
+        $variaciones = Variacion::select('productos.nombre as nombre_producto', DB::raw('MIN(categorias.nombre) as nombre_categoria'), 'v.id as id_producto')
+        ->join('variacion_categoria as vc', 'variaciones.id', '=', 'vc.variacion_id')
+        ->join('categorias', 'vc.categoria_id', '=', 'categorias.id')
+        ->join('productos', 'variaciones.producto_id', '=', 'productos.id')
+        ->join(DB::raw('(SELECT MIN(id) as id FROM variaciones GROUP BY producto_id) as v'), function ($join) {
+            $join->on('variaciones.id', '=', 'v.id');
+        })
+        ->where('productos.nombre','LIKE', '%' . $name . '%')
+        ->groupBy('productos.nombre', 'v.id')
+        ->get();
+    
+        return response()->json($variaciones);
+
+    }
+
     public function getProductosLinea()
     {
         $variaciones = Variacion::select(
@@ -214,7 +231,9 @@ class VariacionesController extends Controller
             ->where('variacion_categoria.categoria_id','!=', 3)
             ->groupBy('productos.nombre', 'categorias.nombre')
             ->get();
-
-    return $variaciones;
+            return $variaciones;
     }
+
+
+  
 }

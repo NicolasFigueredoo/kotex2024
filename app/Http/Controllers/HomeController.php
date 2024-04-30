@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactoMail;
 use App\Models\Aplicacion;
 use App\Models\CategoriaHome;
+use App\Models\Contacto;
+use App\Models\Logo;
+use App\Models\Red;
 use App\Models\SliderHome;
+use App\Models\Suscripcion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
@@ -54,7 +60,7 @@ class HomeController extends Controller
 
     public function updateCategoria(Request $request)
     {
-        $categoria = CategoriaHome::find($request->idSlider);
+        $categoria = CategoriaHome::find($request->idCategoria);
         $categoria->orden = $request->orden;
         $categoria->texto = $request->jsonCodigoSlider;
 
@@ -80,5 +86,49 @@ class HomeController extends Controller
         return response()->json($categoria);
     }
 
+    public function obtenerSuscripciones(){
+        $suscripciones = Suscripcion::all();
+        return response()->json($suscripciones);
+    }
 
+    public function obtenerContacto(){
+        $contacto = Contacto::all();
+
+        return response()->json($contacto);
+    }
+
+    public function updateContacto(Request $request)
+    {
+        $contacto = Contacto::first();
+        $contacto->direccion = $request->direccion;
+        $contacto->email = $request->email;    
+        $contacto->telefono = $request->telefono;    
+        $contacto->instagram = $request->instagram;    
+        $contacto->facebook = $request->facebook;    
+        $contacto->whatsapp = $request->whatsapp;    
+
+        $contacto->save();
+
+        return response()->json(['message' => 'Datos subidos correctamente'], 200);
+    }
+
+    public function obtenerLogos(){
+        $logos = Logo::all();
+        return response()->json($logos);
+    }
+
+
+    public function obtenerLogo($idLogo){
+        $logo = Logo::find($idLogo);
+        return response()->json($logo);
+    }
+
+    public function updateLogo(Request $request)
+    {
+        $logo = Logo::find($request->idLogo);
+        $logo->nombre = $request->nombre;    
+        $logo->save();
+
+        return response()->json(['message' => 'Datos subidos correctamente'], 200);
+    }
 }

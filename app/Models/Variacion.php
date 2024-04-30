@@ -14,21 +14,21 @@ class Variacion extends Model
 
     public function producto()
     {
-        return $this->belongsTo(Producto::class);
+        return $this->belongsTo(Producto::class)->cascadeDelete();
     }
 
     public function categorias()
     {
-        return $this->belongsToMany(Categoria::class, 'variacion_categoria', 'variacion_id', 'categoria_id');
+        return $this->belongsToMany(Categoria::class, 'variacion_categoria', 'variacion_id', 'categoria_id')->cascadeDelete();
     }
 
     public function aplicaciones()
     {
-        return $this->belongsToMany(Aplicacion::class, 'variacion_aplicacion');
+        return $this->belongsToMany(Aplicacion::class, 'variacion_aplicacion')->cascadeDelete();
     }
 
     public function unidadesVenta()
     {
-        return $this->belongsToMany(UnidadVenta::class, 'variacion_unidad_venta', 'variacion_id', 'unidad_id');
+        return $this->belongsToMany(UnidadVenta::class, 'variacion_unidad_venta', 'variacion_id', 'unidad_id')->cascadeDelete();
     }
 }

@@ -17,7 +17,7 @@ class UnidadVenta extends Model
 
     public function variaciones()
     {
-        return $this->belongsToMany(Variacion::class, 'variacion_unidad_venta', 'unidad_id', 'variacion_id');
+        return $this->belongsToMany(Variacion::class, 'variacion_unidad_venta', 'unidad_id', 'variacion_id')->cascadeDelete();
     }
 }
 

@@ -43,24 +43,41 @@ class UserController extends Controller
         return response()->json($usuario);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $usuario = $request->usuario;
-        $contraseña = Hash::make($request->contraseña);
+        $idUsuario = $request->idUsuario;
 
-        $user = User::findOrFail($id);
-        $user->name = $usuario;
-        $user->password = $contraseña;
-        $user->save();
+        $usuario = Usuario::findOrFail($idUsuario);
+        $usuario->usuario = $request->usuario;
+        $usuario->email = $request->email;
+        $usuario->save();
 
-        return response()->json($user);
+        return response()->json($usuario);
     }
 
-    public function destroy($id)
+    public function destroy($idUsuario)
     {
-        $user = User::findOrFail($id);
+        $user = Usuario::findOrFail($idUsuario);
         $user->delete();
+        $usuarios = Usuario::all();
 
-        return response()->json(['message' => 'Usuario eliminado exitosamente']);
+
+
+        return response()->json($usuarios);
+    }
+
+    public function obtenerUsuarios()
+    {
+        $usuarios = Usuario::all();
+        return response()->json($usuarios);
+    }
+
+    public function obtenerUsuario($idUsuario)
+    {
+
+        $usuario = Usuario::where('id', $idUsuario)->first();
+        return response()->json($usuario);
+
+      
     }
 }

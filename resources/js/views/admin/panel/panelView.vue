@@ -55,7 +55,6 @@
             </div>
         </nav>
 
-
         <div>
             <nav id="sidebar" class="sidebar bg-body-light shadow-right">
                 <a class="sidebar-brand">
@@ -67,8 +66,8 @@
                     </li>
                     <hr class="mx-3">
                     <li class="sidebar-item">
-                        <a  class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseCategories"
-                            aria-expanded="false" aria-controls="colappseCategories">
+                        <a  class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseHome"
+                            aria-expanded="false" aria-controls="collapseHome">
                             <div class="nav-link-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-house-door-fill" viewBox="0 0 16 16">
@@ -81,14 +80,206 @@
                                 <i class="fa-solid fa-angle-down"></i>
                             </div>
                         </a>
-                        <div id="collapseCategories" class="collapse">
+                        <div id="collapseHome" class="collapse">
                             <nav  class="sidenav-menu-nested nav accordion">
                                 <a @click="mostrarComponenteF(1)" class="nav-link ">Slider</a>
                             </nav>
                         </div>
-                        <div id="collapseCategories" class="collapse">
+                        <div id="collapseHome" class="collapse">
                             <nav class="sidenav-menu-nested nav accordion">
                                 <a @click="mostrarComponenteF(3)" class="nav-link ">Categorias</a>
+                            </nav>
+                        </div>
+                        <div id="collapseHome" class="collapse">
+                            <nav class="sidenav-menu-nested nav accordion">
+                                <a @click="mostrarComponenteF(5)" class="nav-link ">Banner</a>
+                            </nav>
+                        </div>
+
+                        <div id="collapseHome" class="collapse">
+                            <nav class="sidenav-menu-nested nav accordion">
+                                <a @click="mostrarComponenteF(21)" class="nav-link ">Servicios</a>
+                            </nav>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a  class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseNosotros"
+                            aria-expanded="false" aria-controls="collapseNosotros">
+                            <div class="nav-link-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 640 512">
+                                    <path fill="#ffffff" d="M72 88a56 56 0 1 1 112 0A56 56 0 1 1 72 88zM64 245.7C54 256.9 48 271.8 48 288s6 31.1 16 42.3V245.7zm144.4-49.3C178.7 222.7 160 261.2 160 304c0 34.3 12 65.8 32 90.5V416c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V389.2C26.2 371.2 0 332.7 0 288c0-61.9 50.1-112 112-112h32c24 0 46.2 7.5 64.4 20.3zM448 416V394.5c20-24.7 32-56.2 32-90.5c0-42.8-18.7-81.3-48.4-107.7C449.8 183.5 472 176 496 176h32c61.9 0 112 50.1 112 112c0 44.7-26.2 83.2-64 101.2V416c0 17.7-14.3 32-32 32H480c-17.7 0-32-14.3-32-32zm8-328a56 56 0 1 1 112 0A56 56 0 1 1 456 88zM576 245.7v84.7c10-11.3 16-26.1 16-42.3s-6-31.1-16-42.3zM320 32a64 64 0 1 1 0 128 64 64 0 1 1 0-128zM240 304c0 16.2 6 31 16 42.3V261.7c-10 11.3-16 26.1-16 42.3zm144-42.3v84.7c10-11.3 16-26.1 16-42.3s-6-31.1-16-42.3zM448 304c0 44.7-26.2 83.2-64 101.2V448c0 17.7-14.3 32-32 32H288c-17.7 0-32-14.3-32-32V405.2c-37.8-18-64-56.5-64-101.2c0-61.9 50.1-112 112-112h32c61.9 0 112 50.1 112 112z"/></svg>
+                            </div>
+                            <span>Nosotros</span>
+                            <div class="sidenav-collapse-arrow">
+                                <i class="fa-solid fa-angle-down"></i>
+                            </div>
+                        </a>
+                        
+                        <div id="collapseNosotros" class="collapse">
+                            <nav  class="sidenav-menu-nested nav accordion">
+                                <a @click="mostrarComponenteF(6)" class="nav-link ">Slider</a>
+                            </nav>
+                        </div>
+
+                        <div id="collapseNosotros" class="collapse">
+                            <nav  class="sidenav-menu-nested nav accordion">
+                                <a @click="mostrarComponenteF(7)" class="nav-link ">Banner</a>
+                            </nav>
+                        </div>
+
+                        <div id="collapseNosotros" class="collapse">
+                            <nav  class="sidenav-menu-nested nav accordion">
+                                <a @click="mostrarComponenteF(8)" class="nav-link ">Valores</a>
+                            </nav>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a  class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseAplicaciones"
+                            aria-expanded="false" aria-controls="collapseAplicaciones">
+                            <div class="nav-link-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5Z" />
+                                </svg>
+                            </div>
+                            <span>Aplicaciones</span>
+                            <div class="sidenav-collapse-arrow">
+                                <i class="fa-solid fa-angle-down"></i>
+                            </div>
+                        </a>
+                        
+                        <div id="collapseAplicaciones" class="collapse">
+                            <nav  class="sidenav-menu-nested nav accordion">
+                                <a @click="mostrarComponenteF(10)" class="nav-link ">Mostrar</a>
+                            </nav>
+                        </div>
+
+                        <div id="collapseAplicaciones" class="collapse">
+                            <nav  class="sidenav-menu-nested nav accordion">
+                                <a @click="mostrarComponenteF(12)" class="nav-link ">Crear</a>
+                            </nav>
+                        </div>
+
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a @click="mostrarComponenteF(13)"  class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseContacto"
+                            aria-expanded="false" aria-controls="collapseContacto">
+                            <div class="nav-link-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5Z" />
+                                </svg>
+                            </div>
+                            <span>Contacto</span>
+                            <div class="sidenav-collapse-arrow">
+                                <i class="fa-solid fa-angle-down"></i>
+                            </div>
+                        </a>
+                  
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a  class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseUsuario"
+                            aria-expanded="false" aria-controls="collapseUsuario">
+                            <div class="nav-link-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5Z" />
+                                </svg>
+                            </div>
+                            <span>Usuarios</span>
+                            <div class="sidenav-collapse-arrow">
+                                <i class="fa-solid fa-angle-down"></i>
+                            </div>
+                        </a>
+                        <div id="collapseUsuario" class="collapse">
+                            <nav  class="sidenav-menu-nested nav accordion">
+                                <a @click="mostrarComponenteF(14)" class="nav-link">Mostrar</a>
+                            </nav>
+                        </div>
+                        <div id="collapseUsuario" class="collapse">
+                            <nav class="sidenav-menu-nested nav accordion">
+                                <a @click="mostrarComponenteF(15)" class="nav-link ">Crear</a>
+                            </nav>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a  class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseSuscripciones"
+                            aria-expanded="false" aria-controls="collapseSuscripciones">
+                            <div class="nav-link-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5Z" />
+                                </svg>
+                            </div>
+                            <span>Suscripciones</span>
+                            <div class="sidenav-collapse-arrow">
+                                <i class="fa-solid fa-angle-down"></i>
+                            </div>
+                        </a>
+                        <div id="collapseSuscripciones" class="collapse">
+                            <nav  class="sidenav-menu-nested nav accordion">
+                                <a @click="mostrarComponenteF(17)" class="nav-link">Mostrar</a>
+                            </nav>
+                        </div>
+                        <div id="collapseSuscripciones" class="collapse">
+                            <nav  class="sidenav-menu-nested nav accordion">
+                                <a @click="mostrarComponenteF(18)" class="nav-link">Enviar Mensaje</a>
+                            </nav>
+                        </div>
+                    </li>
+
+                    
+                    <li class="sidebar-item">
+                        <a @click="mostrarComponenteF(19)" class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseLogos"
+                            aria-expanded="false" aria-controls="collapseLogos">
+                            <div class="nav-link-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5Z" />
+                                </svg>
+                            </div>
+                            <span>Logos</span>
+                            <div class="sidenav-collapse-arrow">
+                                <i class="fa-solid fa-angle-down"></i>
+                            </div>
+                        </a>
+                    
+                  
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a  class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseProductos"
+                            aria-expanded="false" aria-controls="collapseProductos">
+                            <div class="nav-link-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5Z" />
+                                </svg>
+                            </div>
+                            <span>Productos</span>
+                            <div class="sidenav-collapse-arrow">
+                                <i class="fa-solid fa-angle-down"></i>
+                            </div>
+                        </a>
+                        <div id="collapseProductos" class="collapse">
+                            <nav  class="sidenav-menu-nested nav accordion">
+                                <a @click="mostrarComponenteF(21)" class="nav-link">Mostrar</a>
+                            </nav>
+                        </div>
+                        <div id="collapseProductos" class="collapse">
+                            <nav  class="sidenav-menu-nested nav accordion">
+                                <a @click="mostrarComponenteF(23)" class="nav-link">Crear</a>
                             </nav>
                         </div>
                     </li>
@@ -97,10 +288,56 @@
                 </ul>
             </nav>
 
+            <Alerta style="position: fixed; z-index: 5;" v-if="mostrarAlerta === true"/>
+
+            <!--COMPONENTES HOME -->
             <ShowSlider v-if="mostrarComponente === 1"/>
             <EditSlider v-if="mostrarComponente === 2"/>
             <ShowCategorias v-if="mostrarComponente === 3"/>
             <EditCategoria v-if="mostrarComponente === 4"/>
+            <EditBanner v-if="mostrarComponente === 5"/>
+
+            <!--COMPONENTES NOSOTROS -->
+            <ShowSlider v-if="mostrarComponente === 6"/>
+            <EditBanner v-if="mostrarComponente === 7"/>
+            <ShowSeccionesNosotros v-if="mostrarComponente === 8"/>
+            <EditSeccionesNosotros v-if="mostrarComponente === 9"/>
+            
+            <!--COMPONENTES APLICACIONES -->
+            <ShowAplicaciones v-if="mostrarComponente === 10"/>
+            <EditAplicaciones v-if="mostrarComponente === 11"/>
+            <CrearAplicaciones v-if="mostrarComponente === 12"/>
+
+            <!--COMPONENTES CONTACTO -->
+            <ShowContactos v-if="mostrarComponente === 13"/>
+
+            <!--COMPONENTES USUARIOS -->
+            <ShowUsuarios v-if="mostrarComponente === 14"/>
+            <CrearUsuario v-if="mostrarComponente === 15"/>
+            <EditUsuario v-if="mostrarComponente === 16"/>
+
+            <!--COMPONENTES SUSCRIPCION -->
+            <ShowSuscripciones v-if="mostrarComponente === 17"/>
+            <EnviarSuscripciones v-if="mostrarComponente === 18"/>
+
+            <!--COMPONENTES LOGOS -->
+            <ShowLogos v-if="mostrarComponente === 19"/>
+
+          
+
+            <!--COMPONENTES SERVICIOS -->
+            <ShowServicios v-if="mostrarComponente === 21"/>
+            <EditServicio v-if="mostrarComponente === 22"/>
+
+            <!--COMPONENTES PRODUCTOS -->
+            <CrearProducto v-if="mostrarComponente === 23"/>
+
+
+
+
+
+
+
 
         </div>
 
@@ -113,6 +350,23 @@ import ShowSlider from "@/components/admin/home/sliderHome/ShowSlider.vue";
 import EditSlider from "@/components/admin/home/sliderHome/EditSlider.vue";
 import ShowCategorias from "@/components/admin/home/categorias/ShowCategorias.vue";
 import EditCategoria from "@/components/admin/home/categorias/EditCategoria.vue";
+import EditBanner from "@/components/admin/home/banner/EditBanner.vue";
+import ShowSeccionesNosotros from "@/components/admin/nosotros/seccion/ShowSeccionesNosotros.vue";
+import EditSeccionesNosotros from "@/components/admin/nosotros/seccion/EditSeccionesNosotros.vue";
+import ShowAplicaciones from "@/components/admin/aplicaciones/ShowAplicaciones.vue";
+import CrearAplicaciones from "@/components/admin/aplicaciones/CrearAplicaciones.vue";
+import EditAplicaciones from "@/components/admin/aplicaciones/EditAplicaciones.vue";
+import Alerta from "@/components/admin/alerta/Alerta.vue";
+import ShowContactos from "@/components/admin/contactos/ShowContactos.vue";
+import ShowUsuarios from "@/components/admin/usuario/ShowUsuarios.vue";
+import CrearUsuario from "@/components/admin/usuario/CrearUsuario.vue";
+import EditUsuario from "@/components/admin/usuario/EditUsuario.vue";
+import ShowSuscripciones from "@/components/admin/suscripciones/ShowSuscripciones.vue";
+import EnviarSuscripciones from "@/components/admin/suscripciones/EnviarSuscripciones.vue";
+import ShowLogos from "@/components/admin/logos/ShowLogos.vue";
+import CrearProducto from "@/components/admin/productos/CrearProducto.vue";
+import EditServicio from "@/components/admin/home/servicios/EditServicio.vue";
+import ShowServicios from "@/components/admin/home/servicios/ShowServicios.vue";
 
 
 export default {
@@ -120,12 +374,34 @@ export default {
         ShowSlider,
         EditSlider,
         ShowCategorias,
-        EditCategoria
+        EditCategoria,
+        EditBanner,
+        ShowSeccionesNosotros,
+        EditSeccionesNosotros,
+        ShowAplicaciones,
+        CrearAplicaciones,
+        EditAplicaciones,
+        Alerta,
+        ShowContactos,
+        ShowUsuarios,
+        CrearUsuario,
+        EditUsuario,
+        EnviarSuscripciones,
+        ShowSuscripciones,
+        ShowLogos,
+        CrearProducto,
+        EditServicio,
+        ShowServicios
     },
+  
     computed:{
         mostrarComponente(){
             return this.$store.getters['getMostrarComponente'];
-        }
+        },
+
+        mostrarAlerta(){
+            return this.$store.getters['getMostrarAlerta'];
+        },
 
     },
     methods:{

@@ -18,4 +18,23 @@ class SuscripcionController extends Controller
 
       
     }
+
+     //SUSCRIPCIONES
+     public function obtenerSuscripciones(){
+        $suscripciones = Suscripcion::all();
+        return response()->json($suscripciones);
+    }
+
+    public function deleteSuscripcion($idSuscripcion)
+    {
+        $suscripcion = Suscripcion::find($idSuscripcion);
+        $suscripcion->delete();
+
+        $suscripciones = Suscripcion::all();
+
+
+        return response()->json($suscripciones);
+
+      
+    }
 }

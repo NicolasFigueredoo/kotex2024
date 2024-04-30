@@ -2,13 +2,13 @@
     <div class="container">
 
         <div class="w-100 border-bottom">
-            <h1>Editar Slider</h1>
+            <h1>EDITAR SLIDER</h1>
         </div>
 
         <form class="mt-3">
             <div class="mb-3">
-                <label class="form-label">Orden</label>
-                <input type="text" class="form-control" id="orden" :value="this.slider.orden"> 
+                <label class="form-label">orden</label>
+                <input type="text" class="form-control" id="orden" :value="this.slider.orden">
             </div>
             <div class="mb-3">
                 <label class="form-label">Imagen (Tamaño recomendado 1400x720)</label>
@@ -19,8 +19,11 @@
                 <textarea class="summernote" id="editor"></textarea>
             </div>
 
-            <button @click="updateSlider()" type="btn" class="btn"
-                style="background-color: rgb(52, 68, 127); color: white;">Guardar</button>
+            <div class="w-100 d-flex justify-content-end">
+                <button @click="updateSlider()" type="button" class="btn"
+                    style="background-color: rgb(52, 68, 127); color: white;">Guardar</button>
+            </div>
+
         </form>
 
 
@@ -46,9 +49,12 @@ export default {
         }
 
     },
-    computed:{
-        idSlider(){
+    computed: {
+        idSlider() {
             return this.$store.getters['getidSliderHome'];
+        },
+        idComponente() {
+            return this.$store.getters['getMostrarComponente'];
         }
     },
     methods: {
@@ -57,7 +63,7 @@ export default {
             this.foto = file.files[0]
         },
         updateSlider() {
-            let formData = new FormData(); 
+            let formData = new FormData();
             formData.append('idSlider', this.idSlider);
             formData.append('foto', this.foto);
             formData.append('jsonCodigoSlider', $('#editor').summernote('code').toString());
@@ -70,14 +76,25 @@ export default {
                 }
             })
                 .then(response => {
-                    this.$store.commit('mostrarComponente', 1);
 
+                    this.$store.commit('setMostrarAlerta', true);
+                    this.$store.commit('setClaseAlerta', 1);
+                    this.$store.commit('setMensajeAlerta', 'Slider modificado con éxito');
+
+                    if (this.idSlider === 1 || this.idSlider === 2 || this.idSlider === 3) {
+                        this.$store.commit('mostrarComponente', 1);
+                    } else {
+                        this.$store.commit('mostrarComponente', 6);
+                    }
                 })
                 .catch(error => {
                     console.error(error);
+                    this.$store.commit('setMostrarAlerta', true);
+                    this.$store.commit('setClaseAlerta', 2);
+                    this.$store.commit('setMensajeAlerta', error);
                 });
 
-                
+
         },
         summerNote() {
             $('#editor').summernote({
@@ -89,7 +106,7 @@ export default {
                 $(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-toggle');
             });
         },
-        obtenerSliderInformacion(){
+        obtenerSliderInformacion() {
             axios.get(`/api/obtenerSliderHome/${this.idSlider}`)
                 .then(response => {
                     this.slider = response.data;
@@ -105,7 +122,7 @@ export default {
 
         this.summerNote();
         this.obtenerSliderInformacion();
-        
+
 
     }
 
@@ -116,5 +133,19 @@ export default {
 .encabezado {
     background-color: rgb(52, 68, 127);
     color: white;
+}
+
+* {
+    font-size: 16px;
+    color: black;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 28px;
+    color: black;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
 }
 </style>

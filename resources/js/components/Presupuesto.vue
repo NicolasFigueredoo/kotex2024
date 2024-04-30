@@ -9,23 +9,23 @@
         <div class="inputs">
           <div>
             <span>Nombre*</span>
-            <input type="text">
+            <input id="nombre" type="text">
           </div>
           <div style="margin-left: 35px;">
             <span>Apellido*</span>
-            <input type="text">
+            <input id="apellido" type="text">
           </div>
         </div>
 
         <div class="inputs" style="margin-top: 20px;">
           <div>
             <span>Email*</span>
-            <input type="text">
+            <input id="email" type="text">
           </div>
 
           <div style="margin-left: 35px;">
             <span>Celular</span>
-            <input type="text">
+            <input id="celular" type="text">
           </div>
 
         </div>
@@ -86,7 +86,7 @@
     <div class="foot">
       <div class="form-floating mensaje">
         <span>Mensaje</span>
-        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+        <textarea class="form-control" placeholder="Leave a comment here" id="mensaje"
           style="height: 177px; border-radius: 0%;"></textarea>
       </div>
       <div class="file">
@@ -94,11 +94,11 @@
           <span>Adjuntar archivo</span>
         </div>
         <div class="file-select" id="src-file1">
-          <input type="file" name="src-file1" aria-label="Archivo">
+          <input @change="onFileChange()" ref="fileArchive" type="file" name="src-file1" aria-label="Archivo">
         </div>
 
         <div>
-          <button id="presupuesto" type="button" style="border-radius: 0%;" class="btn btn-primary">ENVIAR PRESUPUESTO</button>
+          <button @click="enviarPresupuesto()" id="presupuesto" type="button" style="border-radius: 0%;" class="btn btn-primary">ENVIAR PRESUPUESTO</button>
         </div>
       </div>
 
@@ -108,7 +108,16 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
+  
+  data(){
+    return {
+      file: null
+
+    }
+  },
   computed: {
     registros() {
       const registros = this.$store.getters.obtenerRegistros;
@@ -125,6 +134,40 @@ export default {
 
       return this.$route.path === route;
     },
+    onFileChange(event) {
+      const FILE = this.$refs.fileArchive;
+      this.file = FILE.files[0]
+
+    },
+    enviarPresupuesto(){
+      axios.post('/api/enviarPresupuesto', 
+            {
+              nombre: $('#nombre').val(),
+              apellido: $('#apellido').val(),
+              email: $('#email').val(),
+              celular: $('#celular').val(),
+              mensaje: $('#mensaje').val(),
+              productos: this.registros,
+              file: this.file,
+             
+            }
+            , {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+                .then(response => {
+                    console.log(response)
+
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+
+ 
+
+
+    }
   }
 
 }

@@ -10,11 +10,11 @@ class Aplicacion extends Model
     use HasFactory;
     protected $table = 'aplicaciones';
 
-    protected $fillable = ['nombre', 'imagen'];
+    protected $fillable = ['orden','nombre', 'imagen'];
 
 
         public function variaciones()
     {
-        return $this->belongsToMany(Variacion::class, 'variacion_aplicacion');
+        return $this->belongsToMany(Variacion::class, 'variacion_aplicacion')->cascadeDelete();
     }
 }

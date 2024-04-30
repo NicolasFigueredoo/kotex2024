@@ -2,25 +2,22 @@
     <div class="container">
 
         <div class="w-100 border-bottom">
-            <h1>Editar Categorias</h1>
+            <h1>EDITAR CATEGORÍA</h1>
         </div>
 
         <form class="mt-3">
             <div class="mb-3">
-                <label class="form-label">Orden</label>
-                <input type="text" class="form-control" id="orden" :value="this.categoria.orden"> 
+                <label class="form-label">orden</label>
+                <input type="text" class="form-control" id="orden" :value="this.orden">
             </div>
             <div class="mb-3">
                 <label class="form-label">Imagen (Tamaño recomendado 1400x720)</label>
                 <input type="file" ref="fotoCategoria" class="form-control" @change="guardarFoto()">
             </div>
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Texto</label>
-                <textarea class="summernote" id="editor"></textarea>
+            <div class="w-100 d-flex justify-content-end">
+                <button @click="updateCategoria()" type="button" class="btn"
+                    style="background-color: rgb(52, 68, 127); color: white;">Guardar</button>
             </div>
-
-            <button @click="updateCategoria()" type="btn" class="btn"
-                style="background-color: rgb(52, 68, 127); color: white;">Guardar</button>
         </form>
 
 
@@ -39,15 +36,14 @@ export default {
 
     data() {
         return {
-            jsonCodigoCategoria: '',
             foto: null,
-            orden: '',
-            categoria: ''
+            categoria: null,
+            orden: null
         }
 
     },
-    computed:{
-        idCategoria(){
+    computed: {
+        idCategoria() {
             return this.$store.getters['getidCategoriaHome'];
         }
     },
@@ -57,45 +53,38 @@ export default {
             this.foto = file.files[0]
         },
         updateCategoria() {
-            let formData = new FormData(); 
-            formData.append('idCategoria', this.idCategoria);
-            formData.append('foto', this.foto);
-            formData.append('jsonCodigoCategoria', $('#editor').summernote('code').toString());
-            formData.append('orden', $('#orden').val());
 
-            console.log(formData, '??')
-
-
-            axios.post('/api/updateCategoriaHome', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            })
+            axios.post('/api/updateCategoriaHome', {
+                idCategoria: this.idCategoria,
+                foto: this.foto,
+                orden: $('#orden').val()
+            }
+                , {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
                 .then(response => {
+                    this.$store.commit('setMostrarAlerta', true);
+                    this.$store.commit('setClaseAlerta', 1);
+                    this.$store.commit('setMensajeAlerta', 'Categoría modificada con éxito');
                     this.$store.commit('mostrarComponente', 3);
 
                 })
                 .catch(error => {
-                    console.error(error);
+                    this.$store.commit('setMostrarAlerta', true);
+                    this.$store.commit('setClaseAlerta', 2);
+                    this.$store.commit('setMensajeAlerta', 'Error en actualizar Categoria');
                 });
 
-                
+
         },
-        summerNote() {
-            $('#editor').summernote({
-                height: 300,
-            });
-            $('.summernote').summernote();
-            var noteBar = $('.note-toolbar');
-            noteBar.find('[data-toggle]').each(function () {
-                $(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-toggle');
-            });
-        },
-        obtenerCategoriaInformacion(){
+
+        async obtenerCategoriaInformacion() {
             axios.get(`/api/obtenerCategoriaHome/${this.idCategoria}`)
                 .then(response => {
                     this.categoria = response.data;
-                    $('#editor').summernote('code', this.categoria.texto);
+                    this.orden = this.categoria.orden
                 })
                 .catch(error => {
                     console.error(error);
@@ -104,11 +93,7 @@ export default {
     },
 
     mounted() {
-
-        this.summerNote();
         this.obtenerCategoriaInformacion();
-        
-
     }
 
 }
@@ -118,5 +103,19 @@ export default {
 .encabezado {
     background-color: rgb(52, 68, 127);
     color: white;
+}
+
+* {
+    font-size: 16px;
+    color: black;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 28px;
+    color: black;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
 }
 </style>

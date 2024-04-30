@@ -13,6 +13,6 @@ class Categoria extends Model
 
     public function variaciones()
     {
-        return $this->belongsToMany(Variacion::class, 'variacion_categoria', 'categoria_id', 'variacion_id');
+        return $this->belongsToMany(Variacion::class, 'variacion_categoria', 'categoria_id', 'variacion_id')->cascadeDelete();
     }
 }

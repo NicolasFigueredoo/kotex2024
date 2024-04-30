@@ -2,23 +2,29 @@
     <div class="container">
 
         <div class="w-100 border-bottom">
-            <h1>Sliders Home</h1>
+            <h1>SLIDER</h1>
+
         </div>
 
-        <table class="table table-bordered mt-5">
+        <table class="table table-bordered mt-3">
             <thead>
                 <tr>
                     <th scope="col" class="col-sm-1 encabezado">Orden</th>
                     <th scope="col" class="encabezado">Texto</th>
+                    <th scope="col" class="col-sm-1 encabezado">Imagen</th>
                     <th scope="col" class="col-sm-1 encabezado">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="slider in sliders" :key="slider.id">
-                    <th >{{ slider.orden }}</th>
-                    <td ><div v-html="slider.texto"></div></td>
+                    <th>{{ slider.orden }}</th>
                     <td>
-                        <button type="button" class="btn btn-sm" style="background-color: rgb(52, 68, 127);" @click="editarSlider(2, slider.id)">
+                        <div v-html="slider.texto"></div>
+                    </td>
+                    <th><img class="imagen" :src="getImagen(slider.imagen)" alt=""></th>
+                    <td>
+                        <button type="button" class="btn btn-sm" style="background-color: rgb(52, 68, 127);"
+                            @click="editarSlider(2, slider.id)">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="15" height="15"
                                 style="cursor: pointer">
                                 <path fill="white"
@@ -31,7 +37,7 @@
                                 style="cursor: pointer;">
                                 <path fill="white"
                                     d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z" />
-                                </svg>
+                            </svg>
                         </button>
                     </td>
 
@@ -50,37 +56,73 @@ import axios from 'axios';
 
 export default {
 
-    data(){
-        return{
-            sliders:[]
+    data() {
+        return {
+            sliders: []
         }
     },
-    
 
-methods:{
-    editarSlider(idComponente, idSlider){
-        this.$store.commit('setSliderIdComponent', idSlider);
-        this.$store.commit('mostrarComponente', idComponente);
+    computed: {
+        idComponente() {
+            return this.$store.getters['getMostrarComponente'];
+        }
     },
-    obtenerSliders(){
-        axios.get('/api/obtenerSliders')
+    methods: {
+        getImagen(fileName) {
+            if(fileName){
+                const filePath = fileName.split('/').pop();
+                return '/api/getImage/' + filePath
+            }
+        },
+        editarSlider(idComponente, idSlider) {
+            this.$store.commit('setSliderIdComponent', idSlider);
+            this.$store.commit('mostrarComponente', idComponente);
+        },
+        obtenerSliders() {
+            axios.get('/api/obtenerSliders')
                 .then(response => {
-                    this.sliders = response.data
+                    console.log(response.data)
+                    if (this.idComponente === 1) {
+                        this.sliders = response.data.filter(slider => slider.seccion === 'home');
+                    } else {
+                        this.sliders = response.data.filter(slider => slider.seccion === 'nosotros');
+                    }
                 })
                 .catch(error => {
                     console.error(error);
                 });
-    }
+        }
     },
-    mounted(){
+    mounted() {
         this.obtenerSliders();
     }
 }
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 .encabezado {
     background-color: rgb(52, 68, 127);
     color: white;
+}
+
+* {
+    font-size: 16px;
+    color: black;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 28px;
+    color: black;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+}
+
+.imagen {
+    width: 200px;
+    height: 100px;
 }
 </style>

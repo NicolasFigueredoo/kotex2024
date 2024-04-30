@@ -22,7 +22,7 @@
             <p>kotexsrl@hotmail.com</p>
         </div>
         <div class="opcion1">
-        <font-awesome-icon class="iconNavbar" :icon="['fas', 'magnifying-glass']" />
+        <font-awesome-icon data-bs-toggle="modal" data-bs-target="#exampleModal" class="iconNavbar" :icon="['fas', 'magnifying-glass']" style="cursor: pointer;"/>
         </div>
         <div class="opcion4">
         <p>|</p>
@@ -47,10 +47,10 @@
         </div>
 
         <div class="opcion2">
-        <router-link class="route" to="/productosdelinea" @click="prueba()" :style="{ fontWeight: isRouteActive('/productosdelinea') ? 'bold' : '500' }">Productos de linea</router-link>
+        <router-link class="route" to="/productosdelinea" @click="deleteProduct()" :style="{ fontWeight: isRouteActive('/productosdelinea') ? 'bold' : '500' }">Productos de linea</router-link>
         </div>
         <div class="opcion2">
-        <router-link class="route" to="/productosespeciales" @click="prueba()" :style="{ fontWeight: isRouteActive('/productosespeciales') ? 'bold' : '500' }">Productos Especiales</router-link>
+        <router-link class="route" to="/productosespeciales" @click="deleteProduct()" :style="{ fontWeight: isRouteActive('/productosespeciales') ? 'bold' : '500' }">Productos Especiales</router-link>
         </div>
 
         <div class="opcion2">
@@ -85,16 +85,70 @@
   </a>
 </div>
 
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Buscar Producto</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input v-model="textoBuscador" type="text" class="form-control" @change="buscarProducto()" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+      <div class="modal-footer d-flex justify-content-start">
+        <div  v-for="producto in productos" :key="producto.id_producto">
+          <div class="producto w-100" @click="verProducto(producto.id_producto)"> 
+            <div class="containerImg">
+              <img src="../../img/kotexfooter.png" alt="imagen">
+            </div>
+            <div class="containerInfo">
+              <p class="categoria">{{ producto.nombre_categoria.toUpperCase() }}</p>
+              <p class="nombre">{{ producto.nombre_producto.charAt(0).toUpperCase() + producto.nombre_producto.slice(1) }}</p>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 </template>
 
 <script>
+import axios from 'axios';
+import 'jquery';
+
+
 export default {
+  data(){
+    return{
+      textoBuscador: null,
+      productos: []
+
+    }
+  },
   methods: {
+    verProducto(idProducto) {
+      this.$store.commit('setSelectedProductId', idProducto);
+      this.$router.push('/productosdelinea');
+      $('#exampleModal').modal('hide');
+
+    },
+    buscarProducto(){
+      axios.get(`/api/obtenerProductoName/${this.textoBuscador}`)
+        .then(response => {
+          this.productos = response.data;
+        })
+        .catch(error => {
+          console.error('Error al traer los productos:', error);
+        });
+    },
     isRouteActive(route) {
       return this.$route.path === route;
     },
-    prueba(){
+    deleteProduct(){
       this.$store.commit('setSelectedProductId', null);
     }
   }
@@ -222,6 +276,28 @@ export default {
     color: white;
     padding-top: 15px;
 }
+
+.producto{
+  display: flex;
+  height: 160px;
+  cursor: pointer;
+}
+.containerInfo{
+  display: flex;
+  flex-direction: column;
+}
+
+.containerImg{
+    width: 140px;
+    height: 150px;
+}
+
+.containerImg img{
+    width: 140px;
+    height: 150px;
+}
+
+
 
 @media only screen and (max-width: 1860px) {
 

@@ -7,11 +7,52 @@ export default createStore({
     registros: JSON.parse(localStorage.getItem('registros')) || [],
     mostrarComponente: 0,
     idSliderHome: null,
-    idCategoriaHome: null
+    idCategoriaHome: null,
+    idUsuario: null,
+    idRed: null,
+    idContacto: null,
+    idLogo: null,
+    idSeccion: null,
+    idServicio: null,
+    idAplicacion: null,
+    mensajeAlerta: null,
+    mostrarAlerta: null,
+    alertaClase: null,
+    
 
   },
   mutations: {
 
+    setAplicacionId(state,idAplicacion){
+      state.idAplicacion = idAplicacion
+    },
+    setServicioId(state,idServicio){
+      state.idServicio = idServicio
+    },
+    setSeccionId(state,idSeccion){
+      state.idSeccion = idSeccion
+    },
+    setClaseAlerta(state,alertaClase){
+      state.alertaClase = alertaClase
+    },
+    setMostrarAlerta(state,mostrarAlerta){
+      state.mostrarAlerta = mostrarAlerta
+    },
+    setMensajeAlerta(state,mensajeAlerta){
+      state.mensajeAlerta = mensajeAlerta
+    },
+    setLogoId(state,idLogo){
+      state.idLogo = idLogo
+    },
+    setContactoId(state,idContacto){
+      state.idContacto = idContacto
+    },
+    setRedId(state,idRed){
+      state.idRed = idRed
+    },
+    setUsuarioId(state,idUsuario){
+      state.idUsuario = idUsuario
+    },
     setCategoriaIdComponent(state,idCategoriaHome){
       state.idCategoriaHome = idCategoriaHome
     },
@@ -40,10 +81,39 @@ export default createStore({
         state.selectedAplicacionId = aplicacionId;
       }
   },
-  actions: {
-    // Aquí defines las acciones para realizar operaciones asíncronas
-  },
+ 
   getters: {
+    getIdAplicacion(state){
+      return state.idAplicacion;
+
+    },
+    getIdServicio(state){
+      return state.idServicio;
+    },
+    getIdSeccion(state){
+      return state.idSeccion;
+    },
+    getAlertaClase(state) {
+      return state.alertaClase;
+    },
+    getMostrarAlerta(state) {
+      return state.mostrarAlerta;
+    },
+    getMensajeAlerta(state) {
+      return state.mensajeAlerta;
+    },
+    getIdLogo(state) {
+      return state.idLogo;
+    },
+    getIdContacto(state) {
+      return state.idContacto;
+    },
+    getIdRed(state) {
+      return state.idRed;
+    },
+    getIdUsuario(state) {
+      return state.idUsuario;
+    },
     getidCategoriaHome(state) {
       return state.idCategoriaHome;
     },

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="textoImg" data-aos="fade-right" data-aos-duration="2000">>
-      <div v-if="this.sliders && this.sliders.length > 0" v-for="slider in sliders" :key="slider.id">
+      <div v-for="slider in sliders" :key="slider.id">
         <div v-if="slider.orden === 'aa'" v-html="this.sliders[0].texto"></div>
       </div>
       <router-link class="route" to="/nosotros" :style="{ fontWeight: isRouteActive('/nosotros') ? 'bold' : '500' }">
@@ -39,7 +39,7 @@
             <router-link class="route" to="/productosdelinea" :style="{ fontWeight: isRouteActive('/productosdelinea') ? 'bold' : '500' }" @click="this.$store.commit('setSelectedProductId', null);">
             <p class="tituloImg">PRODUCTOS DE LINEA</p>
             <div class="imagen-contenedor" >
-              <img class="imgS zoomable" src="../../img/productos.png" alt="">
+              <img class="imgS zoomable" :src="getImagen(this.imagen1)"  alt="">
           </div>
         </router-link>
           </div>
@@ -47,7 +47,7 @@
             <router-link class="route" to="/productosespeciales" :style="{ fontWeight: isRouteActive('/productosespeciales') ? 'bold' : '500' } " @click="this.$store.commit('setSelectedProductId', null);">
             <p class="tituloImg">PRODUCTOS ESPECIALES</p>
             <div class="imagen-contenedor">
-            <img class="imgS zoomable" src="../../img/productos2.png" alt="">
+            <img class="imgS zoomable" :src="getImagen(this.imagen2)" alt="">
         </div>   
       </router-link>
        
@@ -59,13 +59,12 @@
 
     <div class="empresa">
       <div class="imgEmpresa" data-aos="fade-right" data-aos-duration="2000"  >
-        <img src="../../img/imgNosotros2.png" alt="">
+        <img :src="getImagen(this.imagenBanner)" alt="">
       </div>
           <div class="infoEmpresa" >
-          <p class="titulo" data-aos="fade-left" data-aos-duration="2000">Empresa</p>
+          <p class="titulo" data-aos="fade-left" data-aos-duration="2000">{{ this.banner.titulo}}</p>
           <div class="infotext" data-aos="fade-left" data-aos-duration="2000">
-            <p class="text" ><b class="kotex">Kotex SRL</b>, fábrica de cintas elásticas y rígidas de crochet, es una empresa familiar con casi 30 años en el rubro textil.</p>
-            <p class="text" style="margin-top: 50px;">Por la calidad de nuestros productos y especial enfoque en la “atención personalizada” ocupamos un lugar de preferencia entre las empresas confeccionistas de reconocidas marcas.</p>
+            <div v-html="this.banner.texto" class="text"></div>
           </div>
           <router-link class="route" to="/nosotros" :style="{ fontWeight: isRouteActive('/nosotros') ? 'bold' : '500' }">
           <button type="button" class="btn masInformacion2" data-aos="fade-left" data-aos-duration="2000">CONÓCENOS</button>
@@ -145,6 +144,11 @@ export default defineComponent({
       productos: [],
       sliders: [],
       imagenURLs: {},
+      categorias:[],
+      imagenBanner:'',
+      imagen1:'',
+      imagen2:'',
+      banner:[],
       settings: {
         itemsToShow: 1,
         snapAlign: 'center',
@@ -183,21 +187,46 @@ export default defineComponent({
     obtenerSlidersHome(){
         axios.get('/api/obtenerSliders')
                 .then(response => {
-                  this.sliders = response.data;
+                  this.sliders = response.data.filter(slider => slider.seccion === 'home');
+
                 })
                 .catch(error => {
                     console.error(error);
                 });
     },
+
+    obtenerCategoriasHome(){
+        axios.get('/api/obtenerCategoriasHome')
+                .then(response => {
+                  this.categorias = response.data;
+                  this.imagen1 = this.categorias[0].imagen;
+                  this.imagen2 = this.categorias[1].imagen
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+    },
+    obtenerBannerInformacion(){
+            axios.get(`/api/obtenerBanners`)
+                .then(response => {
+                    this.banner = response.data[0];
+                    this.imagenBanner = response.data[0].imagen;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        },
     getImagen(fileName){
       const filePath = fileName.split('/').pop();
       return '/api/getImage/' + filePath
 
-
     }
   },
+  
   mounted() {
     AOS.init();
+    this.obtenerBannerInformacion();
+    this.obtenerCategoriasHome();
     this.obtenerSlidersHome(); 
     this.obtenerProductosDestacados();
   }
@@ -366,7 +395,7 @@ export default defineComponent({
   color: white;
   position: absolute;
   z-index: 1; 
-  margin-top: 250px;
+  margin-top: 220px;
   margin-left: 100px;
   font-family: "Montserrat", sans-serif;
   font-size: 30px;
@@ -404,10 +433,12 @@ export default defineComponent({
   width: 200px; 
   height: 200px; 
   filter: brightness(0.8); 
+
 }
 
 .imgS {
   width: 100%; 
+  height: 100%;
   transition: transform 0.3s ease; 
 }
 

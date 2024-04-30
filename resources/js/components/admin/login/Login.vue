@@ -4,7 +4,7 @@
             <div class="col-md-6 formulario">
                 <form>
                     <div class="mb-3 justify-content-center align-items-center">
-                        <img class="imgKotex" src="../../../img/kotex.jpg" alt="">
+                        <img class="imgKotex" src="../../../../img/kotex.jpg" alt="">
                     </div>
                     <div class="mb-3">
                         <input v-model="usuario" placeholder="Usuario" type="text" class="form-control"

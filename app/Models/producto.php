@@ -13,6 +13,6 @@ class Producto extends Model
 
     public function variaciones()
     {
-        return $this->hasMany(Variacion::class);
+        return $this->hasMany(Variacion::class)->cascadeDelete();
     }
 }
