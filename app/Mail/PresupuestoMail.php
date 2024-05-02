@@ -41,7 +41,8 @@ class PresupuestoMail extends Mailable
      */
     public function build()
     {
-   
+
+        if($this->archivo){
             return 
             $this->view('emails.presupuesto')
             ->subject('Nuevo mensaje de presupuesto')
@@ -49,6 +50,12 @@ class PresupuestoMail extends Mailable
                 'as' => $this->archivo->getClientOriginalName(),
                 'mime' => $this->archivo->getClientMimeType(),
             ]);
+        }else{
+            return 
+            $this->view('emails.presupuesto')
+            ->subject('Nuevo mensaje de presupuesto');
+        }
+   
         
     }
 }

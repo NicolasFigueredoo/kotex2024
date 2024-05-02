@@ -4,7 +4,7 @@
       <div class="productos" >
         <div  v-for="producto in productos" :key="producto.id_producto">
           <div class="producto" @click="verProducto(producto.id_producto, producto.nombre_producto)"> 
-            <img src="../../img/kotexfooter.png"  alt="imagen" >
+            <img :src="getImagen(producto.imagen)"  alt="imagen" >
             <p class="categoria">{{ producto.nombre_categoria.toUpperCase() }}</p>
             <p class="nombre">{{ producto.nombre_producto.charAt(0).toUpperCase() + producto.nombre_producto.slice(1) }}</p>
 
@@ -39,6 +39,13 @@
     },
 
     methods:{
+      getImagen(fileName){
+      if(fileName){
+      const filePath = fileName.split('/').pop();
+      return '/api/getImage/' + filePath
+    }
+
+    },
         obtenerProductosIdAplicacion(){
             axios.get(`/api/obtenerProductosIdAplicacion/${this.idAplicacion}`)
             .then(response => {

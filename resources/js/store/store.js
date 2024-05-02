@@ -15,14 +15,27 @@ export default createStore({
     idSeccion: null,
     idServicio: null,
     idAplicacion: null,
+    idProducto: null,
+    idMetadato:null,
     mensajeAlerta: null,
     mostrarAlerta: null,
     alertaClase: null,
+    idLogin: JSON.parse(localStorage.getItem('idLogin')) || null,
     
 
   },
   mutations: {
+    setMetadatoId(state,idMetadato){
+      state.idMetadato = idMetadato
+    },
+    setLoginId(state,idLogin){
+      state.idLogin = idLogin
+      localStorage.setItem('idLogin', JSON.stringify(state.idLogin));
 
+    },
+    setProductoId(state,idProducto){
+      state.idProducto = idProducto
+    },
     setAplicacionId(state,idAplicacion){
       state.idAplicacion = idAplicacion
     },
@@ -83,9 +96,17 @@ export default createStore({
   },
  
   getters: {
+    getIdMetadato(state){
+      return state.idMetadato;
+    },
+    getIdLogin(state){
+      return state.idLogin;
+    },
+    getIdProducto(state){
+      return state.idProducto;
+    },
     getIdAplicacion(state){
       return state.idAplicacion;
-
     },
     getIdServicio(state){
       return state.idServicio;

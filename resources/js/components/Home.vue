@@ -15,10 +15,10 @@
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
       </div>
-      <div class="carousel-inner" >
+      <div  class="carousel-inner" >
         <div v-for="slider in sliders" :key="slider.id" :class="['carousel-item', { 'active': slider.orden === 'aa'}]" style="height: 100%;" >
           <div class="degradado"></div>
-          <img :src="getImagen(slider.imagen)"  class="d-block w-100" alt="..." style=" width: 100%;height: 100%; object-fit: cover;" >
+          <img :src="getImagen(slider.imagen)"  class="d-block w-100" loading="lazy" alt="..." style=" width: 100%;height: 100%; object-fit: cover;" >
         </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -39,7 +39,7 @@
             <router-link class="route" to="/productosdelinea" :style="{ fontWeight: isRouteActive('/productosdelinea') ? 'bold' : '500' }" @click="this.$store.commit('setSelectedProductId', null);">
             <p class="tituloImg">PRODUCTOS DE LINEA</p>
             <div class="imagen-contenedor" >
-              <img class="imgS zoomable" :src="getImagen(this.imagen1)"  alt="">
+              <img class="imgS zoomable" :src="getImagen(this.imagen1)" loading="lazy"  alt="">
           </div>
         </router-link>
           </div>
@@ -47,7 +47,7 @@
             <router-link class="route" to="/productosespeciales" :style="{ fontWeight: isRouteActive('/productosespeciales') ? 'bold' : '500' } " @click="this.$store.commit('setSelectedProductId', null);">
             <p class="tituloImg">PRODUCTOS ESPECIALES</p>
             <div class="imagen-contenedor">
-            <img class="imgS zoomable" :src="getImagen(this.imagen2)" alt="">
+            <img class="imgS zoomable" :src="getImagen(this.imagen2)" alt="" loading="lazy">
         </div>   
       </router-link>
        
@@ -59,7 +59,7 @@
 
     <div class="empresa">
       <div class="imgEmpresa" data-aos="fade-right" data-aos-duration="2000"  >
-        <img :src="getImagen(this.imagenBanner)" alt="">
+        <img :src="getImagen(this.imagenBanner)" alt="" loading="lazy">
       </div>
           <div class="infoEmpresa" >
           <p class="titulo" data-aos="fade-left" data-aos-duration="2000">{{ this.banner.titulo}}</p>
@@ -72,26 +72,14 @@
       </div>
     </div>
 
-    <div class="nuestrosServicios" data-aos="fade-up" data-aos-duration="2500">
+    <div class="nuestrosServicios" data-aos="fade-up" data-aos-duration="2500" id="service">
       <div>
         <p class="titleServicio">Nuestros servicios</p>
       </div>
       <div class="servicios">
-        <div class="tarjeta" data-aos="flip-left" data-aos-duration="3000">
-          <font-awesome-icon class="iconServicio" :icon="['fas', 'cubes']" />
-          <p class="textTarjeta">Stock permanente en productos de linea</p>
-        </div>
-        <div class="tarjeta" data-aos="flip-left" data-aos-duration="3000">
-          <font-awesome-icon class="iconServicio" :icon="['fas', 'gem']" />
-          <p class="textTarjeta">Desarrollos de productos especiales</p>
-        </div>
-        <div class="tarjeta" data-aos="flip-left" data-aos-duration="3000">
-          <font-awesome-icon class="iconServicio" :icon="['fas', 'truck']" />
-          <p class="textTarjeta">Envíos al interior a través del transporte de su confianza</p>
-        </div>
-        <div class="tarjeta" data-aos="flip-left" data-aos-duration="3000">
-          <font-awesome-icon class="iconServicio" :icon="['fas', 'headset']" />
-          <p class="textTarjeta">Atendemos su consulta telefonicamente o por email</p>
+        <div v-for="servicio in servicios" :key="servicio.id" class="tarjeta" data-aos="flip-left" data-aos-duration="3000">
+          <div class="iconServicio" v-html="servicio.icono"></div>
+          <div class="textTarjeta" v-html="servicio.texto"> </div>
         </div>
       </div>
     </div>
@@ -103,7 +91,7 @@
           <Slide v-for="producto in productos.slice(0, 10)" :key="producto.id_producto">
             <div class="carousel__item" data-aos="fade-up" data-aos-duration="2000" @click="verProducto(producto.id_producto)">
               <div class="producto"> 
-                <img src="../../img/kotexfooter.png" alt="imagen">
+                <img :src="getImagen(producto.imagen)" alt="imagen" loading="lazy">
                 <p class="categoria">{{ producto.nombre_categoria.toUpperCase() }}</p>
                 <p class="nombre">{{ producto.nombre_producto }}</p>
               </div>
@@ -149,6 +137,7 @@ export default defineComponent({
       imagen1:'',
       imagen2:'',
       banner:[],
+      servicios:[],
       settings: {
         itemsToShow: 1,
         snapAlign: 'center',
@@ -215,23 +204,33 @@ export default defineComponent({
                 .catch(error => {
                     console.error(error);
                 });
-        },
+    },
+    obtenerServiciosInformacion(){
+      axios.get(`/api/obtenerServicios`)
+                .then(response => {
+                  this.servicios = response.data
+                    
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+    },
     getImagen(fileName){
+      if(fileName){
       const filePath = fileName.split('/').pop();
       return '/api/getImage/' + filePath
-
+    }
     }
   },
   
   mounted() {
     AOS.init();
+    this.obtenerSlidersHome(); 
     this.obtenerBannerInformacion();
     this.obtenerCategoriasHome();
-    this.obtenerSlidersHome(); 
     this.obtenerProductosDestacados();
+    this.obtenerServiciosInformacion();
   }
-
-  
 });
 
 </script>
@@ -322,7 +321,7 @@ export default defineComponent({
   font-size: 16px;
   font-weight: 500;
   color: #2F3F78;
-  margin-top: 50px;
+  margin-top: 30px;
 }
 .tarjeta{
   width: 288px;

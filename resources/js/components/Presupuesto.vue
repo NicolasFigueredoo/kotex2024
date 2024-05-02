@@ -99,6 +99,9 @@
 
         <div>
           <button @click="enviarPresupuesto()" id="presupuesto" type="button" style="border-radius: 0%;" class="btn btn-primary">ENVIAR PRESUPUESTO</button>
+          <div id="mensajePresupuesto">
+
+          </div>
         </div>
       </div>
 
@@ -140,6 +143,11 @@ export default {
 
     },
     enviarPresupuesto(){
+      if(!$('#nombre').val() || !$('#apellido').val() || !$('#email').val()){
+        $('#mensajePresupuesto').html('<p class="textE text-danger ">Presupuesto fallido faltan rellenar campos obligatorios</p>')
+      }else{
+        $('#mensajePresupuesto').html('<p class="textE text-success ">Enviando..</p>')
+
       axios.post('/api/enviarPresupuesto', 
             {
               nombre: $('#nombre').val(),
@@ -157,14 +165,15 @@ export default {
                 }
             })
                 .then(response => {
-                    console.log(response)
-
+                  $('#mensajePresupuesto').html('<p class="textE text-success ">Presupuesto enviado correctamente</p>')
                 })
                 .catch(error => {
+                  $('#mensajePresupuesto').html('<p class="textE text-danger ">Presupuesto fallido revisar campos</p>')
                     console.error(error);
                 });
 
- 
+      }
+
 
 
     }
@@ -174,6 +183,10 @@ export default {
 </script>
 
 <style scoped>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+
 .presupuestoDiv {
   min-height: 950px; 
   overflow-y: auto; 
@@ -343,7 +356,11 @@ export default {
   font-family: "Montserrat";
   font-size: 15px;
   font-weight: 500;
+}
 
-
+#mensajePresupuesto{
+  font-family: "Montserrat";
+  font-size: 15px;
+  font-weight: 500;
 }
 </style>

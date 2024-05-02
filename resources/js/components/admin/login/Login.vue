@@ -14,10 +14,6 @@
                         <input v-model="contraseña" placeholder="Contraseña" type="password" class="form-control"
                             id="exampleInputPassword1">
                     </div>
-                    <div class="mb-3">
-                        <a id="emailHelp" class="form-text">¿Olvidaste tu contraseña?</a>
-
-                    </div>
 
                     <button type="button" class="btn btn-dark w-100" @click="verificarLogin()">Login</button>
 
@@ -42,15 +38,21 @@ export default {
     },
 
     methods: {
+
+    
         verificarLogin() {
             axios.post('/api/verificarLogin', {
                 usuario: this.usuario,
                 contraseña: this.contraseña
             })
                 .then(response => {
-                    if(response.data === 1){
+                        let mensaje = 'Bienvenido ' + this.usuario
+                        this.$store.commit('setLoginId', response.data);
+                        this.$store.commit('setMostrarAlerta', true);
+                        this.$store.commit('setClaseAlerta', 1);
+                        this.$store.commit('setMensajeAlerta', mensaje);  
                         this.$router.push('/panelAdmin');
-                    }
+                    
                 })
                 .catch(error => {
                     console.error('Error ingresar Admin:', error);

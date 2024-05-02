@@ -11,6 +11,7 @@
                     <th scope="col" class="col-sm-1 encabezado">Orden</th>
                     <th scope="col" class="encabezado">Titulo</th>
                     <th scope="col" class="encabezado">Texto</th>
+                    <th scope="col" class="col-sm-1  encabezado">Icono</th>
                     <th scope="col" class="col-sm-1 encabezado">Acciones</th>
                 </tr>
             </thead>
@@ -19,6 +20,8 @@
                     <th >{{ seccion.orden }}</th>
                     <th >{{ seccion.titulo }}</th>
                     <td ><div v-html="seccion.texto"></div></td>
+                    <td ><div v-html="seccion.icono"></div></td>
+
                     <td>
                         <button type="button" class="btn btn-sm" style="background-color: rgb(52, 68, 127);" @click="editarSeccion(9, seccion.id)">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="15" height="15"

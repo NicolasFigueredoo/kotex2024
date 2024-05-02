@@ -3,18 +3,18 @@
         <div class="informacionProducto">
             <div class="imgMinis">
                 <div>
-                    <img src="../../img/kotex.jpg" alt="" ref="imgMiniUno" @click="imagenClick(1, 'kotex.jpg')"
+                    <img v-if="this.producto" :src="getImagen(this.producto.imagen)" alt="" ref="imgMiniUno" @click="imagenClick(1, this.producto.imagen)"
                         style="cursor: pointer;" />
                 </div>
                 <div>
-                    <img src="../../img/imgNosotros2.png" alt="" ref="imgMiniDos"
-                        @click="imagenClick(2, 'imgNosotros2.png')" style="cursor: pointer;" />
+                    <img v-if="this.producto" :src="getImagen(this.producto.imagen2)" alt="" ref="imgMiniDos"
+                        @click="imagenClick(2, this.producto.imagen2)" style="cursor: pointer;" />
                 </div>
             </div>
             <div class="contenedor-imagen">
-                <img id="imgP" src="../../img/kotex.jpg" ref="imgenPrincipal" alt="" />
+                <img id="imgP" v-if="this.producto" :src="getImagen(this.producto.imagen)" ref="imgenPrincipal" alt="" />
             </div>
-            <div class="textos">
+            <div class="textos" v-if="this.producto">
                 <div class="categoriaI">
                     <p>{{ this.categoria.toUpperCase() }}</p>
                 </div>
@@ -23,12 +23,11 @@
                 </div>
                 <div class="material">
                     <span>Material</span>
-                    <p>Poliester, tipo, crochet</p>
+                    <p>{{ this.producto.material }}</p>
                 </div>
                 <div class="tipo">
                     <span>Tipo</span>
-
-                    <p>Crochet</p>
+                    <p>{{ this.producto.tipo }}</p>
                 </div>
                 <div class="aplicaciones">
                     <p>Aplicaciones</p>
@@ -185,7 +184,7 @@
                     <Slide v-for="producto in productosRelacionados" :key="producto.id_producto">
                         <div class="carousel__item" @click="verProducto(producto.id_producto)">
                             <div class="producto">
-                                <img src="../../img/kotexfooter.png" alt="imagen">
+                                <img :src="getImagen(producto.imagen)" alt="imagen">
                                 <p class="categoria">{{ producto.nombre_categoria }}</p>
                                 <p class="nombre">{{ producto.nombre_producto }}</p>
                             </div>
@@ -237,6 +236,7 @@ export default {
             medidaSeleccionada: '',
             unidadSeleccionada: '',
             cantidadSeleccionada: '',
+            producto: null,
             settings: {
                 itemsToShow: 1,
                 snapAlign: 'center',
@@ -266,14 +266,24 @@ export default {
         }
     },
     methods: {
+        
+    getImagen(fileName) {
+      if (fileName) {
+        const filePath = fileName.split('/').pop();
+        return '/api/getImage/' + filePath
+      }
+
+    },
         obtenerInformacionProducto() {
             axios.get(`/api/obtenerInformacionProducto/${this.idProducto}`)
                 .then((response) => {
+                    console.log(response.data)
                     this.medidas = response.data.medidas;
                     this.aplicaciones = response.data.aplicaciones;
                     this.nombreProducto = response.data.nombre_producto;
                     this.categoriaId = response.data.categorias[0];
                     this.categoria = response.data.categoriasNombre[0]
+                    this.producto = response.data.producto[0]
 
                     if (this.categoria === 'Productos de linea') {
                         this.obtenerProductosLinea();
@@ -440,14 +450,15 @@ export default {
             let elemento = this.$refs.imgMiniUno;
             let elemento2 = this.$refs.imgMiniDos;
             let elemento3 = this.$refs.imgenPrincipal;
+
             if (idImagen === 1) {
                 elemento2.style.border = 'none';
                 elemento.style.border = '2px solid rgba(51, 68, 127, 1)';
-                elemento3.src = '../../img/' + imagen;
+                elemento3.src = this.getImagen(imagen);
             } else {
                 elemento.style.border = 'none';
                 elemento2.style.border = '2px solid rgba(51, 68, 127, 1)';
-                elemento3.src = '../../img/' + imagen;
+                elemento3.src = this.getImagen(imagen);
 
             }
 

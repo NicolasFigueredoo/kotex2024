@@ -81,7 +81,6 @@ export default {
         obtenerSliders() {
             axios.get('/api/obtenerSliders')
                 .then(response => {
-                    console.log(response.data)
                     if (this.idComponente === 1) {
                         this.sliders = response.data.filter(slider => slider.seccion === 'home');
                     } else {

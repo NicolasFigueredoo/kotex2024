@@ -19,7 +19,7 @@ class UserController extends Controller
 
         if ($user) {
             if (Hash::check($contraseña, $user->password)) {
-                return response()->json(1);
+                return response()->json($user->id);
             } else {
                 return response()->json(['message' => 'Contraseña incorrecta']);
             }
@@ -33,10 +33,12 @@ class UserController extends Controller
         $usuario = $request->usuario;
         $email = $request->email;
         $contraseña = Hash::make($request->contraseña);
+        $rol = $request->rol;
 
         $user = new Usuario();
         $user->usuario = $usuario;
         $user->email = $email;
+        $user->rol = $rol;
         $user->password = $contraseña;
         $user->save();
 
@@ -50,6 +52,8 @@ class UserController extends Controller
         $usuario = Usuario::findOrFail($idUsuario);
         $usuario->usuario = $request->usuario;
         $usuario->email = $request->email;
+        $usuario->rol = $request->rol;
+
         $usuario->save();
 
         return response()->json($usuario);

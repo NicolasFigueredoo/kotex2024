@@ -10,6 +10,7 @@
 import Navbar_boot from './components/Navbar.vue';
 import Footer_boot from './components/Footer.vue';
 
+
 export default {
   name: 'App',
   components: {
@@ -32,7 +33,7 @@ export default {
   },
   methods: {
     checkAdminRoute() {
-      this.isAdminRoute = this.$route.path.startsWith('/admin');
+      this.isAdminRoute = this.$route.path.startsWith('/admin/login');
       this.isAdminPanel = this.$route.path.startsWith('/panelAdmin');
 
     }

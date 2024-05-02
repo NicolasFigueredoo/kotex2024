@@ -6,22 +6,31 @@
         </div>
 
         <form class="mt-3">
-            <div class="mb-3">
-                <label class="form-label">Orden</label>
-                <input type="text" class="form-control" id="orden" :value="this.seccion.orden"> 
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="form-label">Orden</label>
+                    <input type="text" class="form-control" id="orden" :value="this.seccion.orden">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Título</label>
+                    <input type="text" class="form-control" id="titulo" :value="this.seccion.titulo">
+                </div>
             </div>
-            <div class="mb-3">
-                <label class="form-label">Título</label>
-                <input type="text" class="form-control" id="titulo" :value="this.seccion.titulo"> 
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <label class="form-label">Icono</label>
+                    <input type="text" class="form-control" id="icono">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Icono actual</label>
+                    <div v-html="this.seccion.icono"></div>
+                </div>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 mt-3">
                 <label for="exampleInputPassword1" class="form-label">Texto</label>
                 <textarea class="summernote" id="editor"></textarea>
             </div>
-            <div class="mb-3">
-                <label class="form-label">Icono (svg)</label>
-                <input type="text" class="form-control" id="icono" :value="this.seccion.icono"> 
-            </div>
+
             <div class="w-100 d-flex justify-content-end mb-5">
                 <button @click="updateSeccion()" type="btn" class="btn"
                     style="background-color: rgb(52, 68, 127); color: white;">Guardar</button>
@@ -48,19 +57,24 @@ export default {
         }
 
     },
-    computed:{
-        idSeccion(){
+    computed: {
+        idSeccion() {
             return this.$store.getters['getIdSeccion'];
         }
     },
     methods: {
         updateSeccion() {
-            let formData = new FormData(); 
+            let formData = new FormData();
             formData.append('idSeccion', this.idSeccion);
             formData.append('orden', $("#orden").val());
             formData.append('titulo', $("#titulo").val());
+            if($('#icono').val() == ''){
+                formData.append('icono', this.seccion.icono);
+
+            }else{
+                formData.append('icono', $('#icono').val());
+            }
             formData.append('texto', $('#editor').summernote('code').toString());
-            formData.append('icono', $("#icono").val());
 
             axios.post('/api/updateSeccion', formData, {})
                 .then(response => {
@@ -75,7 +89,7 @@ export default {
                     console.error(error);
                 });
 
-                
+
         },
         summerNote() {
             $('#editor').summernote({
@@ -87,7 +101,7 @@ export default {
                 $(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-toggle');
             });
         },
-        obtenerSeccionInformacion(){
+        obtenerSeccionInformacion() {
             axios.get(`/api/obtenerSeccion/${this.idSeccion}`)
                 .then(response => {
                     this.seccion = response.data;
@@ -103,7 +117,7 @@ export default {
 
         this.summerNote();
         this.obtenerSeccionInformacion();
-        
+
 
     }
 
@@ -116,17 +130,17 @@ export default {
     color: white;
 }
 
-*{
-   font-size: 16px;
-  color: black;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 600;
+* {
+    font-size: 16px;
+    color: black;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
 }
 
-h1{
-  font-size: 28px;
-  color: black;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 700;
+h1 {
+    font-size: 28px;
+    color: black;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
 }
 </style>

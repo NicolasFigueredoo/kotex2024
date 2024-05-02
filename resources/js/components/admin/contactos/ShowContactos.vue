@@ -29,14 +29,14 @@
                     <input type="text" class="form-control" id="whatsapp" :value="this.contacto.whatsapp">
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label">Facebook</label>
+                    <label class="form-label">Facebook (Link)</label>
                     <input type="text" class="form-control" id="facebook" :value="this.contacto.facebook">
                 </div>
             </div>
 
             <div class="row mt-2">
                 <div class="col-md-6">
-                    <label class="form-label">Instagram</label>
+                    <label class="form-label">Instagram (Link)</label>
                     <input type="text" class="form-control" id="instagram" :value="this.contacto.instagram">
                 </div>
             </div>
@@ -77,8 +77,10 @@ export default {
                     instagram: $('#instagram').val()
                 })
                 .then(response => {
-                    this.$store.commit('mostrarComponente', 11);
-
+                    this.$store.commit('setMostrarAlerta', true);
+                    this.$store.commit('setClaseAlerta', 1);
+                    this.$store.commit('setMensajeAlerta', 'Contacto actualizado con éxito'); 
+                    this.$store.commit('mostrarComponente', 13);
                 })
                 .catch(error => {
                     console.error(error);
@@ -89,7 +91,6 @@ export default {
         obtenerContacto() {
             axios.get('/api/obtenerContacto')
                 .then(response => {
-                    console.log(response.data)
                     this.contacto = response.data[0]
                 })
                 .catch(error => {

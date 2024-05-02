@@ -6,9 +6,22 @@
         </div>
 
         <form class="mt-3">
-            <div class="mb-3">
-                <label class="form-label">Usuario</label>
-                <input type="text" class="form-control" id="usuario" :value="this.usuario.usuario"> 
+            <div class="row">
+                <div class="col-md-8">
+                    <label class="form-label">Usuario</label>
+                    <input type="text" class="form-control" id="usuario" :value="this.usuario.usuario">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Rol</label>
+                    
+                    <select  id="rol" class="form-select"
+                        aria-label="Default select example" style="height: 50px;">
+                        <option :value="this.usuario.rol" selected>{{ this.usuario.rol }}</option>
+                        <option value="administrador" >Administrador</option>
+                        <option value="usuario" >Usuario</option>
+
+                    </select>
+                </div>
             </div>
 
             <div class="mb-3">
@@ -62,6 +75,7 @@ export default {
                 idUsuario: this.idUsuario,
                 usuario: $('#usuario').val(),
                 email: $('#email').val(),
+                rol: $('#rol').val(),
                 contraseña: $('#contraseña').val()
 
             }
@@ -71,7 +85,10 @@ export default {
                 }
             })
                 .then(response => {
-                    this.$store.commit('mostrarComponente', 3);
+                    this.$store.commit('setMostrarAlerta', true);
+                    this.$store.commit('setClaseAlerta', 1);
+                    this.$store.commit('setMensajeAlerta', 'Usuario actualizado con éxito'); 
+                    this.$store.commit('mostrarComponente', 14);
 
                 })
                 .catch(error => {
@@ -84,7 +101,6 @@ export default {
             axios.get(`/api/obtenerIdUsuario/${this.idUsuario}`)
                 .then(response => {
                     this.usuario = response.data;
-                    console.log(response.data)
                 })
                 .catch(error => {
                     console.error(error);

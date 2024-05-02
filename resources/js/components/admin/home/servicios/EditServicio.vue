@@ -10,11 +10,17 @@
                 <label class="form-label">orden</label>
                 <input type="text" class="form-control" id="orden" :value="this.orden">
             </div>
-            <div class="mb-3">
-                <label class="form-label">Icono</label>
-                <div v-html="this.icono"> </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="form-label">Icono</label>
+                    <input type="text" class="form-control" id="icono">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Icono actual</label>
+                    <div v-html="this.icono"></div>
+                </div>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 mt-2">
                 <label for="exampleInputPassword1" class="form-label">Texto</label>
                 <textarea class="summernote" id="editor"></textarea>
             </div>
@@ -65,8 +71,13 @@ export default {
             let formData = new FormData();
             formData.append('idServicio', this.idServicio);
             formData.append('orden', $('#orden').val());
-            formData.append('icono', $('#icono').val());
-            formData.append('texto', $('#texto').val());
+            if($('#icono').val() == ''){
+                formData.append('icono', this.icono);
+
+            }else{
+                formData.append('icono', $('#icono').val());
+            }
+            formData.append('texto', $('#editor').summernote('code').toString());
 
 
             axios.post('/api/updateServicio', formData)

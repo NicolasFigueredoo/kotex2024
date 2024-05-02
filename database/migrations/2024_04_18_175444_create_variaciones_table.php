@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('variaciones', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('producto_id')->constrained('productos');
+            $table->string('orden');
+            $table->foreignId('producto_id')->constrained('productos')->onDelete('cascade');
             $table->string('color');
             $table->string('medida');
-            $table->string('imagen');
-            $table->string('image2');
-            $table->string('imagen3');
+            $table->string('material');
+            $table->string('tipo');
+            $table->string('imagen')->nullable();
+            $table->string('imagen2')->nullable();
             $table->timestamps();
         });
     }

@@ -104,7 +104,6 @@ export default {
             axios.get('/api/obtenerSecciones')
                 .then(response => {
                     this.secciones = response.data;
-                    console.log(this.secciones)
                 })
                 .catch(error => {
                     console.error(error);
@@ -183,7 +182,6 @@ export default {
 .iconNosotros {
     margin-top: 70px;
     color: #33447F;
-
 }
 
 .tarjeta {
@@ -227,7 +225,7 @@ export default {
 }
 
 .imgInfo img {
-    width: 585px;
+    width: 590px;
     height: 550px;
     filter: grayscale(100%);
 }

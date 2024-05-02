@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banner;
+use App\Models\Catalogo;
 use App\Models\CategoriaHome;
 use App\Models\Contacto;
 use App\Models\Logo;
+use App\Models\MetaDatos;
 use App\Models\Seccion;
 use App\Models\Servicio;
 use App\Models\SliderHome;
@@ -232,6 +234,62 @@ class AdminController extends Controller
         return response()->json(['message' => 'Datos subidos correctamente'], 200);
     }
 
+    //CATALOGO
+    public function obtenerCatalogo(){
+        $catalogo = Catalogo::first();
+        $rutaArchivo = $catalogo->file;
+        if (Storage::exists($rutaArchivo)) {
+            $tipoMime = Storage::mimeType($rutaArchivo);
+
+            return response()->file(storage_path('app/' . $rutaArchivo), ['Content-Type' => $tipoMime]);
+        } else {
+            return response()->json(['error' => 'El archivo no existe'], 404);
+        }
+        
+    }
+
+    public function updateCatalogo(Request $request){
+        $catalogo = Catalogo::first();
+        if ($request->hasFile('file')) {
+          
+            if (!Storage::exists('public/fotos')) {
+                Storage::makeDirectory('public/fotos');
+            }
+        
+            $photoPath = $request->file('file')->store('fotos');
+            $catalogo->file = $photoPath;
+        }
+        $catalogo->link = $request->link;
+        $catalogo->save();
+
+        return response()->json($catalogo);
+    }
+
+    //METADATOS
+
+    public function obtenerMetadatos(){
+        $metadatos = MetaDatos::all();
+        return response()->json($metadatos);
+
+    }
+
+    public function obtenerMetadato($idMetadato){
+        $metadato = MetaDatos::find($idMetadato);
+        return response()->json($metadato);
+    }
+
+    public function updateMetadato(Request $request){
+        $metadatos = MetaDatos::all();
+        foreach ($metadatos as $meta) {
+            $metadato = MetaDatos::find($meta['id']);
+            $metadato->claves = $request->claves;
+            $metadato->save();
+        }
+
+        return response()->json($metadatos);
+    }
+
+    
 
 
 

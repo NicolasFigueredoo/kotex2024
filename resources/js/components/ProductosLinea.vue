@@ -4,7 +4,7 @@
       <div class="productos" >
         <div  v-for="producto in productos" :key="producto.id">
           <div class="producto"> 
-            <img src="../../img/kotexfooter.png"  alt="imagen" @click="verProducto(producto.id_producto, producto.nombre_producto)">
+            <img :src="getImagen(producto.imagen)"  alt="imagen" @click="verProducto(producto.id_producto, producto.nombre_producto)">
             <p class="categoria">{{ producto.nombre_categoria.toUpperCase() }}</p>
             <p class="nombre">{{ producto.nombre_producto.charAt(0).toUpperCase() + producto.nombre_producto.slice(1) }}</p>
 
@@ -27,20 +27,30 @@ export default {
       productos: [],
     };
   },
+  methods:{
+    getImagen(fileName){
+      if(fileName){
+        const filePath = fileName.split('/').pop();
+        return '/api/getImage/' + filePath
+      }
+
+    },
+
+    verProducto(id,nombre) {
+      this.$emit('ver-producto', [id,nombre]);
+      
+    }
+
+  },
   mounted() {
     axios.get('/api/obtenerProductosDeLinea')
       .then(response => {
+        console.log(response.data)
         this.productos = response.data;
       })
       .catch(error => {
         console.error('Error al traer los productos:', error);
       });
-  },
-  methods: {
-    verProducto(id,nombre) {
-      this.$emit('ver-producto', [id,nombre]);
-      
-    }
   }
 }
 </script>

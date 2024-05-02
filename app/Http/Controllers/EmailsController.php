@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\ContactoMail;
 use App\Mail\PresupuestoMail;
 use App\Mail\SuscripcionMail;
+use App\Models\Contacto;
 use App\Models\Suscripcion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -19,7 +20,9 @@ class EmailsController extends Controller
         $celular = $request->celular;
         $mensaje = $request->mensaje;
 
-        Mail::to('kotexsrl@hotmail.com')->send(new ContactoMail($nombre, $apellido, $email,$celular,$mensaje));
+        $contacto = Contacto::first();
+
+        Mail::to($contacto->email)->send(new ContactoMail($nombre, $apellido, $email,$celular,$mensaje));
         
 
         return response()->json(['message' => 'mensajes enviados'], 200);
@@ -49,8 +52,8 @@ class EmailsController extends Controller
         $productos = $request->productos;
         $file = $request->file('file');
 
-
-        Mail::to('kotexsrl@hotmail.com')->send(new PresupuestoMail($nombre, $apellido,$email,$celular,$mensaje,$productos,$file));
+        $contacto = Contacto::first();
+        Mail::to($contacto->email)->send(new PresupuestoMail($nombre, $apellido,$email,$celular,$mensaje,$productos,$file));
 
         return response()->json(['message' => 'mensajes enviados'], 200);
 

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('variacion_unidad_venta', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('variacion_id')->constrained('variaciones');
-            $table->foreignId('unidad_id')->constrained('unidadesventa');
+            $table->foreignId('variacion_id')->constrained('variaciones')->onDelete('cascade');
+            $table->foreignId('unidad_id')->constrained('unidadesventa')->onDelete('cascade');
             $table->timestamps();
         });
     }

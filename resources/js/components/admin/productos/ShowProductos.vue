@@ -2,24 +2,30 @@
     <div class="container">
 
         <div class="w-100 border-bottom">
-            <h1>USUARIOS</h1>
+            <h1>PRODUCTOS</h1>
         </div>
 
         <table class="table table-bordered mt-3">
             <thead>
                 <tr>
-                    <th scope="col" class="col-sm-1 encabezado">Usuario</th>
-                    <th scope="col" class="encabezado">Email</th>
+                    <th scope="col" class="col-sm-1 encabezado">orden</th>
+                    <th scope="col" class="encabezado">Nombre</th>
+                    <th scope="col" class="col-sm-1 encabezado">Color</th>
+                    <th scope="col" class="col-sm-1 encabezado">Medida</th>
+                    <th scope="col" class="col-sm-1 encabezado">Imagen</th>
                     <th scope="col" class="col-sm-1 encabezado">Acciones</th>
-
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="usuario in usuarios" :key="usuario.id">
-                    <td>{{ usuario.usuario }}</td>
-                    <td>{{ usuario.email }}</td>
+                <tr v-for="producto in productos" :key="producto.id">
+                    <th >{{ producto.orden }}</th>
+                    <th >{{ producto.producto.nombre }}</th>
+                    <th >{{ producto.color }}</th>
+                    <th >{{ producto.medida }}</th>
+                    <th><img class="imagen" :src="getImagen(producto.imagen)" alt=""></th>
+                    
                     <td>
-                        <button type="button" class="btn btn-sm" style="background-color: rgb(52, 68, 127);" @click="editarUsuario(16, usuario.id)">
+                        <button type="button" class="btn btn-sm" style="background-color: rgb(52, 68, 127);" @click="editarProducto(26, producto.id)">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="15" height="15"
                                 style="cursor: pointer">
                                 <path fill="white"
@@ -27,7 +33,7 @@
                             </svg>
                         </button>
 
-                        <button type="button" class="btn btn-sm btn-danger" style="margin-left: 15px;" @click="deleteUsuario(usuario.id)">
+                        <button type="button" class="btn btn-sm btn-danger" style="margin-left: 15px; " @click="eliminarAplicacion(producto.id)">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="15" height="15"
                                 style="cursor: pointer;">
                                 <path fill="white"
@@ -53,28 +59,40 @@ export default {
 
     data(){
         return{
-            usuarios:[]
+            productos:[]
         }
     },
     
-    methods:{
-    editarUsuario(idComponente, idUsuario){
-        this.$store.commit('setUsuarioId', idUsuario);
+
+methods:{
+    getImagen(fileName) {
+        if(fileName){
+            const filePath = fileName.split('/').pop();
+            return '/api/getImage/' + filePath
+        }
+        },
+    editarProducto(idComponente, idProducto){
+        this.$store.commit('setProductoId', idProducto);
         this.$store.commit('mostrarComponente', idComponente);
     },
-    deleteUsuario(id){
-        axios.get(`/api/deleteUsuario/${id}`)
+    obtenerProductos(){
+        axios.get('/api/obtenerProductos')
                 .then(response => {
-                    this.usuarios = response.data
+                    this.productos = response.data
                 })
                 .catch(error => {
                     console.error(error);
                 });
     },
-    obtenerUsuarios(){
-        axios.get('/api/obtenerUsuarios')
+    eliminarAplicacion(idAplicacion){
+        axios.post('/api/deleteAplicacion',{
+            idAplicacion: idAplicacion
+        })
                 .then(response => {
-                    this.usuarios = response.data
+                    this.$store.commit('setMostrarAlerta', true);
+                    this.$store.commit('setClaseAlerta', 1);
+                    this.$store.commit('setMensajeAlerta', 'Aplicacíon eliminada con éxito');  
+                    this.obtenerProductos();
                 })
                 .catch(error => {
                     console.error(error);
@@ -82,11 +100,10 @@ export default {
     }
     },
     mounted(){
-        this.obtenerUsuarios();
+        this.obtenerProductos();
     }
 }
 </script>
-
 
 <style scoped>
 .encabezado {
@@ -106,5 +123,9 @@ h1 {
     color: black;
     font-family: "Montserrat", sans-serif;
     font-weight: 700;
+}
+.imagen {
+    width: 200px;
+    height: 100px;
 }
 </style>

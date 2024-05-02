@@ -46,14 +46,12 @@ export default {
 
     methods: {
         crearUsuario() {
-            console.log(this.usuario, this.email,this.contraseña)
             axios.post('/api/crearUsuario', {
                 usuario: this.usuario,
                 email: this.email,
                 contraseña: this.contraseña
             })
                 .then(response => {
-                    console.log(response)
                 })
                 .catch(error => {
                     console.error('Error ingresar Admin:', error);

@@ -29,7 +29,7 @@
                             </svg>
                         </button>
 
-                        <button type="button" class="btn btn-sm btn-danger" style="margin-left: 15px; " @click="eliminarAplicacion(11, aplicacion.id)">
+                        <button type="button" class="btn btn-sm btn-danger" style="margin-left: 15px; " @click="eliminarAplicacion(aplicacion.id)">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="15" height="15"
                                 style="cursor: pointer;">
                                 <path fill="white"
@@ -80,12 +80,15 @@ methods:{
                     console.error(error);
                 });
     },
-    eliminarAplicacion(idComponente, idAplicacion){
+    eliminarAplicacion(idAplicacion){
         axios.post('/api/deleteAplicacion',{
             idAplicacion: idAplicacion
         })
                 .then(response => {
-                    console.log(response.data)
+                    this.$store.commit('setMostrarAlerta', true);
+                    this.$store.commit('setClaseAlerta', 1);
+                    this.$store.commit('setMensajeAlerta', 'Aplicacíon eliminada con éxito');  
+                    this.obtenerAplicaciones();
                 })
                 .catch(error => {
                     console.error(error);

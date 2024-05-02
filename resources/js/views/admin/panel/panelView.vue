@@ -11,45 +11,16 @@
                 <div class="">
                     <ul class="navbar-nav ms-automb-lg-0">
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-user nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                <span class="account-user-avatar">
-                                    <img src="../../../../img/kotex.jpg" alt="Profile Pic"
-                                        class="user-avatar rounded-circle">
-                                </span>
-                                <span class="d-none d-lg-flex flex-column gap-1 d-none">
-                                    <h5 class="my-0 text-grey-600 small">Nicolas</h5>
-                                    <h6 class="my-0 fw-normal small">Figueredo</h6>
-                                </span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end shadow position-absolute">
-                                <li>
-                                    <a class="dropdown-item">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                            fill="currentColor" class="bi bi-person me-2" viewBox="0 0 16 16">
-                                            <path
-                                                d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z" />
-                                        </svg> Mis datos
-                                    </a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li>
-                                    <a class="dropdown-item text-danger">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-box-arrow-right me-2" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
-                                                d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z" />
-                                            <path fill-rule="evenodd"
-                                                d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
-                                        </svg> Cerrar sesión
-                                    </a>
-                                </li>
+                        <div class="p-2 mt-2">
+                            <p>Bienvenido {{ this.nombre }}</p>
 
-                            </ul>
-                        </li>
+                        </div>
+
+                        <div class="p-2">
+                            <button @click="logout()" type="button" class="btn btn-danger ">Salir</button>
+                        </div>
+
+
                     </ul>
                 </div>
             </div>
@@ -77,7 +48,8 @@
                             </div>
                             <span>Home</span>
                             <div class="sidenav-collapse-arrow">
-                                <i class="fa-solid fa-angle-down"></i>
+                                    <svg class="fa-solid fa-angle-down" xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 512 512">
+                                        <path fill="#ffffff" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
                             </div>
                         </a>
                         <div id="collapseHome" class="collapse">
@@ -95,7 +67,6 @@
                                 <a @click="mostrarComponenteF(5)" class="nav-link ">Banner</a>
                             </nav>
                         </div>
-
                         <div id="collapseHome" class="collapse">
                             <nav class="sidenav-menu-nested nav accordion">
                                 <a @click="mostrarComponenteF(21)" class="nav-link ">Servicios</a>
@@ -112,9 +83,11 @@
                             </div>
                             <span>Nosotros</span>
                             <div class="sidenav-collapse-arrow">
-                                <i class="fa-solid fa-angle-down"></i>
+                                    <svg class="fa-solid fa-angle-down" xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 512 512">
+                                        <path fill="#ffffff" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
                             </div>
-                        </a>
+   
+                            </a>
                         
                         <div id="collapseNosotros" class="collapse">
                             <nav  class="sidenav-menu-nested nav accordion">
@@ -136,18 +109,59 @@
                     </li>
 
                     <li class="sidebar-item">
+                        <a @click="mostrarComponenteF(23)"  class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseCatalogo"
+                            aria-expanded="false" aria-controls="collapseCatalogo">
+                            <div class="nav-link-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 576 512">
+                                    <path fill="#ffffff" d="M249.6 471.5c10.8 3.8 22.4-4.1 22.4-15.5V78.6c0-4.2-1.6-8.4-5-11C247.4 52 202.4 32 144 32C93.5 32 46.3 45.3 18.1 56.1C6.8 60.5 0 71.7 0 83.8V454.1c0 11.9 12.8 20.2 24.1 16.5C55.6 460.1 105.5 448 144 448c33.9 0 79 14 105.6 23.5zm76.8 0C353 462 398.1 448 432 448c38.5 0 88.4 12.1 119.9 22.6c11.3 3.8 24.1-4.6 24.1-16.5V83.8c0-12.1-6.8-23.3-18.1-27.6C529.7 45.3 482.5 32 432 32c-58.4 0-103.4 20-123 35.6c-3.3 2.6-5 6.8-5 11V456c0 11.4 11.7 19.3 22.4 15.5z"/></svg>
+                            </div>
+                            <span>Catalogo</span>
+                            <div class="sidenav-collapse-arrow">
+                                <i class="fa-solid fa-angle-down"></i>
+                            </div>
+                        </a>
+                    
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a  class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseProductos"
+                            aria-expanded="false" aria-controls="collapseProductos">
+                            <div class="nav-link-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 640 512">
+                                    <path fill="#ffffff" d="M36.8 192H603.2c20.3 0 36.8-16.5 36.8-36.8c0-7.3-2.2-14.4-6.2-20.4L558.2 21.4C549.3 8 534.4 0 518.3 0H121.7c-16 0-31 8-39.9 21.4L6.2 134.7c-4 6.1-6.2 13.2-6.2 20.4C0 175.5 16.5 192 36.8 192zM64 224V384v80c0 26.5 21.5 48 48 48H336c26.5 0 48-21.5 48-48V384 224H320V384H128V224H64zm448 0V480c0 17.7 14.3 32 32 32s32-14.3 32-32V224H512z"/></svg>
+                            </div>
+                            <span>Productos</span>
+                            <div class="sidenav-collapse-arrow">
+                                    <svg class="fa-solid fa-angle-down" xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 512 512">
+                                        <path fill="#ffffff" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
+                            </div>
+                        </a>
+                        <div id="collapseProductos" class="collapse">
+                            <nav  class="sidenav-menu-nested nav accordion">
+                                <a @click="mostrarComponenteF(25)" class="nav-link">Mostrar</a>
+                            </nav>
+                        </div>
+                        <div id="collapseProductos" class="collapse">
+                            <nav  class="sidenav-menu-nested nav accordion">
+                                <a @click="mostrarComponenteF(24)" class="nav-link">Crear</a>
+                            </nav>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-item">
                         <a  class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseAplicaciones"
                             aria-expanded="false" aria-controls="collapseAplicaciones">
                             <div class="nav-link-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-house-door-fill" viewBox="0 0 16 16">
-                                    <path
-                                        d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5Z" />
-                                </svg>
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 576 512">
+                                    <path fill="#ffffff" d="M264.5 5.2c14.9-6.9 32.1-6.9 47 0l218.6 101c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 149.8C37.4 145.8 32 137.3 32 128s5.4-17.9 13.9-21.8L264.5 5.2zM476.9 209.6l53.2 24.6c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 277.8C37.4 273.8 32 265.3 32 256s5.4-17.9 13.9-21.8l53.2-24.6 152 70.2c23.4 10.8 50.4 10.8 73.8 0l152-70.2zm-152 198.2l152-70.2 53.2 24.6c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 405.8C37.4 401.8 32 393.3 32 384s5.4-17.9 13.9-21.8l53.2-24.6 152 70.2c23.4 10.8 50.4 10.8 73.8 0z"/></svg>
+                        
+                       
                             </div>
                             <span>Aplicaciones</span>
                             <div class="sidenav-collapse-arrow">
-                                <i class="fa-solid fa-angle-down"></i>
+                                    <svg class="fa-solid fa-angle-down" xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 512 512">
+                                        <path fill="#ffffff" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
                             </div>
                         </a>
                         
@@ -169,11 +183,9 @@
                         <a @click="mostrarComponenteF(13)"  class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseContacto"
                             aria-expanded="false" aria-controls="collapseContacto">
                             <div class="nav-link-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-house-door-fill" viewBox="0 0 16 16">
-                                    <path
-                                        d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5Z" />
-                                </svg>
+
+                                <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
+                                    <path fill="#ffffff" d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/></svg>
                             </div>
                             <span>Contacto</span>
                             <div class="sidenav-collapse-arrow">
@@ -184,18 +196,34 @@
                     </li>
 
                     <li class="sidebar-item">
+                        <a @click="mostrarComponenteF(19)" class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseLogos"
+                            aria-expanded="false" aria-controls="collapseLogos">
+                            <div class="nav-link-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
+                                    <path fill="#ffffff" d="M0 96C0 60.7 28.7 32 64 32H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM323.8 202.5c-4.5-6.6-11.9-10.5-19.8-10.5s-15.4 3.9-19.8 10.5l-87 127.6L170.7 297c-4.6-5.7-11.5-9-18.7-9s-14.2 3.3-18.7 9l-64 80c-5.8 7.2-6.9 17.1-2.9 25.4s12.4 13.6 21.6 13.6h96 32H424c8.9 0 17.1-4.9 21.2-12.8s3.6-17.4-1.4-24.7l-120-176zM112 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"/></svg>
+                            </div>
+                            <span>Logos</span>
+                            <div class="sidenav-collapse-arrow">
+                                <i class="fa-solid fa-angle-down"></i>
+                            </div>
+                        </a>
+                    
+                  
+                    </li>
+                
+
+                    <hr class="mx-3 mt-5">
+                    <li class="sidebar-item">
                         <a  class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseUsuario"
                             aria-expanded="false" aria-controls="collapseUsuario">
                             <div class="nav-link-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-house-door-fill" viewBox="0 0 16 16">
-                                    <path
-                                        d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5Z" />
-                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 640 512">
+                                    <path fill="#ffffff" d="M224 0a128 128 0 1 1 0 256A128 128 0 1 1 224 0zM178.3 304h91.4c11.8 0 23.4 1.2 34.5 3.3c-2.1 18.5 7.4 35.6 21.8 44.8c-16.6 10.6-26.7 31.6-20 53.3c4 12.9 9.4 25.5 16.4 37.6s15.2 23.1 24.4 33c15.7 16.9 39.6 18.4 57.2 8.7v.9c0 9.2 2.7 18.5 7.9 26.3H29.7C13.3 512 0 498.7 0 482.3C0 383.8 79.8 304 178.3 304zM436 218.2c0-7 4.5-13.3 11.3-14.8c10.5-2.4 21.5-3.7 32.7-3.7s22.2 1.3 32.7 3.7c6.8 1.5 11.3 7.8 11.3 14.8v17.7c0 7.8 4.8 14.8 11.6 18.7c6.8 3.9 15.1 4.5 21.8 .6l13.8-7.9c6.1-3.5 13.7-2.7 18.5 2.4c7.6 8.1 14.3 17.2 20.1 27.2s10.3 20.4 13.5 31c2.1 6.7-1.1 13.7-7.2 17.2l-14.4 8.3c-6.5 3.7-10 10.9-10 18.4s3.5 14.7 10 18.4l14.4 8.3c6.1 3.5 9.2 10.5 7.2 17.2c-3.3 10.6-7.8 21-13.5 31s-12.5 19.1-20.1 27.2c-4.8 5.1-12.5 5.9-18.5 2.4l-13.8-7.9c-6.7-3.9-15.1-3.3-21.8 .6c-6.8 3.9-11.6 10.9-11.6 18.7v17.7c0 7-4.5 13.3-11.3 14.8c-10.5 2.4-21.5 3.7-32.7 3.7s-22.2-1.3-32.7-3.7c-6.8-1.5-11.3-7.8-11.3-14.8V467.8c0-7.9-4.9-14.9-11.7-18.9c-6.8-3.9-15.2-4.5-22-.6l-13.5 7.8c-6.1 3.5-13.7 2.7-18.5-2.4c-7.6-8.1-14.3-17.2-20.1-27.2s-10.3-20.4-13.5-31c-2.1-6.7 1.1-13.7 7.2-17.2l14-8.1c6.5-3.8 10.1-11.1 10.1-18.6s-3.5-14.8-10.1-18.6l-14-8.1c-6.1-3.5-9.2-10.5-7.2-17.2c3.3-10.6 7.7-21 13.5-31s12.5-19.1 20.1-27.2c4.8-5.1 12.4-5.9 18.5-2.4l13.6 7.8c6.8 3.9 15.2 3.3 22-.6c6.9-3.9 11.7-11 11.7-18.9V218.2zm92.1 133.5a48.1 48.1 0 1 0 -96.1 0 48.1 48.1 0 1 0 96.1 0z"/></svg>
                             </div>
                             <span>Usuarios</span>
                             <div class="sidenav-collapse-arrow">
-                                <i class="fa-solid fa-angle-down"></i>
+                                    <svg class="fa-solid fa-angle-down" xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 512 512">
+                                        <path fill="#ffffff" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
                             </div>
                         </a>
                         <div id="collapseUsuario" class="collapse">
@@ -203,26 +231,23 @@
                                 <a @click="mostrarComponenteF(14)" class="nav-link">Mostrar</a>
                             </nav>
                         </div>
-                        <div id="collapseUsuario" class="collapse">
+                        <div v-if="this.rol == 'administrador'" id="collapseUsuario" class="collapse">
                             <nav class="sidenav-menu-nested nav accordion">
                                 <a @click="mostrarComponenteF(15)" class="nav-link ">Crear</a>
                             </nav>
                         </div>
                     </li>
-
                     <li class="sidebar-item">
                         <a  class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseSuscripciones"
                             aria-expanded="false" aria-controls="collapseSuscripciones">
                             <div class="nav-link-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-house-door-fill" viewBox="0 0 16 16">
-                                    <path
-                                        d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5Z" />
-                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
+                                    <path fill="#ffffff" d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"/></svg>
                             </div>
                             <span>Suscripciones</span>
                             <div class="sidenav-collapse-arrow">
-                                <i class="fa-solid fa-angle-down"></i>
+                                    <svg class="fa-solid fa-angle-down" xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 512 512">
+                                        <path fill="#ffffff" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
                             </div>
                         </a>
                         <div id="collapseSuscripciones" class="collapse">
@@ -237,58 +262,27 @@
                         </div>
                     </li>
 
-                    
                     <li class="sidebar-item">
-                        <a @click="mostrarComponenteF(19)" class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseLogos"
-                            aria-expanded="false" aria-controls="collapseLogos">
+                        <a @click="mostrarComponenteF(27)"  class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseMetadatos"
+                            aria-expanded="false" aria-controls="collapseMetadatos">
                             <div class="nav-link-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-house-door-fill" viewBox="0 0 16 16">
-                                    <path
-                                        d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5Z" />
-                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 640 512">
+                                    <path fill="#ffffff" d="M0 96C0 60.7 28.7 32 64 32l384 0c35.3 0 64 28.7 64 64l0 65.1c-37.8 5.4-69.4 29.6-85.2 62.9L360 224l0 64 56 0 0 8.6c-19.1 11.1-32 31.7-32 55.4l-24 0 0 64 24 0 0 64L64 480c-35.3 0-64-28.7-64-64L0 96zM64 224l0 64 88 0 0-64-88 0zm232 0l-88 0 0 64 88 0 0-64zM152 352l-88 0 0 64 88 0 0-64zm56 0l0 64 88 0 0-64-88 0zM528 240c-17.7 0-32 14.3-32 32l0 48 64 0 0-48c0-17.7-14.3-32-32-32zm-80 32c0-44.2 35.8-80 80-80s80 35.8 80 80l0 48c17.7 0 32 14.3 32 32l0 128c0 17.7-14.3 32-32 32l-160 0c-17.7 0-32-14.3-32-32l0-128c0-17.7 14.3-32 32-32l0-48z"/></svg>
                             </div>
-                            <span>Logos</span>
-                            <div class="sidenav-collapse-arrow">
-                                <i class="fa-solid fa-angle-down"></i>
-                            </div>
+                            <span>Metadatos</span>
+                         
                         </a>
                     
+                    </li>
                   
-                    </li>
-
-                    <li class="sidebar-item">
-                        <a  class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseProductos"
-                            aria-expanded="false" aria-controls="collapseProductos">
-                            <div class="nav-link-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-house-door-fill" viewBox="0 0 16 16">
-                                    <path
-                                        d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5Z" />
-                                </svg>
-                            </div>
-                            <span>Productos</span>
-                            <div class="sidenav-collapse-arrow">
-                                <i class="fa-solid fa-angle-down"></i>
-                            </div>
-                        </a>
-                        <div id="collapseProductos" class="collapse">
-                            <nav  class="sidenav-menu-nested nav accordion">
-                                <a @click="mostrarComponenteF(21)" class="nav-link">Mostrar</a>
-                            </nav>
-                        </div>
-                        <div id="collapseProductos" class="collapse">
-                            <nav  class="sidenav-menu-nested nav accordion">
-                                <a @click="mostrarComponenteF(23)" class="nav-link">Crear</a>
-                            </nav>
-                        </div>
-                    </li>
+                  
     
     
                 </ul>
             </nav>
 
             <Alerta style="position: fixed; z-index: 5;" v-if="mostrarAlerta === true"/>
+            <InicioAdmin v-if="mostrarComponente === 0"/>
 
             <!--COMPONENTES HOME -->
             <ShowSlider v-if="mostrarComponente === 1"/>
@@ -329,8 +323,21 @@
             <ShowServicios v-if="mostrarComponente === 21"/>
             <EditServicio v-if="mostrarComponente === 22"/>
 
+            <!--COMPONENTES CATALOGO -->
+            <ShowCatalogo v-if="mostrarComponente === 23"/>
+
+
+
             <!--COMPONENTES PRODUCTOS -->
-            <CrearProducto v-if="mostrarComponente === 23"/>
+            <CrearProducto v-if="mostrarComponente === 24"/>
+            <ShowProductos v-if="mostrarComponente === 25"/>
+            <EditProducto v-if="mostrarComponente === 26"/>
+
+            <!--COMPONENTES METADATOS -->
+            <MetaDatos v-if="mostrarComponente === 27"/>
+            <EditMetadatos v-if="mostrarComponente === 28"/>
+
+            
 
 
 
@@ -346,6 +353,7 @@
 </template>
 
 <script>
+
 import ShowSlider from "@/components/admin/home/sliderHome/ShowSlider.vue";
 import EditSlider from "@/components/admin/home/sliderHome/EditSlider.vue";
 import ShowCategorias from "@/components/admin/home/categorias/ShowCategorias.vue";
@@ -364,13 +372,21 @@ import EditUsuario from "@/components/admin/usuario/EditUsuario.vue";
 import ShowSuscripciones from "@/components/admin/suscripciones/ShowSuscripciones.vue";
 import EnviarSuscripciones from "@/components/admin/suscripciones/EnviarSuscripciones.vue";
 import ShowLogos from "@/components/admin/logos/ShowLogos.vue";
-import CrearProducto from "@/components/admin/productos/CrearProducto.vue";
 import EditServicio from "@/components/admin/home/servicios/EditServicio.vue";
 import ShowServicios from "@/components/admin/home/servicios/ShowServicios.vue";
+import ShowCatalogo from "@/components/admin/catalogo/ShowCatalogo.vue";
+import CrearProducto from "@/components/admin/productos/CrearProducto.vue";
+import ShowProductos from "@/components/admin/productos/ShowProductos.vue";
+import EditProducto from "@/components/admin/productos/EditProducto.vue";
+import InicioAdmin from "@/components/admin/inicio/InicioAdmin.vue";
+import MetaDatos from "@/components/admin/metadatos/MetaDatos.vue";
+import EditMetadatos from "@/components/admin/metadatos/EditMetadatos.vue";
 
+import axios from "axios";
 
 export default {
     components: {
+        InicioAdmin,
         ShowSlider,
         EditSlider,
         ShowCategorias,
@@ -389,9 +405,20 @@ export default {
         EnviarSuscripciones,
         ShowSuscripciones,
         ShowLogos,
-        CrearProducto,
         EditServicio,
-        ShowServicios
+        ShowServicios,
+        ShowCatalogo,
+        CrearProducto,
+        ShowProductos,
+        EditProducto,
+        MetaDatos,
+        EditMetadatos
+    },
+
+    data(){
+        return{
+            rol: null
+        }
     },
   
     computed:{
@@ -403,10 +430,35 @@ export default {
             return this.$store.getters['getMostrarAlerta'];
         },
 
+        getIdLogin(){
+            return this.$store.getters['getIdLogin'];
+        },
+
     },
     methods:{
+        logout(){
+            this.$router.push('/admin/login');
+            localStorage.setItem('idLogin', JSON.stringify(null));
+
+        },
+        obtenerUsuario(){
+            axios.get(`/api/obtenerIdUsuario/${this.getIdLogin}`)
+                .then(response => {
+                    this.rol = response.data.rol
+                    this.nombre = response.data.usuario
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        },
         mostrarComponenteF(idComponente){
             this.$store.commit('mostrarComponente', idComponente);
+        }
+    },
+    mounted(){
+        this.obtenerUsuario();
+        if(this.getIdLogin == null){
+            this.$router.push('/admin/login');
         }
     }
 
@@ -591,14 +643,11 @@ body {
     display: inline-block;
     margin-left: auto;
     transition: transform 0.15s ease;
-}
 
-.sidenav-collapse-arrow i {
-    font-size: 12px;
 }
 
 .nav-link.collapsed .sidenav-collapse-arrow {
-    transform: rotate(-90deg);
+    transform: rotate(180deg);
 }
 
 .sidenav-menu-nested {

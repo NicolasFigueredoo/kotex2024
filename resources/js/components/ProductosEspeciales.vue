@@ -1,17 +1,19 @@
 <template>
   <div>
     <div class="productosEspeciales">
-      <div class="productos" >
-        <div  v-for="producto in productos" :key="producto.id_producto">
-          <div class="producto"> 
-            <img src="../../img/kotexfooter.png"  alt="imagen" @click="verProducto(producto.id_producto, producto.nombre_producto)">
+      <div class="productos">
+        <div v-for="producto in productos" :key="producto.id_producto">
+          <div class="producto">
+            <img :src="getImagen(producto.imagen)" alt="imagen"
+              @click="verProducto(producto.id_producto, producto.nombre_producto)">
             <p class="categoria">{{ producto.nombre_categoria.toUpperCase() }}</p>
-            <p class="nombre">{{ producto.nombre_producto.charAt(0).toUpperCase() + producto.nombre_producto.slice(1) }}</p>
+            <p class="nombre">{{ producto.nombre_producto.charAt(0).toUpperCase() + producto.nombre_producto.slice(1) }}
+            </p>
 
           </div>
-  
+
         </div>
-  
+
       </div>
 
     </div>
@@ -28,6 +30,19 @@ export default {
       mostrarProducto: 1
     };
   },
+  methods: {
+
+    getImagen(fileName) {
+      if (fileName) {
+        const filePath = fileName.split('/').pop();
+        return '/api/getImage/' + filePath
+      }
+
+    },
+    verProducto(id, nombre) {
+      this.$emit('ver-producto', [id, nombre]);
+    }
+  },
   mounted() {
     axios.get('/api/obtenerProductosEspeciales')
       .then(response => {
@@ -37,11 +52,6 @@ export default {
         console.error('Error al traer los productos:', error);
       });
   },
-  methods: {
-    verProducto(id,nombre) {
-      this.$emit('ver-producto', [id,nombre]);
-    }
-  }
 }
 </script>
 
@@ -57,7 +67,8 @@ export default {
   width: 75%;
   margin-bottom: 100px;
 }
-.nombre{
+
+.nombre {
   font-size: 22px;
   color: black;
   font-family: "Montserrat", sans-serif;
@@ -65,7 +76,8 @@ export default {
   line-height: 26px;
   margin-left: 10px;
 }
-.categoria{
+
+.categoria {
   font-size: 14px;
   font-weight: 700;
   font-family: "Montserrat", sans-serif;
@@ -79,15 +91,16 @@ export default {
 
 .productos {
   display: flex;
-  flex-wrap: wrap;  
+  flex-wrap: wrap;
 }
 
-.producto img{
+.producto img {
   width: 285px;
   height: 273px;
   cursor: pointer;
 }
-.producto{
+
+.producto {
   margin-top: 50px;
   width: 288px;
   height: 410px;
@@ -97,5 +110,4 @@ export default {
   margin: 15px;
 
 }
-
 </style>

@@ -65,6 +65,7 @@ Route::get('/api/obtenerCategoriaHome/{idCategoria}', [AdminController::class, '
 
 //banners
 Route::get('/api/obtenerBanner', [AdminController::class, 'obtenerBanner']);
+Route::get('/api/obtenerBanners', [AdminController::class, 'obtenerBanner']);
 Route::post('/api/updateBanner', [AdminController::class, 'updateBanner']);
 
 //Valores
@@ -106,3 +107,19 @@ Route::get('/api/aplicaciones', [AplicacionController::class, 'index']);
 Route::get('/api/obtenerAplicacion/{idAplicacion}', [AplicacionController::class, 'obtenerAplicacion']);
 Route::post('/api/updateAplicacion', [AplicacionController::class, 'update']);
 Route::post('/api/crearAplicacion', [AplicacionController::class, 'store']);
+Route::post('/api/deleteAplicacion', [AplicacionController::class, 'delete']);
+
+//catalogo
+Route::get('/api/obtenerCatalogo', [AdminController::class, 'obtenerCatalogo']);
+Route::post('/api/updateCatalogo', [AdminController::class, 'updateCatalogo']);
+
+//productos
+Route::post('/api/crearProducto', [VariacionesController::class, 'crearProducto']);
+Route::get('/api/obtenerProductos', [VariacionesController::class, 'obtenerProductos']);
+Route::get('/api/obtenerProducto/{idProducto}', [VariacionesController::class, 'obtenerProducto']);
+Route::post('/api/updateProducto/', [VariacionesController::class, 'updateProducto']);
+
+//metadatos
+Route::get('/api/obtenerMetadatos', [AdminController::class, 'obtenerMetadatos']);
+Route::get('/api/obtenerMetadato/{idMetadato}', [AdminController::class, 'obtenerMetadato']);
+Route::post('/api/updateMetadato/', [AdminController::class, 'updateMetadato']);

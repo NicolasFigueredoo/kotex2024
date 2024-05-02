@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Categoria;
 use App\Models\Producto;
+use App\Models\UnidadVenta;
 use App\Models\Variacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class VariacionesController extends Controller
 {
@@ -18,7 +20,9 @@ class VariacionesController extends Controller
 
     public function obtenerProductosXname($name){
      
-        $variaciones = Variacion::select('productos.nombre as nombre_producto', DB::raw('MIN(categorias.nombre) as nombre_categoria'), 'v.id as id_producto')
+        $variaciones = Variacion::select('productos.nombre as nombre_producto', 
+        'variaciones.imagen',
+        DB::raw('MIN(categorias.nombre) as nombre_categoria'), 'v.id as id_producto')
         ->join('variacion_categoria as vc', 'variaciones.id', '=', 'vc.variacion_id')
         ->join('categorias', 'vc.categoria_id', '=', 'categorias.id')
         ->join('productos', 'variaciones.producto_id', '=', 'productos.id')
@@ -26,7 +30,7 @@ class VariacionesController extends Controller
             $join->on('variaciones.id', '=', 'v.id');
         })
         ->where('productos.nombre','LIKE', '%' . $name . '%')
-        ->groupBy('productos.nombre', 'v.id')
+        ->groupBy('productos.nombre', 'v.id','variaciones.imagen',        )
         ->get();
     
         return response()->json($variaciones);
@@ -38,13 +42,14 @@ class VariacionesController extends Controller
         $variaciones = Variacion::select(
             'productos.nombre as nombre_producto',
             'categorias.nombre as nombre_categoria',
+            'variaciones.imagen',
             DB::raw('MIN(variaciones.id) as id_producto')
         )
             ->join('variacion_categoria', 'variaciones.id', '=', 'variacion_categoria.variacion_id')
             ->join('categorias', 'variacion_categoria.categoria_id', '=', 'categorias.id')
             ->join('productos', 'variaciones.producto_id', '=', 'productos.id')
             ->where('categorias.nombre', 'Productos de linea')
-            ->groupBy('productos.nombre', 'categorias.nombre')
+            ->groupBy('productos.nombre', 'categorias.nombre', 'variaciones.imagen')
             ->get();
 
         return response()->json($variaciones);
@@ -55,13 +60,14 @@ class VariacionesController extends Controller
         $variaciones = Variacion::select(
             'productos.nombre as nombre_producto',
             'categorias.nombre as nombre_categoria',
+            'variaciones.imagen',
             DB::raw('MIN(variaciones.id) as id_producto')
         )
             ->join('variacion_categoria', 'variaciones.id', '=', 'variacion_categoria.variacion_id')
             ->join('categorias', 'variacion_categoria.categoria_id', '=', 'categorias.id')
             ->join('productos', 'variaciones.producto_id', '=', 'productos.id')
             ->where('categorias.nombre', 'Productos Especiales')
-            ->groupBy('productos.nombre', 'categorias.nombre')
+            ->groupBy('productos.nombre', 'categorias.nombre', 'variaciones.imagen')
             ->get();
 
         return response()->json($variaciones);
@@ -72,13 +78,15 @@ class VariacionesController extends Controller
         $variaciones = Variacion::select(
             'productos.nombre as nombre_producto',
             'categorias.nombre as nombre_categoria',
+            'variaciones.imagen',
+
             DB::raw('MIN(variaciones.id) as id_producto')
         )
             ->join('variacion_categoria', 'variaciones.id', '=', 'variacion_categoria.variacion_id')
             ->join('categorias', 'variacion_categoria.categoria_id', '=', 'categorias.id')
             ->join('productos', 'variaciones.producto_id', '=', 'productos.id')
             ->where('categorias.nombre', 'Productos Destacados')
-            ->groupBy('productos.nombre', 'categorias.nombre')
+            ->groupBy('productos.nombre', 'categorias.nombre', 'variaciones.imagen')
             ->get();
 
         return response()->json($variaciones);
@@ -117,6 +125,7 @@ class VariacionesController extends Controller
 
 
         return response()->json([
+            'producto' => $variaciones,
             'nombre_producto' => $nombre_producto,
             'categorias' => $categorias->flatten()->values(),
             'categoriasNombre' => $categoriasNombre->flatten()->values(),
@@ -144,7 +153,6 @@ class VariacionesController extends Controller
 
         return response()->json($variacionesPorProducto);
     }
-
 
     public function obtenerColorProducto($nombreProducto)
     {
@@ -221,6 +229,7 @@ class VariacionesController extends Controller
         $variaciones = Variacion::select(
             'productos.nombre as nombre_producto',
             'categorias.nombre as nombre_categoria',
+            'variaciones.imagen',
             DB::raw('MIN(variaciones.id) as id_producto')
         )
             ->join('variacion_categoria', 'variaciones.id', '=', 'variacion_categoria.variacion_id')
@@ -229,9 +238,169 @@ class VariacionesController extends Controller
             ->join('variacion_aplicacion', 'variaciones.id', '=', 'variacion_aplicacion.variacion_id')
             ->where('variacion_aplicacion.aplicacion_id', $aplicacionId)
             ->where('variacion_categoria.categoria_id','!=', 3)
-            ->groupBy('productos.nombre', 'categorias.nombre')
+            ->groupBy('productos.nombre', 'categorias.nombre','variaciones.imagen')
             ->get();
             return $variaciones;
+    }
+
+    public function crearProducto(Request $request){
+
+    
+
+        $variacion = new Variacion();
+        $variacion->orden = $request->orden;
+
+        $producto = Producto::whereRaw('LOWER(nombre) LIKE ?', ['%' . strtolower($request->nombre) . '%'])->first();
+        if($producto){
+        $variacion->producto_id = $producto->id;
+        }else{
+            $producto = new Producto();
+            $producto->nombre = $request->nombre;
+            $producto->save();
+            $variacion->producto_id = $producto->id;
+        }
+
+        $variacion->color = $request->color;
+        $variacion->medida = $request->medida;
+        $variacion->material = $request->material;
+        $variacion->tipo = $request->tipo;
+
+        if ($request->hasFile('imagen')) {
+            if (!Storage::exists('public/fotos')) {
+                Storage::makeDirectory('public/fotos');
+            }
+            $photoPath = $request->file('imagen')->store('fotos');
+            $variacion->imagen = $photoPath;
+        }
+
+        if ($request->hasFile('imagen2')) {
+            if (!Storage::exists('public/fotos')) {
+                Storage::makeDirectory('public/fotos');
+            }
+            $photoPath = $request->file('imagen2')->store('fotos');
+            $variacion->imagen2 = $photoPath;
+        }
+
+        $variacion->save();
+
+        foreach ($request->aplicaciones as $aplicacion) {
+            $variacion->aplicaciones()->attach($aplicacion['id']);
+        }
+
+        if($request->linea == 1){
+            $variacion->categorias()->attach(1);
+
+        }
+        if($request->especial == 1){
+            $variacion->categorias()->attach(2);
+
+        }
+        if($request->destacado == 1){
+            $variacion->categorias()->attach(3);
+        }
+
+        $unidad = UnidadVenta::whereRaw('LOWER(unidad) LIKE ?', ['%' . strtolower($request->unidad) . '%'])->first();
+
+        if($unidad){
+            $variacion->unidadesVenta()->attach($unidad->id);
+        }else{
+            $unidad = new UnidadVenta();
+            $unidad->unidad = $request->unidad;
+            $unidad->save();
+
+            $variacion->unidadesVenta()->attach($unidad->id);
+        }
+
+
+        return 'cargado';
+    }
+
+    public function obtenerProductos(){
+        $variaciones = Variacion::with('producto')->get();
+        return response()->json($variaciones);
+    }
+
+    public function obtenerProducto($idProducto){
+        $variaciones = Variacion::with('producto','categorias','aplicaciones','unidadesVenta')
+        ->where('id', $idProducto)
+        ->get();
+        return response()->json($variaciones);
+
+    }
+
+    public function updateProducto(Request $request){
+
+
+        $variacion = Variacion::find($request->idProducto);
+
+        $variacion->orden = $request->orden;
+
+        $producto = Producto::whereRaw('LOWER(nombre) LIKE ?', ['%' . strtolower($request->nombre) . '%'])->first();
+        if($producto){
+        $variacion->producto_id = $producto->id;
+        }else{
+            $producto = new Producto();
+            $producto->nombre = $request->nombre;
+            $producto->save();
+            $variacion->producto_id = $producto->id;
+        }
+
+        $variacion->color = $request->color;
+        $variacion->medida = $request->medida;
+        $variacion->material = $request->material;
+        $variacion->tipo = $request->tipo;
+
+        if ($request->hasFile('imagen')) {
+            if (!Storage::exists('public/fotos')) {
+                Storage::makeDirectory('public/fotos');
+            }
+            $photoPath = $request->file('imagen')->store('fotos');
+            $variacion->imagen = $photoPath;
+        }
+
+        if ($request->hasFile('imagen2')) {
+            if (!Storage::exists('public/fotos')) {
+                Storage::makeDirectory('public/fotos');
+            }
+            $photoPath = $request->file('imagen2')->store('fotos');
+            $variacion->imagen2 = $photoPath;
+        }
+
+        $variacion->save();
+
+        $variacion->aplicaciones()->detach();
+
+        foreach ($request->aplicaciones as $aplicacion) {
+            $variacion->aplicaciones()->attach($aplicacion['id']);
+        }
+        
+        $variacion->categorias()->detach();
+
+        if($request->linea === true){
+            $variacion->categorias()->attach(1);
+        }
+        if($request->especial === true){
+            $variacion->categorias()->attach(2);
+        }
+        if($request->destacado === true){
+            $variacion->categorias()->attach(3);
+        }
+
+        $unidad = UnidadVenta::whereRaw('LOWER(unidad) LIKE ?', ['%' . strtolower($request->unidad) . '%'])->first();
+        $variacion->unidadesVenta()->detach();
+
+        if($unidad){
+            $variacion->unidadesVenta()->attach($unidad->id);
+        }else{
+            $unidad = new UnidadVenta();
+            $unidad->unidad = $request->unidad;
+            $unidad->save();
+
+            $variacion->unidadesVenta()->attach($unidad->id);
+        }
+
+
+        return 'cargado';
     }
 
 

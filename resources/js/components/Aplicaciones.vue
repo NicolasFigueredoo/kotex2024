@@ -4,7 +4,7 @@
         <div class="aplicaciones" >
           <div  v-for="aplicacion in aplicaciones" :key="aplicacion.id">
             <div class="aplicacion" @click="verAplicacion(aplicacion.id, aplicacion.nombre)"> 
-              <img :src="'../../img/aplicaciones/' + aplicacion.imagen"  alt="imagen" class="imgAplicacion" >
+              <img :src="getImagen(aplicacion.imagen)"  alt="imagen" class="imgAplicacion" >
               <p class="nombre">{{ (aplicacion.nombre).toUpperCase() }}</p>
             </div>
           </div>
@@ -24,6 +24,13 @@
       };
     },
     methods:{
+      getImagen(fileName){
+      if(fileName){
+      const filePath = fileName.split('/').pop();
+      return '/api/getImage/' + filePath
+    }
+
+    },
       verAplicacion(id,nombre){
         this.$emit('ver-aplicacion', [id,nombre]);
       }

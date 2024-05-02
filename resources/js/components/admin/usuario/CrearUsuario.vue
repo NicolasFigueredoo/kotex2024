@@ -6,12 +6,23 @@
         </div>
 
         <form class="mt-3">
-            <div class="mb-3">
-                <label class="form-label">Usuario</label>
-                <input type="text" v-model="this.usuario" class="form-control" id="usuario">
+            <div class="row">
+                <div class="col-md-8">
+                    <label class="form-label">Usuario</label>
+                    <input type="text" v-model="this.usuario" class="form-control" id="usuario">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Rol</label>
+                    
+                    <select v-model="this.rol" id="aplicacionSelect" class="form-select"
+                        aria-label="Default select example" style="height: 50px;">
+                        <option value="usuario" selected>Usuario</option>
+                        <option value="administrador" >Administrador</option>
+                    </select>
+                </div>
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 mt-3">
                 <label class="form-label">Email</label>
                 <input type="text" v-model="this.email" class="form-control" id="email">
             </div>
@@ -46,7 +57,8 @@ export default {
         return {
             usuario: null,
             email: null,
-            contraseña: null
+            contraseña: null,
+            rol: null
         }
 
     },
@@ -59,10 +71,15 @@ export default {
             axios.post('/api/crearUsuario', {
                 usuario: this.usuario,
                 email: this.email,
-                contraseña: this.contraseña
+                contraseña: this.contraseña,
+                rol: this.rol
             })
                 .then(response => {
-                    console.log(response)
+                    this.$store.commit('setMostrarAlerta', true);
+                    this.$store.commit('setClaseAlerta', 1);
+                    this.$store.commit('setMensajeAlerta', 'Producto creado con éxito'); 
+                    this.$store.commit('mostrarComponente', 14);
+   
                 })
                 .catch(error => {
                     console.error('Error ingresar Admin:', error);
