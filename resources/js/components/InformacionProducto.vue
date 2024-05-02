@@ -11,6 +11,9 @@
                         @click="imagenClick(2, this.producto.imagen2)" style="cursor: pointer;" />
                 </div>
             </div>
+
+            <div id="divP" class="d-flex">
+
             <div class="contenedor-imagen">
                 <img id="imgP" v-if="this.producto" :src="getImagen(this.producto.imagen)" ref="imgenPrincipal" alt="" />
             </div>
@@ -56,8 +59,9 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="tabla">
+        <div class="tabla table-responsive">
             <p>Presupuesto</p>
             <table class="table">
                 <thead style="height: 40px">
@@ -771,7 +775,7 @@ export default {
 
 .carouselP {
     padding-left: 15.5%;
-    width: 98rem;
+    width: 83%;
 }
 
 .categoria {
@@ -816,4 +820,109 @@ export default {
     height: 300px;
 }
 
+
+@media only screen and  (max-width: 1000px) {
+
+    #imgP{
+        width: 200px;
+        height: 200px;
+    }
+    #divP{
+    display: flex;
+    flex-direction: column
+  }
+  .textos{
+    width:300px;
+    margin-left: 0px;
+  }
+
+  
+}
+
+
+
+  @media only screen and  (max-width: 900px) {
+    .tabla{
+    width: 100%;
+  }
+  }
+@media only screen and  (max-width: 700px) {
+    .indicador{
+        margin-left: 5%;
+
+    }
+    .informacionProducto{
+        margin-left: 5%;
+    }
+
+    .tabla{
+        margin-left: 5%;
+
+    }
+    .productosD{
+        margin-left: 5%;
+
+    }
+    .carouselP *{
+        padding-left: 10%;
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .productosDestacados{
+        height: 100%
+    }
+    #divP{
+    display: flex;
+    flex-direction: column
+  }
+}
+
+@media only screen and  (max-width: 600px) {
+
+    .tabla{
+    font-size: 12px;
+  }
+
+  .tabla th{
+    font-size: 12px;
+  }
+  .tabla{
+    margin-left:0px;
+  }
+
+  #agregarProducto{
+    width: 200px;
+    height: 50px;
+  }
+
+  #verPresupuesto{
+    width: 200px;
+    height: 50px;
+  }
+  #divP{
+    display: flex;
+    flex-direction: column
+  }
+
+}
+
+@media only screen and  (max-width: 550px) {
+
+  #divP{
+    display: flex;
+    flex-direction: column
+  }
+
+  @media only screen and  (max-width: 400px) {
+
+    .textos{
+        width: 100px;
+    }
+
+  }
+
+
+}
 </style>

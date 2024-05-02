@@ -308,4 +308,121 @@ export default {
     height: 100%;
     background: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,100)); 
 }
+
+
+
+
+@media only screen and (max-width: 1600px) {
+
+    .titulo{
+        margin-left: 0px;
+
+    }
+
+    .infotext{
+        margin-left: 0px;
+    }
+
+    .imgInfo{
+        margin-left: 0px;
+    }
+}
+
+@media only screen and (max-width: 1300px) {
+
+.informacionNosotros{
+    display:flex;
+    flex-direction: column
+}
+}
+
+
+@media only screen and (max-width: 1000px) {
+
+.tarjetas{
+    display:flex;
+    flex-direction: column
+}
+.tarjeta{
+    margin: 50px
+}
+.textoElegirnos{
+    height: 100%
+}
+}
+
+
+@media only screen and (max-width: 800px) {
+
+.informacionNosotros{
+    margin-left: 0px;
+}
+}
+
+
+@media only screen and (max-width: 600px) {
+
+.infotext{
+    font-size: 10px;
+}
+
+.informacionNosotros{
+    width: 100%
+}
+
+.informacion{
+    width: 100%
+
+}
+.infotext{
+    width: 100%
+
+}
+.text{
+    width: 100%
+}
+.imgInfo{
+    width: 100%;
+}
+
+.imgInfo img{
+    width: 100%
+}
+
+.tarjetas{
+    margin-left: 10px;
+}
+}
+
+
+@media only screen and (max-width: 600px) {
+
+    .tarjeta{
+        width: 150px;
+        height: 150px;
+    }
+
+    .iconNosotros{
+        margin-top: 40px;
+    }
+    .textoIcon{
+        font-size: 15px;
+        margin-top: 10px;
+
+    }
+
+  
+    .infoIcon {
+        display: none
+    }
+    
+}
+
+
+
+
+
+
+
+
 </style>

@@ -270,7 +270,7 @@ input{
     margin: 50px;
     width: 280px;
     height: 120px;
-    margin-left: 88%;
+    margin-left: 76%;
 }
 .logoRedes{
     width: 400px;
@@ -301,4 +301,94 @@ input{
     margin-right: 19%;
 }
 
+
+@media only screen and (max-width: 450px) {
+.logoRedes{
+    width: 100%
+}
+
+}
+
+@media only screen and (max-width: 1100px) {
+
+    .logoRedes{
+        margin-left: 0px;
+    }
+
+    .logoRedes img{
+        margin-left: 0px;
+        margin: 0px;
+    }
+
+    .textoEmpresa{
+        margin-top: 0px;
+        margin-left: 0px;
+        font-size: 8px;
+        height: 100%;
+        border: none;
+
+    }
+
+
+    .textoEmpresa2{
+        margin-left: 25px;
+        margin-top: 0px;
+        height: 100%;
+        font-size: 8px;
+
+    }
+
+    .textoEmpresa3{
+        margin-left: 0px;
+        font-size: 8px;
+        margin-top: 0px;
+        height: 100%;
+
+    }
+
+    .textoEmpresa4{
+        margin-left: 25px;
+        font-size: 8px;
+        margin-top: 0px;
+        height: 100%;
+
+    }
+
+    .footer{
+        display: row;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .iconInfo p{
+        font-size: 8px;
+    }
+
+    .textoEmpresa5{
+        padding-right: 0px;
+        padding-left: 10px;
+    }
+}
+
+
+
+
+
+@media only screen and (max-width: 1500px) {
+    .logoRedes img{
+        margin-left: 0px;
+
+    }
+
+    .iconos{
+        margin-left: 0px;
+        
+    }
+
+    .textoEmpresa{
+        margin-left: 0px;
+        font-size: 15px
+    }
+
+}
 </style>

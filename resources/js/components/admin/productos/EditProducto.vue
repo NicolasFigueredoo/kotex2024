@@ -137,7 +137,10 @@ export default {
             aplicaciones: [],
             aplicacionesProducto: [],
             fotoProducto: null,
-            fotoProducto2: null
+            fotoProducto2: null,
+            productoLinea: null,
+            productoEspecial: null,
+            productoDestacado: null
         }
     },
 
@@ -149,10 +152,19 @@ export default {
     methods: {
 
         updateProducto(){
-
             let linea = $('#linea').prop("checked");
             let especial = $('#especial').prop("checked");
             let destacado = $('#destacado').prop("checked");
+
+            if(linea === true){
+                this.productoLinea = 1;
+            }
+            if(especial === true){
+                this.productoEspecial = 1;
+            }
+            if(destacado === true){
+                this.productoDestacado = 1;
+            }
 
             axios.post('/api/updateProducto', {
                 idProducto: this.idProducto,
@@ -160,9 +172,9 @@ export default {
                 nombre: $('#nombre').val(),
                 material: $('#material').val(),
                 tipo: $('#tipo').val(),
-                linea: linea,
-                especial: especial,
-                destacado: destacado,
+                linea:   this.productoLinea,
+                especial:   this.productoEspecial,
+                destacado:   this.productoDestacado,
                 color: $('#color').val(),
                 medida: $('#medida').val(),
                 imagen: this.fotoProducto,

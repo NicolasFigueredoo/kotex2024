@@ -2,7 +2,7 @@
     <div>
       <div class="contenedor">
             <div class="contenedorImg">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.809473704295!2d-58.524614623504235!3d-34.58368715644198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb7a5c4215ac1%3A0x76a652edf6c37bda!2sKotex%20srl!5e0!3m2!1ses!2sar!4v1713355691535!5m2!1ses!2sar" width="1903" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              <iframe class="mapa"  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.809473704295!2d-58.524614623504235!3d-34.58368715644198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb7a5c4215ac1%3A0x76a652edf6c37bda!2sKotex%20srl!5e0!3m2!1ses!2sar!4v1713355691535!5m2!1ses!2sar"  height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         
             <div class="contacto">
@@ -30,39 +30,40 @@
                         </div>
                     </div>
         
-                    <div class="inputs">
-                            <div class="casilla">
-                                <div>
+
+                    <form id="formularioI" class="mt-3" style="width: 49%; margin-left: 20px;">
+                      <div class="row">
+                        <div class="col-md-6">
                                     <span>Nombre*</span>
-                                    <input type="text" v-model="nombre">
+                                    <input type="text" class="form-control" v-model="nombre">
                                 </div>
-                                <div style="margin-left: 35px;">
+                                <div class="col-md-6">
                                     <span>Apellido*</span>
-                                    <input type="text" v-model="apellido">
+                                    <input type="text" class="form-control" v-model="apellido">
                                 </div>
                             </div>
-                            <div class="casilla" style="margin-top: 10px; ">
-                                <div>
+                            <div class="row">
+                              <div class="col-md-6">
                                     <span>Email*</span>
-                                    <input type="text" v-model="email">
+                                    <input type="text" class="form-control" v-model="email">
                                 </div>
-                                <div style="margin-left: 35px; ">
+                                <div class="col-md-6">
                                     <span>Celular</span>
-                                    <input type="text" v-model="celular">
+                                    <input type="text" class="form-control" v-model="celular">
                                 </div>
                             </div>
         
-                            <div style="justify-content: left; margin-top: 10px;" class="casilla">
-                                <div>
+                            <div class="row">
+                              <div class="col-md-6">
                                     <span>Mensaje</span>
-                                    <textarea class="form-control" style="width: 415px; height: 150px; border-radius: 0%;" v-model="mensaje"></textarea>
+                                    <textarea class="form-control" id="mensajeInput" style="width: 100%; height: 150px; border-radius: 0%;" v-model="mensaje"></textarea>
                                 </div>
-                                <div class="enviar">
+                                <div class="col-md-6">
                                     <div>
                                         <p>*Datos Obligatorios</p>
                                     </div>
                                     <div>
-                                        <button id="enviarContacto" type="button" style="border-radius: 0%;" class="btn btn-primary" @click="enviarCorreo()">ENVIAR CONSULTA</button>
+                                        <button id="enviarContacto" type="button" style="border-radius: 0%; width: 100%" class="btn btn-primary" @click="enviarCorreo()">ENVIAR CONSULTA</button>
                                         <div id="mensajePresupuesto">
 
                                         </div>
@@ -70,7 +71,7 @@
                                 </div>
                             </div>
                             
-                    </div>
+                          </form>
                     
         
                 </div>
@@ -84,7 +85,7 @@
 
   <script>
   import axios from "axios";
-
+  
   export default {
 
     data() {
@@ -147,6 +148,10 @@
   
   <style scoped>
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+  .mapa{
+    width: 100%;
+  }
   .contenedor{
     height: 1400px;
   }
@@ -265,6 +270,22 @@
     margin-top: 20px;
     margin-left: 30px;
 }
+@media only screen and (max-width: 1000px) {
+
+  .formulario{
+    display: flex;
+    flex-direction: column;
+  }
+
+  #formularioI{
+    margin-left: 17%;
+  }
+
+
+
+}
+
+
 
 
   </style>

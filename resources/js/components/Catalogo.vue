@@ -97,6 +97,7 @@ export default {
   font-weight: 400;
   font-family: "Montserrat", sans-serif;
   font-size: 13px;
+  width: 100%;
 }
 
 .botones {
@@ -116,13 +117,14 @@ export default {
 
 .catalogo {
   background-color: #FAFAFA;
-  width: 900px;
   height: 420px;
   display: flex;
-  align-items: center;
-  margin: 100px;
-  margin-left: 600px;
-  margin-bottom: 400px;
+  justify-content: center;
+  margin-left: 32%;
+  margin-right: auto;
+  width: 40%;
+  margin-bottom: 100px;
+
 
 }
 
@@ -134,5 +136,88 @@ export default {
 #imgCatalogo {
   width: 320px;
   height: 420px;
+}
+
+
+@media only screen and  (max-width: 1800px) {
+
+  .catalogo {
+    width: 60%;
+  }
+
+  .catalogoBotones{
+    width: 400px;
+
+  }
+
+  .catalogoTitle{
+    font-size: 20px;
+  }
+
+ }
+
+ @media only screen and  (max-width: 1200px) {
+
+.catalogo {
+  width: 65%;
+  margin-left: 20%;
+
+}
+
+.catalogoBotones{
+  width: 400px;
+
+}
+
+.catalogoTitle{
+  font-size: 20px;
+}
+
+}
+
+@media only screen and  (max-width: 800px) {
+  .catalogo {
+    width: 48%;
+    margin-top: 200px;
+  display: flex;
+  flex-direction: column
+
+}
+.catalogoBotones{
+  padding: 50px;
+}
+}
+
+@media only screen and  (max-width: 500px) {
+  .catalogo {
+    width: 60%;
+    margin-bottom: 200px;
+
+}
+
+.catalogoBotones{
+  width: 100%;
+  padding: 0px;
+}
+
+
+.catalogoTitle{
+  font-size: 15px;
+}
+.catalogoText{
+  font-size: 15px;
+  width: 150px;
+}
+.informacionCatalogo{
+  width: 100%
+}
+#imgCatalogo{
+  width: 100%
+}
+
+.botones{
+  display: flex;
+  flex-direction: column
+}
 }
 </style>

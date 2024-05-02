@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="textoImg" data-aos="fade-right" data-aos-duration="2000">>
+    <div class="textoImg" data-aos="fade-right" data-aos-duration="2000">
       <div v-for="slider in sliders" :key="slider.id">
         <div v-if="slider.orden === 'aa'" v-html="this.sliders[0].texto"></div>
       </div>
@@ -357,9 +357,10 @@ export default defineComponent({
 
 }
 
+
 .infotext{
   margin-top: 50px;
-  width: 530px;
+  width: 61%;
 }
 
 .titulo{
@@ -615,39 +616,406 @@ export default defineComponent({
 }
 
 
-@media only screen and (max-width: 1860px) {
 
 
-.textoImg{
-    margin-left: 5vw;
+
+
+
+
+@media only screen and (max-width: 1300px) {
+
+.carouselP{
+  width: auto ; 
 }
 
-.carousel-indicators {
- right: 65vw;
+.producto{
+  padding: 15px;
 }
 
+.empresa{
+  height:100%;
+}
+
+.masInformacion2{
+  margin-bottom: 20px;
+}
+
+.tarjeta{
+  margin-top: 20px;
+  width: 200px;
+  height: 200px;
+  padding: 40px;
+}
+
+.svgIcono{
+  width: 10px;
+  height: 10px;
+
+}
+
+.textTarjeta{
+  font-size: 10px;
+}
+
+
+.carouselP{
+  padding-left: 0px;
+}
+
+.productosD{
+  margin-left:10px;
+  font-size: 30px;
+}
+
+.productosDestacados {
+  padding-left: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+
+
+
+}
+
+@media only screen and (max-width: 1800px) {
+  .tituloImg{
+  margin-top: 50px;
+  padding-left: 0px;
+  font-size: 25px;
+}
+}
+
+@media only screen and (max-width: 1100px) {
+  .tituloImg{
+  margin-top: 50px;
+  padding-left: 0px;
+  font-size: 20px;
+}
+
+#imgkotex{
+  margin-left: 10px;
+
+}
 .seccion2{
-  margin-left: 5vw;
+  margin-left: 10px;
 }
+.carouselP{
+  width:95%
 }
 
-@media only screen and (max-width: 1600px) {
+.titleServicio{
+  margin-left: 10px;
+
+}
+.servicios {
+  margin-left: 0px;
+}
+
+ }
+
+ 
+
+
+@media only screen and (min-width: 400px) and (max-width: 700px) {
+
+.masInformacion{
+  width: 200px;
+  height: 40px;
+  font-size: 10px 
+
+}
+s
+.carousel-indicators {
+ right: 40.5%;
+}
+
+.imagenes div{
+width: 195px;
+height: 100px; 
+
+}
+
+.imagen-contenedor {
+width: 195px; 
+height: 100px; 
+
+}
+
+.tituloImg{
+margin-top: 70px;
+margin-left: 30px;
+font-size: 10px;
+
+}
+
+.titulo{
+font-size: 20px
+}
+
+
+.empresa{
+flex-direction:column;
+margin: 50px;
+width: 80%;
+height: 100%;
+}
+
+.text{
+font-size: 20px;
+width: 250px;
+
+}
+
+.infoEmpresa{
+margin-top: 20px;
+padding-left: 10px;
+width: 80%
+
+}
+
+.masInformacion2 {
+width: 200px;
+  height: 50px;
+  font-size: 15px;
+  margin-top:0px;
+  margin-bottom: 20px;
+}
+
+.imgEmpresa{
+  width: 80%
+
+}
+.imgEmpresa img{
+height: 300px;
+width: 100%
+}
+
+.titleServicio{
+margin-left: 10px;
+}
+
+.servicios{
+margin-left: 0px;
+}
+
+
+.nuestrosServicios{
+height: 1100px;
+}
+
+.servicios {
+display: flex;
+flex-direction: column;
+height: 500px;
+margin-top: 0px;
+margin: 50px
+}
+
+.tarjeta{
+margin-top: 20px;
+width: 200px;
+height: 200px;
+padding: 40px;
+}
+
+.svgIcono{
+width: 10px;
+height: 10px;
+
+}
+
+.textTarjeta{
+font-size: 10px;
+}
+
+
+.carouselP{
+padding-left: 0px;
+}
+
+.producto{
+  margin-left: 100px
+}
+
+.productosD{
+margin-left:10px;
+font-size: 30px;
+}
+
+.productosDestacados {
+padding-left: 30px;
+width: 100%;
+height: 100%;
+}
+
+.carousel *{
+display: flex;
+flex-direction: column
+}
+
+
+}
+
+
+@media only screen and (max-width: 1200px) {
+  .tituloImg{
+  margin-top: 50px;
+  padding-left: 0px;
+  font-size: 15px;
+}
+
+.carouselP{
+  width:95%
+}
+ } 
+
+
+ @media only screen and (min-width: 200px) and (max-width: 399px) {
+   
 
   .textoImg{
-    margin-left: 2vw;
+    width: 100px;
+  }
+  
+.masInformacion{
+  width: 200px;
+  height: 40px;
+  font-size: 10px 
+
 }
+
 .carousel-indicators {
- right: 70vw;
-}
-.seccion2{
-  margin-left: 2vw;
+ right: 40.5%;
 }
 
+.imagenes div{
+width: 100%;
+height: 100px; 
+
+}
+
+.imagen-contenedor {
+width: 100%; 
+height: 100px; 
+
+}
+
+.tituloImg{
+margin-top: 70px;
+margin-left: 30px;
+font-size: 10px;
+
+}
+
+.titulo{
+font-size: 20px
+}
+
+
+.empresa{
+flex-direction:column;
+margin: 50px;
+width: 90%;
+height: 100%;
+}
+
+.text{
+font-size: 20px;
+width: 250px;
+
+}
+
+.infoEmpresa{
+margin-top: 20px;
+padding-left: 10px;
+width: 80%
+
+}
+
+.masInformacion2 {
+width: 200px;
+  height: 50px;
+  font-size: 15px;
+  margin-top:0px;
+  margin-bottom: 20px;
+}
+
+.imgEmpresa{
+  width: 80%
+
+}
+.imgEmpresa img{
+height: 300px;
+width: 100%
+}
+
+.titleServicio{
+margin-left: 10px;
 }
 
 
 
+.nuestrosServicios{
+height: 1100px;
+}
+
+.servicios {
+display: flex;
+flex-direction: column;
+height: 400px;
+margin: 200px;
+margin-top: 0px;
+margin-left: 0px;
+
+}
+
+.tarjeta{
+margin-top: 20px;
+width: 200px;
+height: 200px;
+padding: 40px;
+}
+
+.svgIcono{
+width: 10px;
+height: 10px;
+
+}
+
+.textTarjeta{
+font-size: 10px;
+}
 
 
+.carouselP{
+padding-left: 0px;
+}
 
+.producto{
+  margin-left: 50px
+}
+
+.productosD{
+margin-left:10px;
+font-size: 30px;
+}
+
+.productosDestacados {
+padding-left: 30px;
+width: 100%;
+height: 100%;
+}
+
+.carouselP *{
+display: flex;
+flex-direction: column;
+margin-left: 20px
+}
+
+
+}
+
+
+ 
 </style>

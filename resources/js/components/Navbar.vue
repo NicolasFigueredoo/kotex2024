@@ -2,19 +2,19 @@
   <div>
 
     <nav class="navbar navbar-expand-lg"
-      style="background-color: white; box-shadow: 0 3px 23px 0 rgba(0, 0, 0, 0.1);">
+    :style="{ height: navHeight, backgroundColor: 'white', boxShadow: '0 3px 23px 0 rgba(0, 0, 0, 0.1)' }">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
           <router-link class="route" to="/home" :style="{ fontWeight: isRouteActive('/home') ? 'bold' : '500' }">
             <img id="imgkotex" :src="getImagen(this.imagenLogo)" alt="">
           </router-link>
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        <button @click="agrandarNav()" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="container">
-          <ul class="navbar-nav me-auto ml-5" style="margin-left: 280px">
+          <ul class="navbar-nav me-auto ml-5 navContacto">
             <li class="nav-item">
               <a class="nav-link" href="#">
                 <div class="d-flex align-items-center">
@@ -49,7 +49,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center" style="padding-top: 20px">
                   <font-awesome-icon data-bs-toggle="modal" data-bs-target="#exampleModal" class="iconNavbar"
                     :icon="['fas', 'magnifying-glass']" style="cursor: pointer;" />
                 </div>
@@ -57,14 +57,15 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="#">
-                  <p class="title">|</p>
+              
+              <a class="nav-link" href="#" style="margin: 0px; margin-top: 16px;">
+                  |
               </a>
             </li>
 
             <li class="nav-item">
               <a class="nav-link" href="#">
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center" style="padding-top: 20px">
                   <a :href="facebook" target="_blank"><font-awesome-icon class="iconNavbar2"
                       :icon="['fab', 'facebook-f']" /></a>
                 </div>
@@ -73,14 +74,14 @@
 
             <li class="nav-item">
               <a class="nav-link" href="#">
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center" style="padding-top: 20px">
                   <a :href="instagram" target="_blank"><font-awesome-icon class="iconNavbar2"
                       :icon="['fab', 'instagram']" /></a>
                 </div>
               </a>
             </li>
           </ul>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 140px">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="navbar-nav me-auto mb-2 mb-lg-0">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
@@ -223,11 +224,23 @@ export default {
       facebook: null,
       instagram: null,
       whatsappLink: null,
-      imagenLogo: null
+      imagenLogo: null,
+      isExpanded: false,
+      navHeight: $('.navbar').height(),
 
     }
   },
   methods: {
+    agrandarNav(){
+      if (this.isExpanded) {
+        this.navHeight = '160px'; 
+      } else {
+        this.navHeight = '600px'; 
+      }
+      this.isExpanded = !this.isExpanded;
+    
+
+    },
     getImagen(fileName) {
       if (fileName) {
         const filePath = fileName.split('/').pop();
@@ -302,6 +315,12 @@ export default {
 }
 
 
+#navbarSupportedContent{
+  margin-left: 55px
+}
+
+
+
 .title{
   display: flex;
   margin-left: 18px;
@@ -309,6 +328,16 @@ export default {
   font-family: "Montserrat", sans-serif;
   line-height: 18px;
   font-size: 16px;
+  padding-top: 20px
+  
+}
+
+.route{
+  font-weight: 500;
+  font-family: "Montserrat", sans-serif;
+  line-height: 18px;
+  font-size: 16px;
+  
 }
 
 #imgkotex {
@@ -321,6 +350,7 @@ export default {
   align-items: center;
   font-size: 20px;
   color: #33447F;
+  
 }
 
 .iconNavbar2 {
@@ -454,24 +484,223 @@ export default {
   height: 150px;
 }
 
-
-
-@media only screen and (max-width: 1860px) {
-
-  #imgkotex {
-
-    margin-left: 5vw;
-  }
-
+.navContacto{
+  margin-left: 300px
 }
 
 
-@media only screen and (max-width: 1600px) {
 
-  #imgkotex {
 
-    margin-left: 2vw;
+
+
+
+@media only screen and (min-width: 100px) and (max-width: 440px) {
+
+
+  .navbar{
+    height: 300px;
   }
+  .navContacto {
+    display: none;
+margin-left: 0px;
+flex-direction: row;
+}
 
+.title{
+font-size: 8px;
+margin-left: 0px;
+margin-left: 5px
+
+}
+
+.iconNavbar2{
+width: 13px;
+height: 13px;
+margin-left: 10px;
+}
+.iconNavbar{
+width: 13px;
+height: 13px;
+margin-left: 10px
+
+}
+
+#navbarSupportedContent{
+margin-left: 0px;
+}
+.container{
+  margin-left: 0px;
+}
+}
+
+
+@media only screen and (min-width: 441px) and (max-width: 550px) {
+
+
+  .whatsapp-container{
+  right: 50px;
+}
+  .navContacto {
+
+margin-left: 0px;
+flex-direction: row;
+}
+
+.title{
+font-size: 10px;
+margin-left: 0px;
+margin-left: 5px
+
+}
+
+.iconNavbar2{
+width: 13px;
+height: 13px;
+margin-left: 10px;
+}
+.iconNavbar{
+width: 13px;
+height: 13px;
+margin-left: 10px
+
+}
+
+#navbarSupportedContent{
+margin-left: 0px;
+}
+.container{
+  margin-left: 0px;
+}
+
+}
+
+@media only screen and (min-width: 551px) and (max-width: 649px) {
+
+  .whatsapp-container{
+  right: 80px;
+}
+.navContacto {
+
+  margin-left: 0px;
+  flex-direction: row;
+}
+
+.title{
+  font-size: 13px;
+  margin-left: 0px;
+  margin-left: 5px
+
+}
+
+.iconNavbar2{
+  width: 13px;
+  height: 13px;
+  margin-left: 10px;
+}
+.iconNavbar{
+  width: 13px;
+  height: 13px;
+  margin-left: 10px
+
+}
+
+#navbarSupportedContent{
+  margin-left: 0px;
+}
+.container{
+    margin-left: 0px;
+  }
+}
+
+@media only screen and (min-width: 650px) and (max-width: 999px) {
+
+  .whatsapp-container{
+  right: 100px;
+}
+  .container{
+    margin-left: 0px;
+  }
+.navContacto {
+  margin-bottom: 50px;
+  margin-left: 0px;
+  flex-direction: row;
+}
+
+.title{
+  font-size: 16px;
+  margin-left: 0px;
+  margin-left: 5px
+
+}
+
+.iconNavbar2{
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+}
+.iconNavbar{
+  width: 20px;
+  height: 20px;
+  margin-left: 10px
+
+}
+
+#navbarSupportedContent{
+  margin-left: 0px;
+}
+}
+
+
+@media only screen and (max-width: 1500px) {
+  .whatsapp-container{
+  right: 200px;
+}
+}
+@media only screen and (max-width: 1200px) {
+  #imgkotex{
+    margin-left: 10px;
+   }
+}
+
+
+
+@media only screen and (min-width: 1000px) and (max-width: 1400px) {
+
+
+#imgkotex{
+  margin-left: 20px
+}
+.navContacto {
+
+  margin-left: 0px;
+  flex-direction: row;
+}
+
+.title{
+  font-size: 15px;
+  margin-left: 0px;
+  margin-left: 5px
+}
+
+.route{
+  font-size: 12px;
+
+}
+
+.iconNavbar2{
+  width: 13px;
+  height: 13px;
+  margin-left: 10px;
+}
+.iconNavbar{
+  width: 13px;
+  height: 13px;
+  margin-left: 10px
+
+}
+
+#navbarSupportedContent{
+  margin-left: 0px;
+}
 }
 </style>

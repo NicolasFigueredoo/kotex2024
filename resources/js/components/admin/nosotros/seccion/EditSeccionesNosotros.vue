@@ -72,7 +72,16 @@ export default {
                 formData.append('icono', this.seccion.icono);
 
             }else{
-                formData.append('icono', $('#icono').val());
+
+            const parser = new DOMParser();
+            const svgDOM = parser.parseFromString($('#icono').val(), 'image/svg+xml');
+      
+            svgDOM.documentElement.classList.add('svgIcono');
+      
+            const serializer = new XMLSerializer();
+            const svgString = serializer.serializeToString(svgDOM.documentElement);
+
+            formData.append('icono', svgString);
             }
             formData.append('texto', $('#editor').summernote('code').toString());
 

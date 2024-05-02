@@ -376,13 +376,13 @@ class VariacionesController extends Controller
         
         $variacion->categorias()->detach();
 
-        if($request->linea === true){
+        if($request->linea == 1){
             $variacion->categorias()->attach(1);
         }
-        if($request->especial === true){
+        if($request->especial == 1){
             $variacion->categorias()->attach(2);
         }
-        if($request->destacado === true){
+        if($request->destacado == 1){
             $variacion->categorias()->attach(3);
         }
 

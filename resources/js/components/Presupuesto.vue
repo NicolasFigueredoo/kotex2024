@@ -5,38 +5,38 @@
     </div>
     <div class="formulario">
 
-      <div class="casilla">
-        <div class="inputs">
-          <div>
+      <form class="mt-3" style="width: 77.5%; margin-left: 20px;">
+        <div class="row">
+          <div class="col-md-6">
             <span>Nombre*</span>
-            <input id="nombre" type="text">
+            <input class="form-control" id="nombre" type="text">
           </div>
-          <div style="margin-left: 35px;">
+          <div class="col-md-6">
             <span>Apellido*</span>
-            <input id="apellido" type="text">
+            <input class="form-control" id="apellido" type="text">
           </div>
         </div>
 
-        <div class="inputs" style="margin-top: 20px;">
-          <div>
+        <div class="row">
+          <div class="col-md-6">
             <span>Email*</span>
-            <input id="email" type="text">
+            <input class="form-control" id="email" type="text">
           </div>
 
-          <div style="margin-left: 35px;">
+          <div class="col-md-6">
             <span>Celular</span>
-            <input id="celular" type="text">
+            <input class="form-control" id="celular" type="text">
           </div>
 
         </div>
 
-      </div>
+      </form>
 
 
     </div>
 
     <div class="tabla">
-      <table class="table">
+      <table class="table table-responsive">
         <thead style="height: 40px;">
           <tr>
             <th scope="col" class="encabezado">Categoria</th>
@@ -94,7 +94,7 @@
           <span>Adjuntar archivo</span>
         </div>
         <div class="file-select" id="src-file1">
-          <input @change="onFileChange()" ref="fileArchive" type="file" name="src-file1" aria-label="Archivo">
+          <input id="fileArchive" @change="onFileChange()" class="form-control" ref="fileArchive" type="file" name="src-file1" aria-label="Archivo">
         </div>
 
         <div>
@@ -186,6 +186,8 @@ export default {
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 
+
+ 
 
 .presupuestoDiv {
   min-height: 950px; 
@@ -362,5 +364,66 @@ export default {
   font-family: "Montserrat";
   font-size: 15px;
   font-weight: 500;
+}
+
+@media only screen and (max-width: 1200px) {
+  .foot{
+    display:flex;
+    flex-direction: column
+
+  }
+
+  #src-file1{
+    width: 30%
+  }
+
+}
+
+@media only screen and (max-width: 900px) {
+  .foot{
+    display:flex;
+    flex-direction: column
+
+  }
+
+  #src-file1{
+    width: 80%
+  }
+
+  #mensaje{
+    width:65%
+  }
+
+  #presupuesto{
+    margin-left: 0px;
+  }
+
+  .tabla{
+    margin-left:0px;
+  }
+
+}
+
+@media only screen and (max-width: 600px) {
+  .tabla{
+    font-size: 12px;
+  }
+
+  .tabla th{
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .tabla{
+    font-size: 8px;
+    width: 100%;
+  }
+  .tabla th{
+    font-size: 8px;
+  }
+  .foot{
+    margin-left: 0px;
+  }
 }
 </style>

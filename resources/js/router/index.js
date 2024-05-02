@@ -60,7 +60,7 @@ const routes = [
         component: Contacto
     },
     {
-        path: '/admin',
+        path: '/admin/login',
         name: 'Admin',
         component: Admin
     },

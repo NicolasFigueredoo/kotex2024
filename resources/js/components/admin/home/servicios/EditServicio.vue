@@ -71,11 +71,21 @@ export default {
             let formData = new FormData();
             formData.append('idServicio', this.idServicio);
             formData.append('orden', $('#orden').val());
+      
             if($('#icono').val() == ''){
                 formData.append('icono', this.icono);
 
             }else{
-                formData.append('icono', $('#icono').val());
+
+            const parser = new DOMParser();
+            const svgDOM = parser.parseFromString($('#icono').val(), 'image/svg+xml');
+      
+            svgDOM.documentElement.classList.add('svgIcono');
+      
+            const serializer = new XMLSerializer();
+            const svgString = serializer.serializeToString(svgDOM.documentElement);
+
+            formData.append('icono', svgString);
             }
             formData.append('texto', $('#editor').summernote('code').toString());
 
