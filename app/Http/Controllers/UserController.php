@@ -21,10 +21,10 @@ class UserController extends Controller
             if (Hash::check($contraseña, $user->password)) {
                 return response()->json($user->id);
             } else {
-                return response()->json(['message' => 'Contraseña incorrecta']);
+                return response()->json(false);
             }
         } else {
-            return response()->json(['message' => 'Usuario no encontrado']);
+            return response()->json(false);
         }
     }
 

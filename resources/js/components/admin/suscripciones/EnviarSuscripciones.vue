@@ -44,10 +44,8 @@ export default {
 
             })
                 .then(response => {
-                    this.$store.commit('setMostrarAlerta', true);
-                    this.$store.commit('setClaseAlerta', 1);
-                    this.$store.commit('setMensajeAlerta', 'Suscripcion enviada con éxito');
-                    this.$store.commit('mostrarComponente', 17);
+                    console.log(response)
+            
 
                 })
                 .catch(error => {

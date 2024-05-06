@@ -14,6 +14,9 @@
                         <input v-model="contraseña" placeholder="Contraseña" type="password" class="form-control"
                             id="exampleInputPassword1">
                     </div>
+                    <div class="mensaje">
+
+                    </div>
 
                     <button type="button" class="btn btn-dark w-100" @click="verificarLogin()">Login</button>
 
@@ -41,22 +44,34 @@ export default {
 
     
         verificarLogin() {
-            axios.post('/api/verificarLogin', {
-                usuario: this.usuario,
-                contraseña: this.contraseña
-            })
-                .then(response => {
-                        let mensaje = 'Bienvenido ' + this.usuario
-                        this.$store.commit('setLoginId', response.data);
-                        this.$store.commit('setMostrarAlerta', true);
-                        this.$store.commit('setClaseAlerta', 1);
-                        this.$store.commit('setMensajeAlerta', mensaje);  
-                        this.$router.push('/panelAdmin');
-                    
+
+
+                axios.post('/api/verificarLogin', {
+                    usuario: this.usuario,
+                    contraseña: this.contraseña
                 })
-                .catch(error => {
-                    console.error('Error ingresar Admin:', error);
-                });
+                    .then(response => {
+                        console.log(response)
+                            if(response.data !== false){
+                            
+                                let mensaje = 'Bienvenido ' + this.usuario
+                                this.$store.commit('setLoginId', response.data);
+                                this.$store.commit('setMostrarAlerta', true);
+                                this.$store.commit('setClaseAlerta', 1);
+                                this.$store.commit('setMensajeAlerta', mensaje);  
+                                this.$router.push('/panelAdmin');
+                            }else{
+                                $('.mensaje').append('<p class="text-danger">Usuario incorrecto</p>')
+
+                            }
+                        
+                    })
+                    .catch(error => {
+                        $('.mensaje').html('<p class="text-danger">Usuario incorrecto</p>')
+                        console.error('Error ingresar Admin:', error);
+                    });
+            
+
 
         },
     }

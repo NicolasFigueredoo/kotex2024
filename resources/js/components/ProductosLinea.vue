@@ -45,7 +45,6 @@ export default {
   mounted() {
     axios.get('/api/obtenerProductosDeLinea')
       .then(response => {
-        console.log(response.data)
         this.productos = response.data;
       })
       .catch(error => {

@@ -291,17 +291,17 @@ export default {
   margin-left: 17.5%;
   display: flex;
   margin-bottom: 200px;
-
 }
 
 .mensaje {
-  width: 650px;
+  width: 35%;
 }
 
 .file {
   display: flex;
   flex-direction: column;
   margin-left: 1%;
+  width: 42%;
 }
 
 .file-select {
@@ -334,15 +334,15 @@ export default {
 }
 
 #presupuesto {
-  margin-left: 49%;
+  margin-left: 57%;
   margin-top: 80px;
   background: rgba(51, 68, 127, 1);
   border: none;
   font-family: "Montserrat";
   font-size: 16px;
   font-weight: 300;
-  width: 290px;
-  height: 50px;
+  width: 44%;
+  height: 42%;
 }
 
 .rowT {
@@ -376,6 +376,16 @@ export default {
   #src-file1{
     width: 30%
   }
+
+  #presupuesto{
+    margin-left: 0px;
+  }
+
+  .tabla{
+    width: 100%;
+  }
+
+
 
 }
 

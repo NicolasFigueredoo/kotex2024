@@ -33,7 +33,7 @@
                             </svg>
                         </button>
 
-                        <button type="button" class="btn btn-sm btn-danger" style="margin-left: 15px; " @click="eliminarAplicacion(producto.id)">
+                        <button type="button" class="btn btn-sm btn-danger" style="margin-left: 15px; " @click="eliminarProducto(producto.id)">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="15" height="15"
                                 style="cursor: pointer;">
                                 <path fill="white"
@@ -84,14 +84,14 @@ methods:{
                     console.error(error);
                 });
     },
-    eliminarAplicacion(idAplicacion){
-        axios.post('/api/deleteAplicacion',{
-            idAplicacion: idAplicacion
+    eliminarProducto(idProducto){
+        axios.post('/api/deleteProducto',{
+            idProducto: idProducto
         })
                 .then(response => {
                     this.$store.commit('setMostrarAlerta', true);
                     this.$store.commit('setClaseAlerta', 1);
-                    this.$store.commit('setMensajeAlerta', 'Aplicacíon eliminada con éxito');  
+                    this.$store.commit('setMensajeAlerta', 'Producto eliminado con éxito');  
                     this.obtenerProductos();
                 })
                 .catch(error => {

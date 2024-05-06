@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VariacionesController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ImagenController;
-use App\Models\CategoriaHome;
 
 Route::get('/', function () {
     return view('welcome');
@@ -118,6 +117,7 @@ Route::post('/api/crearProducto', [VariacionesController::class, 'crearProducto'
 Route::get('/api/obtenerProductos', [VariacionesController::class, 'obtenerProductos']);
 Route::get('/api/obtenerProducto/{idProducto}', [VariacionesController::class, 'obtenerProducto']);
 Route::post('/api/updateProducto/', [VariacionesController::class, 'updateProducto']);
+Route::post('/api/deleteProducto/', [VariacionesController::class, 'deleteProducto']);
 
 //metadatos
 Route::get('/api/obtenerMetadatos', [AdminController::class, 'obtenerMetadatos']);

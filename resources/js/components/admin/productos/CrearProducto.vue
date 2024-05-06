@@ -108,6 +108,9 @@
             </div>
 
 
+            <div class="mensaje">
+
+            </div>
             <div class="w-100 d-flex justify-content-end">
                 <button @click="crearProducto()" type="button" class="btn mt-3"
                     style="background-color: rgb(52, 68, 127); color: white;">Crear</button>
@@ -186,6 +189,8 @@ export default {
                 this.productoDestacado = 1;
             }
 
+
+
             axios.post('/api/crearProducto', {
                 orden: $('#orden').val(),
                 nombre: $('#nombre').val(),
@@ -209,6 +214,7 @@ export default {
         
         )
                 .then(response => {
+                    console.log(response)
                     this.$store.commit('setMostrarAlerta', true);
                     this.$store.commit('setClaseAlerta', 1);
                     this.$store.commit('setMensajeAlerta', 'Producto creado con éxito');    
@@ -216,6 +222,7 @@ export default {
              
                 })
                 .catch(error => {
+                    $('.mensaje').html('<p class="text-danger">Faltan completar campos</p>')
                     console.error('Error ingresar Admin:', error);
                 });
 

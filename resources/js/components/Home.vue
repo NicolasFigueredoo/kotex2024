@@ -389,6 +389,8 @@ export default defineComponent({
 .empresa{
   display: flex;
   height: 750px;
+  max-width: 100%; /* Limita el ancho al 100% del viewport */
+    overflow-x: hidden;
 }
 
 .tituloImg{
@@ -678,13 +680,19 @@ export default defineComponent({
 
 }
 
+
+
+
 @media only screen and (max-width: 1800px) {
   .tituloImg{
   margin-top: 50px;
   padding-left: 0px;
   font-size: 25px;
 }
+
 }
+
+
 
 @media only screen and (max-width: 1100px) {
   .tituloImg{
@@ -713,9 +721,6 @@ export default defineComponent({
 }
 
  }
-
- 
-
 
 @media only screen and (min-width: 400px) and (max-width: 700px) {
 
@@ -857,7 +862,6 @@ flex-direction: column
 
 }
 
-
 @media only screen and (max-width: 1200px) {
   .tituloImg{
   margin-top: 50px;
@@ -870,6 +874,21 @@ flex-direction: column
 }
  } 
 
+ @media only screen and (max-width: 500px) {
+  .textoImg{
+    width: 200px;
+  }
+
+  #imgKotex{
+    width: 150px;
+    
+  }
+ }
+ @media only screen and (max-width: 1600px) {
+  .carouselP{
+    width: 100%;
+  }
+ }
 
  @media only screen and (min-width: 200px) and (max-width: 399px) {
    

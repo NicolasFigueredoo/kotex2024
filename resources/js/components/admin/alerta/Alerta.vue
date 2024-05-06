@@ -61,7 +61,7 @@ export default {
 .container{
     display: flex;
     justify-content: right;
-    width: 58%;
+    width: 40%;
 }
 .alerta{
     position: fixed;

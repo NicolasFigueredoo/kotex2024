@@ -91,7 +91,6 @@ export default {
                     this.$store.commit('setMostrarAlerta', true);
                     this.$store.commit('setClaseAlerta', 1);
                     this.$store.commit('setMensajeAlerta', 'Valor modificado con éxito');
-                    this.$store.commit('mostrarComponente', 8);
 
                 })
                 .catch(error => {

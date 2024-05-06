@@ -8,7 +8,6 @@
                 <a :href="facebook" target="_blank"><font-awesome-icon class="iconFooter" :icon="['fab', 'facebook-f']" /></a>
                 <a :href="instagram" target="_blank"><font-awesome-icon class="iconFooter" :icon="['fab', 'instagram']" /></a>
             </div>
-    
         </div>
         <div class="textoEmpresa">
             <p id="tituloSecciones">Secciones</p>
@@ -57,7 +56,7 @@
     
     <div class="textoEmpresa5">
     <p>© Copyright 2024 kotex S.R.L. Todos los derechos reservados</p>
-    <p class="osole">By osole</p>
+    <a class="osole" href="https://osole.com.ar/"><p>By osole</p></a>
     </div>
     </footer>
    
@@ -299,6 +298,8 @@ input{
 }
 .osole{
     margin-right: 19%;
+    text-decoration: none;
+    color: white;
 }
 
 

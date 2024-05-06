@@ -403,6 +403,14 @@ class VariacionesController extends Controller
         return 'cargado';
     }
 
+    public function deleteProducto(Request $request)
+    {
+        $variacion = Variacion::find($request->idProducto);
+        $variacion->delete();
+
+        return response()->json(['message' => 'Producto Eliminada'], 200);
+    }
+
 
   
 }
