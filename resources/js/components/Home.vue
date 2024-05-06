@@ -1,53 +1,52 @@
 <template>
   <div>
+    <div class="container">
     <div class="textoImg" data-aos="fade-right" data-aos-duration="2000">
       <div v-for="slider in sliders" :key="slider.id">
-        <div v-if="slider.orden === 'aa'" v-html="this.sliders[0].texto"></div>
+        <div v-if="slider.orden === 'aa'" v-html="this.sliders[0].texto" class="textoSlider"></div>
       </div>
+
+
       <router-link class="route" to="/nosotros" :style="{ fontWeight: isRouteActive('/nosotros') ? 'bold' : '500' }">
       <button type="button"  class="btn masInformacion" >MÁS INFORMACIÓN</button>
       </router-link>
+      <div class="justify-content-start carousel-indicators carousel-slider">
+       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+     </div>
     </div>
+  </div>
 
-    <div id="carouselExampleIndicators" class="carousel slide">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-      </div>
+    <div id="carouselExampleIndicators" class="carousel slide" style="overflow:hidden" >
+   
+
       <div  class="carousel-inner" >
-        <div v-for="slider in sliders" :key="slider.id" :class="['carousel-item', { 'active': slider.orden === 'aa'}]" style="height: 100%;" >
+        <div v-for="slider in sliders" :key="slider.id" :class="['carousel-item', { 'active': slider.orden === 'aa'}]" >
           <div class="degradado"></div>
-          <img :src="getImagen(slider.imagen)"  class="d-block w-100" loading="lazy" alt="..." style=" width: 100%;height: 100%; object-fit: cover;" >
+          <img :src="getImagen(slider.imagen)" class="d-block" loading="lazy" alt="..." style="background-size: contain; background-position: center; height: 800px;"   >
         </div>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
+
     </div>
 
-    <div class="seccion2">
+    <div class="container seccion2">
       <div class="contenido">
         <p class="titleSeccion">Productos</p>
-        <div class="imagenes">
-          <div style="margin-right: 2.5%;" data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="2000">
+        <div class="row d-flex imagenes">
+          <div class="col-lg-6" data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="2000">
             <router-link class="route" to="/productosdelinea" :style="{ fontWeight: isRouteActive('/productosdelinea') ? 'bold' : '500' }" @click="this.$store.commit('setSelectedProductId', null);">
             <p class="tituloImg">PRODUCTOS DE LINEA</p>
             <div class="imagen-contenedor" >
-              <img class="imgS zoomable" :src="getImagen(this.imagen1)" loading="lazy"  alt="">
+              <img class="imgS zoomable w-100" :src="getImagen(this.imagen1)" loading="lazy"  alt="">
           </div>
         </router-link>
           </div>
-          <div  data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="2000">
+          <div class="col-lg-6" id="imgProductos2"  data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="2000">
             <router-link class="route" to="/productosespeciales" :style="{ fontWeight: isRouteActive('/productosespeciales') ? 'bold' : '500' } " @click="this.$store.commit('setSelectedProductId', null);">
             <p class="tituloImg">PRODUCTOS ESPECIALES</p>
-            <div class="imagen-contenedor">
-            <img class="imgS zoomable" :src="getImagen(this.imagen2)" alt="" loading="lazy">
+            <div class="imagen-contenedor ">
+            <img class="imgS zoomable w-100" :src="getImagen(this.imagen2)" alt="" loading="lazy">
         </div>   
       </router-link>
        
@@ -57,11 +56,13 @@
 
     </div>
 
-    <div class="empresa">
-      <div class="imgEmpresa" data-aos="fade-right" data-aos-duration="2000"  >
+    <div class="container-fluid" >
+
+    <div class="row empresa">
+      <div class="col-lg-6 imgEmpresa" data-aos="fade-right" data-aos-duration="2000"  >
         <img :src="getImagen(this.imagenBanner)" alt="" loading="lazy">
       </div>
-          <div class="infoEmpresa" >
+      <div class="col-lg-6 infoEmpresa" >
           <p class="titulo" data-aos="fade-left" data-aos-duration="2000">{{ this.banner.titulo}}</p>
           <div class="infotext" data-aos="fade-left" data-aos-duration="2000">
             <div v-html="this.banner.texto" class="text"></div>
@@ -71,39 +72,65 @@
           </router-link>
       </div>
     </div>
+  </div>
 
-    <div class="nuestrosServicios" data-aos="fade-up" data-aos-duration="2500" id="service">
+<div class="container-fluid nuestrosServicios w-100">
+    <div class="container" data-aos="fade-up" data-aos-duration="2500">
       <div>
         <p class="titleServicio">Nuestros servicios</p>
       </div>
-      <div class="servicios">
-        <div v-for="servicio in servicios" :key="servicio.id" class="tarjeta" data-aos="flip-left" data-aos-duration="3000">
+      <div class="row servicios">
+        <div v-for="servicio in servicios" :key="servicio.id" class="col-lg-3 tarjeta" data-aos="flip-left" data-aos-duration="3000">
           <div class="iconServicio" v-html="servicio.icono"></div>
           <div class="textTarjeta" v-html="servicio.texto"> </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="productosDestacados" data-aos="fade-up" data-aos-duration="2500">
-      <p class="productosD">Productos destacados</p>
-      <div>
-        <Carousel :items-to-show="4"  class="carouselP">
-          <Slide v-for="producto in productos.slice(0, 10)" :key="producto.id_producto">
-            <div class="carousel__item" data-aos="fade-up" data-aos-duration="2000" @click="verProducto(producto.id_producto)">
-              <div class="producto"> 
-                <img :src="getImagen(producto.imagen)" alt="imagen" loading="lazy">
-                <p class="categoria">{{ producto.nombre_categoria.toUpperCase() }}</p>
-                <p class="nombre">{{ producto.nombre_producto }}</p>
-              </div>
+
+
+
+<div class="container" style="padding-top: 80px; padding-bottom:156px">
+  <div>
+      <p class="titleServicio">Productos destacados</p>
+  </div>
+
+  <div id="carouselProductos" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div v-for="(grupo, index) in Math.ceil(productos.length / 4)" :key="index" :class="['carousel-item', index === 0 ? 'active' : '']">
+      <div class="row">
+        <div v-for="(producto, innerIndex) in productos.slice(index * 4, (index + 1) * 4)" :key="producto.id_producto" class="col-lg-3">
+          <div class="producto"> 
+            <div>
+              <img :src="getImagen(producto.imagen)" alt="imagen" loading="lazy">
             </div>
-          </Slide>
-
-          <template #addons>
-            <Pagination />
-          </template>
-        </Carousel>
+            <p class="categoria">{{ producto.nombre_categoria.toUpperCase() }}</p>
+            <p class="nombre">{{ producto.nombre_producto }}</p>
+          </div>
+        </div>
       </div>
     </div>
+   
+  </div>
+
+
+  
+  <div class="justify-content-center carousel-indicators carousel-slider" style="bottom:-80px">
+        <button v-for="(grupo, index) in productos.slice(0,3)" type="button" :key="index" data-bs-target="#carouselProductos" :data-bs-slide-to="index" :class="{ 'active': index === 0 }" aria-label="Slide {{ index + 1 }}"></button>
+    
+        <!-- Agrega más botones según la cantidad de grupos de productos -->
+      </div>
+
+</div>
+</div>
+
+
+
+
+
+
+
 
   </div>  
 
@@ -239,56 +266,65 @@ export default defineComponent({
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 
+.imagenes{
+  margin-bottom: 80px;
+}
+.textoSlider{
+  color: #FFF;
+font-family: 'Montserrat';
+font-size: 42px;
+font-style: normal;
+font-weight: 400;
+line-height: 48px; 
+}
+#carouselExampleIndicators{
+  height: 614px;
+}
+
 .productosDestacados{
   height: 800px;
 }
-.carouselP{
-  padding-left: 15.5%;
-  width: 98rem;
-}
+
 
 .nombre{
-  font-size: 22px;
-  color: black;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-  line-height: 26px;
-  margin-left: 10px;
-  text-align: left;
+  color: #000;
+font-family: Montserrat;
+font-size: 22px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+text-align: left;
 
 }
 .categoria{
-  font-size: 14px;
-  font-weight: 700;
-  font-family: "Montserrat", sans-serif;
-  color: #33447F;
-  line-height: 17px;
-  margin-top: 20px;
-  margin-left: 10px;
+  color: var(--azul, #33447F);
+font-family: Montserrat;
+font-size: 14px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+text-transform: uppercase;
   text-align: left;
 
 }
 
-.productos{
-  height: 1200px;
-  display: grid;
-  grid-template-rows: repeat(2, 1fr 1fr);
-  grid-template-columns: repeat(4, 400px);
-}
+
 
 .producto img{
-  width: 288px;
-  height: 300px;
+  width: 100%;
+  height: 100%;
 }
-.carousel__item{
-    width: 288px;
-    height: 500px;
+
+.producto div{
+  width: 100%;
+  height: 273px;
 }
+
 
 .producto{
   cursor: pointer;
   width: 288px;
-  height: 500px;
+  height: 410px;
   background-color: white;
   color: #33447F;
   border-bottom: 1px solid rgba(147, 147, 147, 0.3);
@@ -300,7 +336,6 @@ export default defineComponent({
   font-weight: 600;
   text-align: left;
   font-family: "Montserrat", sans-serif;
-  margin-left: 17%;
   padding-top: 70px;
 }
 .titleServicio{
@@ -308,8 +343,6 @@ export default defineComponent({
   font-weight: 600;
   text-align: left;
   font-family: "Montserrat", sans-serif;
-  margin-left: 17%;
-  padding-top: 50px;
 
 }
 .iconServicio{
@@ -324,6 +357,8 @@ export default defineComponent({
   margin-top: 30px;
 }
 .tarjeta{
+  margin-top: 20px;
+  margin-bottom: 20px;
   width: 288px;
   height: 266px;
   background-color: white;
@@ -335,46 +370,48 @@ export default defineComponent({
 
 }
 .servicios{
-  display: flex;
-  justify-content: left;
-  margin-left: 15.5%;
   margin-top: 30px;
 }
 .nuestrosServicios{
   background-color: #F5F5F5;
-  height: 500px;
-  width: 100%;
-  padding-top: 20px
+  padding-top: 80px;
+  padding-bottom: 83px;
+
 }
 
 .kotex{
   font-weight: 600;
 }
 .text{
-  font-size: 18px;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 300;
+  color: #FFF;
+font-family: Montserrat;
+font-size: 18px;
+font-style: normal;
+font-weight: 300;
+line-height: 34px;
 
 }
 
 
 .infotext{
-  margin-top: 50px;
-  width: 61%;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  padding-right: 89px;
+
 }
 
 .titulo{
-  margin-top: 80px;
-  font-size: 45px;
+  margin-top: 49px;
+  font-size: 35px;
   font-family: "Montserrat", sans-serif;
   font-weight: 500
 }
 
 .infoEmpresa{
-  width: 50%;
-  padding-left: 100px;
+  padding-left: 89px;
   background-color: #2F3F78;
   color: white;
+
 }
 .imgEmpresa img{
   width: 100%;
@@ -383,57 +420,46 @@ export default defineComponent({
 
 }
 .imgEmpresa{
-  width: 50%;
-  height: 100%;
+  height: 566px;
+  padding: 0px;
+
 }
+
 .empresa{
-  display: flex;
-  height: 750px;
-  max-width: 100%; /* Limita el ancho al 100% del viewport */
-    overflow-x: hidden;
+  overflow-x: hidden;
 }
+
 
 .tituloImg{
-  color: white;
   position: absolute;
-  z-index: 1; 
-  margin-top: 220px;
-  margin-left: 100px;
-  font-family: "Montserrat", sans-serif;
-  font-size: 30px;
-  font-weight: 500;
-  line-height: 29.26px;
-  text-align: center;
-
+  z-index: 1;
+  margin-top: 224px;
+  color: #FFF;
+text-align: center;
+font-family: Montserrat;
+font-size: 24px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+margin-left: 20%;
 }
 .secciones{
   display: flex;
   justify-content: center;
 }
 .seccion2{
-   margin-left: 17%;
    margin-top: 60px;
 }
 .contenido{
   display: flex;
   flex-direction: column;  
+}
 
-}
-.imagenes div{
-  width: 31.3vw;
-  height: 15vw;
-  margin-bottom: 100px;
-}
-.imagenes{
-  display: flex;
-  justify-content: left;
 
-}
 
 .imagen-contenedor {
   overflow: hidden; 
-  width: 200px; 
-  height: 200px; 
+  height: 288px; 
   filter: brightness(0.8); 
 
 }
@@ -500,7 +526,7 @@ export default defineComponent({
   height: 700px;
   width: 100%;
 }
-.carousel-indicators .active {
+.carousel-slider .active {
     opacity: 1;
     height: 7px;
     width: 35px;
@@ -508,7 +534,7 @@ export default defineComponent({
 
 }
 
-.carousel-indicators button {
+.carousel-slider button {
     opacity: 1;
     height: 7px;
     width: 35px;
@@ -516,19 +542,21 @@ export default defineComponent({
     opacity: 50%;
 
 }
-.carousel-indicators {
- right: 44.5%;
- margin-left: 0px;
- bottom: 65px;
+.carousel-slider {
+ bottom: -370px;
  height: 10px;
+ margin-bottom: 0;
+ margin-left: 0;
+ margin-right: 0;
 }
+
+
 .carousel-control-prev,
 .carousel-control-next {
   display: none; 
 }
 
 .carousel-inner{
-  height: 750px;
   gap: 0px;
   opacity: 0px;
 }
@@ -542,7 +570,6 @@ export default defineComponent({
 
 .textoImg{
     margin-top: 150px;
-    margin-left: 17%;
     width: 460px;
     height: 50px;
     position: absolute;
@@ -557,55 +584,55 @@ export default defineComponent({
 }
 
 .masInformacion{
-  margin-left: 1%;
   margin-top: 50px;
   border-radius: 0%;
-  width: 300px;
-  height: 60px; 
+  width: 248px;
+  height: 49px; 
   background-color: #2F3F78; 
-  color: white;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 300;
-  font-size: 20px;
+  color: #FFF;
+text-align: center;
+font-family: Montserrat;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
 }
 .masInformacion:hover{
-  margin-left: 1%;
   margin-top: 50px;
   border-radius: 0%;
-  width: 300px;
-  height: 60px; 
+  width: 248px;
+  height: 49px; 
   background-color: #2F3F78; 
-  color: white;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 300;
-  font-size: 20px;
+  color: #FFF;
+text-align: center;
+font-family: Montserrat;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
 
 }
 
 .masInformacion2{
-  margin-left: 4px;
-  margin-top: 50px;
   border-radius: 0%;
-  width: 300px;
-  height: 60px; 
+  width: 248px;
+  height: 49px; 
   background-color: white; 
   color: #2F3F78;
   font-family: "Montserrat", sans-serif;
-  font-weight: 300;
-  font-size: 20px;
+  font-weight: 400;
+  font-size: 16px;
 }
 
 .masInformacion2:hover{
-  margin-left: 4px;
-  margin-top: 50px;
   border-radius: 0%;
-  width: 300px;
-  height: 60px; 
+  width: 248px;
+  height: 49px; 
   background-color: white; 
   color: #2F3F78;
   font-family: "Montserrat", sans-serif;
-  font-weight: 300;
-  font-size: 20px;
+  font-weight: 400;
+  font-size: 16px;
 }
 
 .degradado{
@@ -619,421 +646,51 @@ export default defineComponent({
 
 
 
-
-
-
-
-
-@media only screen and (max-width: 1300px) {
-
-.carouselP{
-  width: auto ; 
-}
-
-.producto{
-  padding: 15px;
-}
-
-.empresa{
-  height:100%;
-}
-
-.masInformacion2{
-  margin-bottom: 20px;
-}
-
-.tarjeta{
-  margin-top: 20px;
-  width: 200px;
-  height: 200px;
-  padding: 40px;
-}
-
-.svgIcono{
-  width: 10px;
-  height: 10px;
-
-}
-
-.textTarjeta{
-  font-size: 10px;
-}
-
-
-.carouselP{
-  padding-left: 0px;
-}
-
-.productosD{
-  margin-left:10px;
-  font-size: 30px;
-}
-
-.productosDestacados {
-  padding-left: 0px;
-  width: 100%;
-  height: 100%;
-}
-
-
-
-
-}
-
-
-
-
-@media only screen and (max-width: 1800px) {
-  .tituloImg{
-  margin-top: 50px;
-  padding-left: 0px;
-  font-size: 25px;
-}
-
-}
-
-
-
-@media only screen and (max-width: 1100px) {
-  .tituloImg{
-  margin-top: 50px;
-  padding-left: 0px;
-  font-size: 20px;
-}
-
-#imgkotex{
-  margin-left: 10px;
-
-}
-.seccion2{
-  margin-left: 10px;
-}
-.carouselP{
-  width:95%
-}
-
-.titleServicio{
-  margin-left: 10px;
-
-}
-.servicios {
-  margin-left: 0px;
-}
-
- }
-
-@media only screen and (min-width: 400px) and (max-width: 700px) {
-
-.masInformacion{
-  width: 200px;
-  height: 40px;
-  font-size: 10px 
-
-}
-s
-.carousel-indicators {
- right: 40.5%;
-}
-
-.imagenes div{
-width: 195px;
-height: 100px; 
-
-}
-
-.imagen-contenedor {
-width: 195px; 
-height: 100px; 
-
-}
-
-.tituloImg{
-margin-top: 70px;
-margin-left: 30px;
-font-size: 10px;
-
-}
-
-.titulo{
-font-size: 20px
-}
-
-
-.empresa{
-flex-direction:column;
-margin: 50px;
-width: 80%;
-height: 100%;
-}
-
-.text{
-font-size: 20px;
-width: 250px;
-
-}
-
-.infoEmpresa{
-margin-top: 20px;
-padding-left: 10px;
-width: 80%
-
-}
-
-.masInformacion2 {
-width: 200px;
-  height: 50px;
-  font-size: 15px;
-  margin-top:0px;
-  margin-bottom: 20px;
-}
-
-.imgEmpresa{
-  width: 80%
-
-}
-.imgEmpresa img{
-height: 300px;
-width: 100%
-}
-
-.titleServicio{
-margin-left: 10px;
-}
-
-.servicios{
-margin-left: 0px;
-}
-
-
-.nuestrosServicios{
-height: 1100px;
-}
-
-.servicios {
-display: flex;
-flex-direction: column;
-height: 500px;
-margin-top: 0px;
-margin: 50px
-}
-
-.tarjeta{
-margin-top: 20px;
-width: 200px;
-height: 200px;
-padding: 40px;
-}
-
-.svgIcono{
-width: 10px;
-height: 10px;
-
-}
-
-.textTarjeta{
-font-size: 10px;
-}
-
-
-.carouselP{
-padding-left: 0px;
-}
-
-.producto{
-  margin-left: 100px
-}
-
-.productosD{
-margin-left:10px;
-font-size: 30px;
-}
-
-.productosDestacados {
-padding-left: 30px;
-width: 100%;
-height: 100%;
-}
-
-.carousel *{
-display: flex;
-flex-direction: column
-}
-
-
-}
-
 @media only screen and (max-width: 1200px) {
-  .tituloImg{
-  margin-top: 50px;
-  padding-left: 0px;
-  font-size: 15px;
-}
-
-.carouselP{
-  width:95%
-}
- } 
-
- @media only screen and (max-width: 500px) {
-  .textoImg{
-    width: 200px;
+  .masInformacion2  {
+    margin-bottom: 20px;
   }
+}
 
-  #imgKotex{
+@media only screen and (max-width: 400px) {
+  .masInformacion2  {
     width: 150px;
-    
+    font-size: 10px;
   }
- }
- @media only screen and (max-width: 1600px) {
-  .carouselP{
-    width: 100%;
+
+  .textoSlider{
+    width: 50px;
   }
- }
 
- @media only screen and (min-width: 200px) and (max-width: 399px) {
-   
-
-  .textoImg{
-    width: 100px;
+  .textoImg {
+    width: 80px;
   }
   
+}
+
+
+@media only screen and (max-width: 300px) {
+
 .masInformacion{
-  width: 200px;
-  height: 40px;
-  font-size: 10px 
-
-}
-
-.carousel-indicators {
- right: 40.5%;
-}
-
-.imagenes div{
-width: 100%;
-height: 100px; 
-
-}
-
-.imagen-contenedor {
-width: 100%; 
-height: 100px; 
-
+  width: 150px;
 }
 
 .tituloImg{
-margin-top: 70px;
-margin-left: 30px;
-font-size: 10px;
+    margin-left: 5%;
+  }
 
 }
 
-.titulo{
-font-size: 20px
-}
-
-
-.empresa{
-flex-direction:column;
-margin: 50px;
-width: 90%;
-height: 100%;
-}
-
-.text{
-font-size: 20px;
-width: 250px;
-
-}
-
-.infoEmpresa{
-margin-top: 20px;
-padding-left: 10px;
-width: 80%
-
-}
-
-.masInformacion2 {
-width: 200px;
-  height: 50px;
-  font-size: 15px;
-  margin-top:0px;
-  margin-bottom: 20px;
-}
-
-.imgEmpresa{
-  width: 80%
-
-}
-.imgEmpresa img{
-height: 300px;
-width: 100%
-}
-
-.titleServicio{
-margin-left: 10px;
-}
 
 
 
-.nuestrosServicios{
-height: 1100px;
-}
-
-.servicios {
-display: flex;
-flex-direction: column;
-height: 400px;
-margin: 200px;
-margin-top: 0px;
-margin-left: 0px;
-
-}
-
-.tarjeta{
-margin-top: 20px;
-width: 200px;
-height: 200px;
-padding: 40px;
-}
-
-.svgIcono{
-width: 10px;
-height: 10px;
-
-}
-
-.textTarjeta{
-font-size: 10px;
-}
 
 
-.carouselP{
-padding-left: 0px;
-}
-
-.producto{
-  margin-left: 50px
-}
-
-.productosD{
-margin-left:10px;
-font-size: 30px;
-}
-
-.productosDestacados {
-padding-left: 30px;
-width: 100%;
-height: 100%;
-}
-
-.carouselP *{
-display: flex;
-flex-direction: column;
-margin-left: 20px
-}
 
 
-}
+
+
+
 
 
  

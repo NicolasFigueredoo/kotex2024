@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="informacionProducto">
+        <div class="container informacionProducto">
             <div class="imgMinis">
                 <div>
                     <img v-if="this.producto" :src="getImagen(this.producto.imagen)" alt="" ref="imgMiniUno" @click="imagenClick(1, this.producto.imagen)"
@@ -17,7 +17,7 @@
             <div class="contenedor-imagen">
                 <img id="imgP" v-if="this.producto" :src="getImagen(this.producto.imagen)" ref="imgenPrincipal" alt="" />
             </div>
-            <div class="textos" v-if="this.producto">
+            <div class="textos" v-if="this.producto" style="width: 100%">
                 <div class="categoriaI">
                     <p>{{ this.categoria.toUpperCase() }}</p>
                 </div>
@@ -61,6 +61,7 @@
         </div>
     </div>
 
+    <div class="container">
         <div class="tabla table-responsive">
             <p>Presupuesto</p>
             <table class="table">
@@ -180,27 +181,43 @@
 
             </div>
         </div>
+    </div>
 
-        <div class="productosDestacados">
-            <p class="productosD">Productos relacionados</p>
+   
+
+        <div class="container" style="padding-top: 80px; padding-bottom:100px">
+  <div>
+      <p class="titleServicio">Productos destacados</p>
+  </div>
+
+  <div id="carouselProductos" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div v-for="(grupo, index) in Math.ceil(productosRelacionados.length / 4)" :key="index" :class="['carousel-item', index === 0 ? 'active' : '']">
+      <div class="row">
+        <div v-for="(producto, innerIndex) in productosRelacionados.slice(index * 4, (index + 1) * 4)" :key="producto.id_producto" class="col-lg-3">
+          <div class="producto"> 
             <div>
-                <Carousel :items-to-show="4" class="carouselP">
-                    <Slide v-for="producto in productosRelacionados" :key="producto.id_producto">
-                        <div class="carousel__item" @click="verProducto(producto.id_producto)">
-                            <div class="producto">
-                                <img :src="getImagen(producto.imagen)" alt="imagen">
-                                <p class="categoria">{{ producto.nombre_categoria }}</p>
-                                <p class="nombre">{{ producto.nombre_producto }}</p>
-                            </div>
-                        </div>
-                    </Slide>
-
-                    <template #addons>
-                        <Pagination />
-                    </template>
-                </Carousel>
+              <img :src="getImagen(producto.imagen)" alt="imagen" loading="lazy">
             </div>
+            <p class="categoria">{{ producto.nombre_categoria.toUpperCase() }}</p>
+            <p class="nombre">{{ producto.nombre_producto }}</p>
+          </div>
         </div>
+      </div>
+    </div>
+   
+  </div>
+
+
+  
+  <div class="justify-content-center carousel-indicators carousel-slider" style="bottom:-80px">
+        <button v-for="(grupo, index) in productosRelacionados.slice(0,3)" type="button" :key="index" data-bs-target="#carouselProductos" :data-bs-slide-to="index" :class="{ 'active': index === 0 }" aria-label="Slide {{ index + 1 }}"></button>
+    
+        <!-- Agrega más botones según la cantidad de grupos de productos -->
+      </div>
+
+</div>
+</div>
     </div>
 </template>
 
@@ -652,8 +669,6 @@ export default {
 
 .tabla {
     margin-top: 100px;
-    margin-left: 17%;
-    width: 66%;
 }
 
 .tabla p {

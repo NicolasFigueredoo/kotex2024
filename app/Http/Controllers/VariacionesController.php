@@ -85,7 +85,7 @@ class VariacionesController extends Controller
             ->join('variacion_categoria', 'variaciones.id', '=', 'variacion_categoria.variacion_id')
             ->join('categorias', 'variacion_categoria.categoria_id', '=', 'categorias.id')
             ->join('productos', 'variaciones.producto_id', '=', 'productos.id')
-            ->where('categorias.nombre', 'Productos Destacados')
+            ->where('variaciones.destacado', 1)
             ->groupBy('productos.nombre', 'categorias.nombre', 'variaciones.imagen')
             ->get();
 
@@ -265,6 +265,10 @@ class VariacionesController extends Controller
         $variacion->material = $request->material;
         $variacion->tipo = $request->tipo;
 
+        if($request->destacado == 1){
+            $variacion->destacado = 1;
+        }
+
         if ($request->hasFile('imagen')) {
             if (!Storage::exists('public/fotos')) {
                 Storage::makeDirectory('public/fotos');
@@ -295,9 +299,7 @@ class VariacionesController extends Controller
             $variacion->categorias()->attach(2);
 
         }
-        if($request->destacado == 1){
-            $variacion->categorias()->attach(3);
-        }
+    
 
         $unidad = UnidadVenta::whereRaw('LOWER(unidad) LIKE ?', ['%' . strtolower($request->unidad) . '%'])->first();
 
@@ -350,6 +352,12 @@ class VariacionesController extends Controller
         $variacion->material = $request->material;
         $variacion->tipo = $request->tipo;
 
+        if($request->destacado == 1){
+            $variacion->destacado = 1;
+        }else{
+            $variacion->destacado = 0;
+        }
+
         if ($request->hasFile('imagen')) {
             if (!Storage::exists('public/fotos')) {
                 Storage::makeDirectory('public/fotos');
@@ -382,9 +390,7 @@ class VariacionesController extends Controller
         if($request->especial == 1){
             $variacion->categorias()->attach(2);
         }
-        if($request->destacado == 1){
-            $variacion->categorias()->attach(3);
-        }
+    
 
         $unidad = UnidadVenta::whereRaw('LOWER(unidad) LIKE ?', ['%' . strtolower($request->unidad) . '%'])->first();
         $variacion->unidadesVenta()->detach();

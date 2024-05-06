@@ -1,11 +1,14 @@
 <template>
   <div class="presupuestoDiv">
-    <div class="indicador">
+    <div class="container indicador">
       <p>Inicio > Presupuesto</p>
     </div>
+
+    <div class="container">
+
     <div class="formulario">
 
-      <form class="mt-3" style="width: 77.5%; margin-left: 20px;">
+      <form class="mt-3">
         <div class="row">
           <div class="col-md-6">
             <span>Nombre*</span>
@@ -34,8 +37,9 @@
 
 
     </div>
+  </div>
 
-    <div class="tabla">
+    <div class="container tabla">
       <table class="table table-responsive">
         <thead style="height: 40px;">
           <tr>
@@ -56,16 +60,12 @@
             <td>{{ registro.medida }}</td>
             <td>{{ registro.unidadVenta }}</td>
             <td>{{ registro.cantidad }}</td>
-            <td id="botonAgregar" style="padding-right: 0px; padding-left: 0px">
+            <td style="text-align: end; margin-right: 0px; padding-right: 0px;">
               <button id="agregar" type="button" style="border-radius: 0%" class="btn btn-primary"
                 @click="deleteProducto(registro.idRegistro)">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash"
-                  viewBox="0 0 16 16">
-                  <path
-                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
-                  <path
-                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  <path d="M14 11V17M10 11V17M6 7V19C6 19.5304 6.21071 20.0391 6.58579 20.4142C6.96086 20.7893 7.46957 21 8 21H16C16.5304 21 17.0391 20.7893 17.4142 20.4142C17.7893 20.0391 18 19.5304 18 19V7M4 7H20M7 7L9 3H15L17 7" stroke="#33447F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
               </button>
             </td>
 
@@ -83,27 +83,30 @@
       </div>
     </div>
 
-    <div class="foot">
-      <div class="form-floating mensaje">
+    <div class="container foot" style="margin-top: 41px">
+      <div class="row">
+
+      <div class="col-lg-6 form-floating mensaje">
         <span>Mensaje</span>
         <textarea class="form-control" placeholder="Leave a comment here" id="mensaje"
           style="height: 177px; border-radius: 0%;"></textarea>
       </div>
-      <div class="file">
+      <div class="col-lg-6 file">
         <div>
           <span>Adjuntar archivo</span>
         </div>
-        <div class="file-select" id="src-file1">
+        <div class="file-select" id="src-file1" style="width: 100%">
           <input id="fileArchive" @change="onFileChange()" class="form-control" ref="fileArchive" type="file" name="src-file1" aria-label="Archivo">
         </div>
 
-        <div>
+        <div class="d-flex justify-content-end">
           <button @click="enviarPresupuesto()" id="presupuesto" type="button" style="border-radius: 0%;" class="btn btn-primary">ENVIAR PRESUPUESTO</button>
           <div id="mensajePresupuesto">
 
           </div>
         </div>
       </div>
+    </div>
 
     </div>
 
@@ -188,7 +191,9 @@ export default {
 
 
  
-
+.form-control{
+  border-radius: 0%;
+}
 .presupuestoDiv {
   min-height: 950px; 
   overflow-y: auto; 
@@ -201,19 +206,13 @@ export default {
 .indicador {
   color: black;
   margin-top: 10px;
-  margin-left: 17%;
   font-size: 15px;
   font-weight: 500;
   font-family: "Montserrat", sans-serif;
   line-height: 60px;
 }
 
-.formulario {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  padding-left: 16%;
-}
+
 
 .casilla {
   display: flex;
@@ -245,8 +244,6 @@ export default {
 
 .tabla {
   margin-top: 100px;
-  margin-left: 17%;
-  width: 65.2%;
 }
 
 #cantidad {
@@ -286,23 +283,10 @@ export default {
 
 }
 
-.foot {
-  margin-top: 50px;
-  margin-left: 17.5%;
-  display: flex;
-  margin-bottom: 200px;
-}
 
-.mensaje {
-  width: 35%;
-}
 
-.file {
-  display: flex;
-  flex-direction: column;
-  margin-left: 1%;
-  width: 42%;
-}
+
+
 
 .file-select {
   position: relative;
@@ -328,21 +312,21 @@ export default {
 
 .file-select input[type="file"] {
   opacity: 0;
-  width: 565px;
+  width: 100%;
   height: 45px;
   display: inline-block;
 }
 
 #presupuesto {
-  margin-left: 57%;
   margin-top: 80px;
   background: rgba(51, 68, 127, 1);
   border: none;
   font-family: "Montserrat";
   font-size: 16px;
   font-weight: 300;
-  width: 44%;
-  height: 42%;
+  width: 286px;
+height: 49px;
+flex-shrink: 0;
 }
 
 .rowT {
@@ -366,74 +350,5 @@ export default {
   font-weight: 500;
 }
 
-@media only screen and (max-width: 1200px) {
-  .foot{
-    display:flex;
-    flex-direction: column
 
-  }
-
-  #src-file1{
-    width: 30%
-  }
-
-  #presupuesto{
-    margin-left: 0px;
-  }
-
-  .tabla{
-    width: 100%;
-  }
-
-
-
-}
-
-@media only screen and (max-width: 900px) {
-  .foot{
-    display:flex;
-    flex-direction: column
-
-  }
-
-  #src-file1{
-    width: 80%
-  }
-
-  #mensaje{
-    width:65%
-  }
-
-  #presupuesto{
-    margin-left: 0px;
-  }
-
-  .tabla{
-    margin-left:0px;
-  }
-
-}
-
-@media only screen and (max-width: 600px) {
-  .tabla{
-    font-size: 12px;
-  }
-
-  .tabla th{
-    font-size: 12px;
-  }
-}
-
-@media only screen and (max-width: 500px) {
-  .tabla{
-    font-size: 8px;
-    width: 100%;
-  }
-  .tabla th{
-    font-size: 8px;
-  }
-  .foot{
-    margin-left: 0px;
-  }
-}
 </style>

@@ -3,18 +3,18 @@
 
     <nav class="navbar navbar-expand-lg"
     :style="{ height: navHeight, backgroundColor: 'white', boxShadow: '0 3px 23px 0 rgba(0, 0, 0, 0.1)' }">
-      <div class="container-fluid">
+      <div class="container">
         <a class="navbar-brand" href="#">
           <router-link class="route" to="/home" :style="{ fontWeight: isRouteActive('/home') ? 'bold' : '500' }">
-            <img id="imgkotex" :src="getImagen(this.imagenLogo)" alt="">
+            <img class="logoNavbar"  :src="getImagen(this.imagenLogo)" alt="">
           </router-link>
         </a>
-        <button @click="agrandarNav()" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        <button  class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="container">
-          <ul class="navbar-nav me-auto ml-5 navContacto">
+          <ul class="navbar-nav justify-content-end columaOne">
             <li class="nav-item">
               <a class="nav-link" href="#">
                 <div class="d-flex align-items-center">
@@ -86,9 +86,11 @@
               </a>
             </li>
           </ul>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <div class="navbar-nav me-auto mb-2 mb-lg-0">
-              <ul class="navbar-nav ml-auto">
+          <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <div class="navbar-nav">
+            </div>
+            <div class="navbar-nav">
+              <ul class="navbar-nav ml-auto pb-3" >
            
 
                 <li class="nav-item">
@@ -231,7 +233,7 @@ export default {
   methods: {
     agrandarNav(){
       if (this.isExpanded) {
-        this.navHeight = '160px'; 
+        this.navHeight = '164px'; 
       } else {
         this.navHeight = '600px'; 
       }
@@ -307,26 +309,17 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 
-.navbar {
-  height: 160px;
-
-}
-
-
-#navbarSupportedContent{
-  margin-left: 118px
-}
 
 
 
 .title{
   display: flex;
-  margin-left: 18px;
   font-weight: 500;
   font-family: "Montserrat", sans-serif;
   line-height: 18px;
   font-size: 16px;
-  padding-top: 20px
+  padding-top: 20px;
+  padding-left: 10px
   
 }
 
@@ -338,11 +331,6 @@ export default {
   
 }
 
-#imgkotex {
-  width: 245px;
-  height: 92px;
-  margin-left: 16vw;
-}
 
 .iconNavbar {
   align-items: center;
@@ -367,7 +355,6 @@ export default {
   flex-direction: column;
   height: 150px;
   align-items: end;
-  margin-right: 17vw;
 
 }
 
@@ -389,11 +376,9 @@ export default {
   font-family: "Montserrat", sans-serif;
   line-height: 18px;
   font-size: 16px;
-  margin-left: 10px;
 }
 
 .opcion3 {
-  margin-left: 10px;
   display: flex;
   font-weight: 500;
   font-family: "Montserrat", sans-serif;
@@ -407,21 +392,16 @@ export default {
   line-height: 18px;
   font-size: 16px;
   line-height: 18px;
-  margin-left: 22px;
 }
 
 .opcion1 {
   display: flex;
-  margin-left: 18px;
   font-weight: 500;
   font-family: "Montserrat", sans-serif;
   line-height: 18px;
   font-size: 16px;
 }
 
-.opcion1 p {
-  margin-left: 10px;
-}
 
 .route {
   text-decoration: none;
@@ -478,223 +458,36 @@ export default {
   height: 150px;
 }
 
-.navContacto{
-  margin-left: 300px
+.logoNavbar{
+  width: 245px;
+  height: 92px
 }
 
+@media only screen and (max-width: 1000px) {
 
-
-
-
-
-
-@media only screen and (min-width: 100px) and (max-width: 440px) {
-
-
-  .navbar{
-    height: 300px;
-  }
-  .navContacto {
+  .columaOne{
     display: none;
-margin-left: 0px;
-flex-direction: row;
-}
-
-.title{
-font-size: 8px;
-margin-left: 0px;
-margin-left: 5px
-
-}
-
-.iconNavbar2{
-width: 13px;
-height: 13px;
-margin-left: 10px;
-}
-.iconNavbar{
-width: 13px;
-height: 13px;
-margin-left: 10px
-
-}
-
-#navbarSupportedContent{
-margin-left: 0px;
-}
-.container{
-  margin-left: 0px;
-}
-}
-
-
-@media only screen and (min-width: 441px) and (max-width: 550px) {
-
-
-  .whatsapp-container{
-  right: 50px;
-}
-  .navContacto {
-
-margin-left: 0px;
-flex-direction: row;
-}
-
-.title{
-font-size: 10px;
-margin-left: 0px;
-margin-left: 5px
-
-}
-
-.iconNavbar2{
-width: 13px;
-height: 13px;
-margin-left: 10px;
-}
-.iconNavbar{
-width: 13px;
-height: 13px;
-margin-left: 10px
-
-}
-
-#navbarSupportedContent{
-margin-left: 0px;
-}
-.container{
-  margin-left: 0px;
-}
-
-}
-
-@media only screen and (min-width: 551px) and (max-width: 649px) {
-
-  .whatsapp-container{
-  right: 80px;
-}
-.navContacto {
-
-  margin-left: 0px;
-  flex-direction: row;
-}
-
-.title{
-  font-size: 13px;
-  margin-left: 0px;
-  margin-left: 5px
-
-}
-
-.iconNavbar2{
-  width: 13px;
-  height: 13px;
-  margin-left: 10px;
-}
-.iconNavbar{
-  width: 13px;
-  height: 13px;
-  margin-left: 10px
-
-}
-
-#navbarSupportedContent{
-  margin-left: 0px;
-}
-.container{
-    margin-left: 0px;
   }
+
+
 }
 
-@media only screen and (min-width: 650px) and (max-width: 999px) {
 
-  .whatsapp-container{
-  right: 100px;
-}
-  .container{
-    margin-left: 0px;
+@media only screen and (max-width: 400px) {
+
+  .logoNavbar{
+    width: 100%;
   }
-.navContacto {
-  margin-bottom: 50px;
-  margin-left: 0px;
-  flex-direction: row;
-}
 
-.title{
-  font-size: 16px;
-  margin-left: 0px;
-  margin-left: 5px
-
-}
-
-.iconNavbar2{
-  width: 20px;
-  height: 20px;
-  margin-left: 10px;
-}
-.iconNavbar{
-  width: 20px;
-  height: 20px;
-  margin-left: 10px
-
-}
-
-#navbarSupportedContent{
-  margin-left: 0px;
-}
-}
+  
 
 
-@media only screen and (max-width: 1500px) {
-  .whatsapp-container{
-  right: 200px;
-}
-}
-@media only screen and (max-width: 1200px) {
-  #imgkotex{
-    margin-left: 10px;
-   }
+  
 }
 
 
 
-@media only screen and (min-width: 1000px) and (max-width: 1400px) {
 
 
-#imgkotex{
-  margin-left: 20px
-}
-.navContacto {
 
-  margin-left: 0px;
-  flex-direction: row;
-}
-
-.title{
-  font-size: 15px;
-  margin-left: 0px;
-  margin-left: 5px
-}
-
-.route{
-  font-size: 12px;
-
-}
-
-.iconNavbar2{
-  width: 13px;
-  height: 13px;
-  margin-left: 10px;
-}
-.iconNavbar{
-  width: 13px;
-  height: 13px;
-  margin-left: 10px
-
-}
-
-#navbarSupportedContent{
-  margin-left: 0px;
-}
-}
 </style>

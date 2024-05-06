@@ -35,23 +35,29 @@
             </button>
         </div>
 
-        <div class="informacionNosotros">
-            <div class="informacion">
-                <p class="titulo">{{ this.banner.titulo }}</p>
-                <div class="infotext">
-                    <div class="text" v-html="this.banner.texto"></div>
+        <div class="container informacionNosotros">
+            <div class="row d-flex">
+                <div class="col-lg-6 informacion">
+                    <p class="titulo">{{ this.banner.titulo }}</p>
+                    <div class="infotext">
+                        <div class="text" v-html="this.banner.texto"></div>
+                    </div>
+    
                 </div>
-
-            </div>
-            <div class="imgInfo">
-                <img :src="getImagen(this.imagenBanner)" alt="">
+                <div class="col-lg-6 imgInfo">
+                    <img :src="getImagen(this.imagenBanner)" alt="" style="width: 597px; height:568px" >
+                </div>
             </div>
 
 
         </div>
-        <div class="textoElegirnos">
-            <p class="titulo2">¿Porque elegirnos?</p>
-            <div class="tarjetas">
+        <div class="container-fluid textoElegirnos  w-100">
+            <div class="container" >
+
+            <div>
+                <p class="titulo2">¿Porque elegirnos?</p>
+            </div>
+            <div class="row d-flex tarjetas">
                 <div v-for="seccion in secciones" :key="seccion.id" class="tarjeta">
                     <div class="iconNosotros" v-html="seccion.icono"></div>
                     <p class="textoIcon">{{ seccion.titulo }}</p>
@@ -59,6 +65,10 @@
                 </div>
             </div>
         </div>
+
+        </div>
+
+
     </div>
 
 </template>
@@ -194,63 +204,47 @@ export default {
     padding-right: 20px;
 }
 
-.tarjetas {
-    display: flex;
-    justify-content: left;
-    margin-left: 17%;
-}
+
 
 .titulo2 {
     font-size: 35px;
     font-family: "Montserrat", sans-serif;
     font-weight: 600;
-    margin-left: 17%;
     padding-top: 40px;
     padding-bottom: 20px;
 
 }
 
 .textoElegirnos {
-    width: 100%;
-    height: 580px;
     background-color: #f5f5f5;
+    padding-bottom: 76px;
 }
 
 .titulo {
-    font-size: 35px;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 600;
-    margin-left: 30%;
-    margin-top: 20px;
+    color: #000;
+font-family: Montserrat;
+font-size: 35px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+    margin-top: 60px;
 }
 
 .imgInfo img {
-    width: 590px;
-    height: 550px;
     filter: grayscale(100%);
 }
 
-.imgInfo {
-    margin-left: 250px;
 
-}
 
 .informacionNosotros {
-    display: flex;
-    justify-content: start;
-    margin-top: 45px;
-    padding: 50px;
-    margin-left: 100px;
+    margin-top: 85px;
+    padding-bottom: 80px;
 }
 
-.informacion {
-    width: 600px;
-}
+
 
 .infotext {
     margin-top: 90px;
-    margin-left: 30%;
-    width: 600px;
 }
 
 .text {
@@ -310,112 +304,24 @@ export default {
 }
 
 
-
-
-@media only screen and (max-width: 1600px) {
-
-    .titulo{
-        margin-left: 0px;
-
-    }
-
-    .infotext{
-        margin-left: 0px;
-    }
-
-    .imgInfo{
-        margin-left: 0px;
-    }
-}
-
-@media only screen and (max-width: 1300px) {
-
-.informacionNosotros{
-    display:flex;
-    flex-direction: column
-}
-}
-
-
 @media only screen and (max-width: 1000px) {
-
-.tarjetas{
-    display:flex;
-    flex-direction: column
+   .tarjeta{
+    margin-top: 20px;
 }
-.tarjeta{
-    margin: 50px
-}
-.textoElegirnos{
-    height: 100%
-}
-}
+} 
 
-
-@media only screen and (max-width: 800px) {
-
-.informacionNosotros{
-    margin-left: 0px;
-}
-}
-
-
-@media only screen and (max-width: 600px) {
-
-.infotext{
-    font-size: 10px;
-}
-
-.informacionNosotros{
-    width: 100%
-}
-
-.informacion{
-    width: 100%
-
-}
-.infotext{
-    width: 100%
-
-}
-.text{
-    width: 100%
-}
-.imgInfo{
-    width: 100%;
-}
-
-.imgInfo img{
-    width: 100%
-}
-
-.tarjetas{
-    margin-left: 10px;
-}
-}
-
-
-@media only screen and (max-width: 600px) {
-
-    .tarjeta{
-        width: 150px;
-        height: 150px;
+@media only screen and (max-width: 780px) {
+    .imgInfo{
+        width: 400px;
     }
 
-    .iconNosotros{
-        margin-top: 40px;
-    }
-    .textoIcon{
-        font-size: 15px;
-        margin-top: 10px;
+}
 
+@media only screen and (max-width: 400px) {
+    .imgInfo{
+        width: 250px;
+        height: 250px;
     }
-
-  
-    .infoIcon {
-        display: none
-    }
-    
 }
 
 

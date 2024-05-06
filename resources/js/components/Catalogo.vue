@@ -1,8 +1,13 @@
 <template>
   <div>
-    <div class="indicador">
+    <div class="container d-flex">
+
+    <div class="justify-content-start indicador" style="margin-left: 0%">
       <p>Inicio > Catalogo</p>
     </div>
+    </div>
+    <div class="container">
+
     <div class="catalogo">
       <div class="informacionCatalogo">
         <img id="imgCatalogo" src="../../img/catalogo.jpg" alt="">
@@ -13,16 +18,16 @@
           <p>Descargá nuestro catálogo actualizado con todos nuestros artículos en venta</p>
         </div>
         <div class="botones">
-          <button @click="descargarArchivo()" type="button" id="descargar" class="btn"
-            style="width: 184px; height: 50px;">Descargar</button>
+          <button @click="descargarArchivo()" type="button" id="descargar" class="btn">Descargar</button>
           <a href="/api/obtenerCatalogo" target="_blank">
-            <button type="button" id="visualizar" class="btn" style="width: 184px; height: 50px;">Visualizar</button>
+            <button type="button" id="visualizar" class="btn">Visualizar</button>
           </a>
         </div>
 
       </div>
 
     </div>
+  </div>
 
 
   </div>
@@ -67,6 +72,8 @@ export default {
   background-color: #2F3F78;
   color: white;
   border-radius: 0%;
+  width: 184px;
+  height: 49px;
 }
 
 #visualizar {
@@ -74,13 +81,20 @@ export default {
   color: black;
   border-radius: 0%;
   margin-left: 20px;
-
+  width: 184px;
+  height: 49px;
+  color: #2F3F78;
 }
 
 .catalogoTitle {
-  font-weight: 600;
-  font-family: "Montserrat", sans-serif;
-  font-size: 24px;
+  
+  color: #131313;
+font-family: Montserrat;
+font-size: 24px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+  
 
 }
 
@@ -88,6 +102,7 @@ export default {
   font-weight: 400;
   font-family: "Montserrat", sans-serif;
   font-size: 16px;
+  margin-top: 20px;
 }
 
 .catalogoBotones {
@@ -103,12 +118,12 @@ export default {
 .botones {
   display: flex;
   justify-content: start;
+  margin-top: 60px;
 }
 
 .indicador {
   color: black;
   margin-top: 10px;
-  margin-left: 17%;
   font-size: 15px;
   font-weight: 500;
   font-family: "Montserrat", sans-serif;
@@ -117,13 +132,13 @@ export default {
 
 .catalogo {
   background-color: #FAFAFA;
-  height: 420px;
   display: flex;
   justify-content: center;
   margin-left: 32%;
   margin-right: auto;
   width: 40%;
-  margin-bottom: 100px;
+  margin-bottom: 311px;
+  height: 339px;
 
 
 }
@@ -134,16 +149,14 @@ export default {
 }
 
 #imgCatalogo {
-  width: 320px;
-  height: 420px;
+  width: 265px;
+  height: 339px;
 }
 
 
 @media only screen and  (max-width: 1800px) {
 
-  .catalogo {
-    width: 60%;
-  }
+
 
   .catalogoBotones{
     width: 400px;
@@ -158,11 +171,6 @@ export default {
 
  @media only screen and  (max-width: 1200px) {
 
-.catalogo {
-  width: 65%;
-  margin-left: 20%;
-
-}
 
 .catalogoBotones{
   width: 400px;
@@ -219,5 +227,16 @@ export default {
   display: flex;
   flex-direction: column
 }
+}
+
+@media only screen and  (max-width: 250px) {
+
+  #descargar{
+    width: 100px;
+  }
+  #visualizar{
+    width: 100px;
+  }
+
 }
 </style>
