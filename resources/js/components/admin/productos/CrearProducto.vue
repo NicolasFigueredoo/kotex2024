@@ -5,13 +5,12 @@
             <h1>CREAR PRODUCTO</h1>
         </div>
 
-
-
         <form class="mt-3">
             <div class="row">
                 <div class="col-md-10">
                     <label class="form-label">Nombre producto</label>
                     <input type="text" class="form-control" id="nombre">
+                    
                 </div>
                 <div class="col-md-2">
                     <label class="form-label">Orden</label>
@@ -112,7 +111,7 @@
 
             </div>
             <div class="w-100 d-flex justify-content-end">
-                <button @click="crearProducto()" type="button" class="btn mt-3"
+                <button @click="crearProducto()" type="submit" class="btn mt-3"
                     style="background-color: rgb(52, 68, 127); color: white;">Crear</button>
             </div>
 
@@ -175,6 +174,8 @@ export default {
             this.fotoProducto2 = file.files[0]
         },
         crearProducto() {
+
+        
             let linea = $('#linea').prop("checked");
             let especial = $('#especial').prop("checked");
             let destacado = $('#destacado').prop("checked");

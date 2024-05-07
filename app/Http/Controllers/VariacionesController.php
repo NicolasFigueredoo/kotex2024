@@ -43,14 +43,18 @@ class VariacionesController extends Controller
             'productos.nombre as nombre_producto',
             'categorias.nombre as nombre_categoria',
             'variaciones.imagen',
-            DB::raw('MIN(variaciones.id) as id_producto')
+            'variaciones.id as id_producto'
         )
-            ->join('variacion_categoria', 'variaciones.id', '=', 'variacion_categoria.variacion_id')
-            ->join('categorias', 'variacion_categoria.categoria_id', '=', 'categorias.id')
-            ->join('productos', 'variaciones.producto_id', '=', 'productos.id')
-            ->where('categorias.nombre', 'Productos de linea')
-            ->groupBy('productos.nombre', 'categorias.nombre', 'variaciones.imagen')
-            ->get();
+        ->join('variacion_categoria', 'variaciones.id', '=', 'variacion_categoria.variacion_id')
+        ->join('categorias', 'variacion_categoria.categoria_id', '=', 'categorias.id')
+        ->join('productos', 'variaciones.producto_id', '=', 'productos.id')
+        ->where('categorias.nombre', 'Productos de linea')
+        ->whereIn('variaciones.id', function ($query) {
+            $query->select(DB::raw('MIN(variaciones.id)'))
+                  ->from('variaciones')
+                  ->groupBy('variaciones.producto_id');
+        })
+        ->get();
 
         return response()->json($variaciones);
     }
@@ -63,31 +67,39 @@ class VariacionesController extends Controller
             'variaciones.imagen',
             DB::raw('MIN(variaciones.id) as id_producto')
         )
-            ->join('variacion_categoria', 'variaciones.id', '=', 'variacion_categoria.variacion_id')
-            ->join('categorias', 'variacion_categoria.categoria_id', '=', 'categorias.id')
-            ->join('productos', 'variaciones.producto_id', '=', 'productos.id')
-            ->where('categorias.nombre', 'Productos Especiales')
-            ->groupBy('productos.nombre', 'categorias.nombre', 'variaciones.imagen')
-            ->get();
+        ->join('variacion_categoria', 'variaciones.id', '=', 'variacion_categoria.variacion_id')
+        ->join('categorias', 'variacion_categoria.categoria_id', '=', 'categorias.id')
+        ->join('productos', 'variaciones.producto_id', '=', 'productos.id')
+        ->where('categorias.nombre', 'Productos Especiales')
+        ->whereIn('variaciones.id', function ($query) {
+            $query->select(DB::raw('MIN(variaciones.id)'))
+                  ->from('variaciones')
+                  ->groupBy('variaciones.producto_id');
+        })
+        ->groupBy('productos.nombre', 'categorias.nombre', 'variaciones.imagen')
+        ->get();
+    
 
         return response()->json($variaciones);
     }
 
     public function getProductosDestacados()
     {
-        $variaciones = Variacion::select(
-            'productos.nombre as nombre_producto',
-            'categorias.nombre as nombre_categoria',
-            'variaciones.imagen',
+        $variaciones = Variacion::select('productos.nombre as nombre_producto', 
+        'variaciones.imagen',
+        DB::raw('MIN(categorias.nombre) as nombre_categoria'), 'v.id as id_producto')
+        ->join('variacion_categoria as vc', 'variaciones.id', '=', 'vc.variacion_id')
+        ->join('categorias', 'vc.categoria_id', '=', 'categorias.id')
+        ->join('productos', 'variaciones.producto_id', '=', 'productos.id')
+        ->join(DB::raw('(SELECT MIN(id) as id FROM variaciones GROUP BY producto_id) as v'), function ($join) {
+            $join->on('variaciones.id', '=', 'v.id');
+        })
+        ->where('variaciones.destacado', 1)
+        ->groupBy('productos.nombre', 'v.id','variaciones.imagen',        )
+        ->get();
 
-            DB::raw('MIN(variaciones.id) as id_producto')
-        )
-            ->join('variacion_categoria', 'variaciones.id', '=', 'variacion_categoria.variacion_id')
-            ->join('categorias', 'variacion_categoria.categoria_id', '=', 'categorias.id')
-            ->join('productos', 'variaciones.producto_id', '=', 'productos.id')
-            ->where('variaciones.destacado', 1)
-            ->groupBy('productos.nombre', 'categorias.nombre', 'variaciones.imagen')
-            ->get();
+        
+    
 
         return response()->json($variaciones);
     }
@@ -267,6 +279,9 @@ class VariacionesController extends Controller
 
         if($request->destacado == 1){
             $variacion->destacado = 1;
+        }else{
+            $variacion->destacado = 0;
+
         }
 
         if ($request->hasFile('imagen')) {

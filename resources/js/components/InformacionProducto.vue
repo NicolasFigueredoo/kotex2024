@@ -298,7 +298,6 @@ export default {
         obtenerInformacionProducto() {
             axios.get(`/api/obtenerInformacionProducto/${this.idProducto}`)
                 .then((response) => {
-                    console.log(response.data)
                     this.medidas = response.data.medidas;
                     this.aplicaciones = response.data.aplicaciones;
                     this.nombreProducto = response.data.nombre_producto;
@@ -437,8 +436,41 @@ export default {
                     unidadVenta: this.unidadSeleccionada,
                     cantidad: this.cantidadSeleccionada
                 };
-                this.$store.commit('agregarRegistro', nuevoRegistro);
-                this.registroCount += 1;
+
+                let registros = JSON.parse(localStorage.getItem('registros'));
+                let registroTrue = false;
+                const index = this.registros.findIndex(registro => {
+                    return registro.nombre === this.productoSeleccionado && registro.color === this.colorSeleccionado &&
+                    registro.medida === this.medidaSeleccionada && registro.unidadVenta === this.unidadSeleccionada;
+                });
+
+                if(index !== -1){
+                    registros.forEach(element => {
+                    if(element.nombre === this.productoSeleccionado && element.color === this.colorSeleccionado &&
+                    element.medida === this.medidaSeleccionada && element.unidadVenta === this.unidadSeleccionada
+                     ){
+                        element.cantidad += this.cantidadSeleccionada;
+                        this.$store.commit('updateRegistros', registros);
+                    }
+                
+                });
+
+                }else{
+                    registroTrue = true;
+                }
+
+                if(registroTrue){
+                    this.$store.commit('agregarRegistro', nuevoRegistro);
+                    this.registroCount += 1;
+                }
+
+               
+
+              
+
+                
+
+                
             } else {
                 alert('Por favor, complete todos los campos antes de guardar.');
             }

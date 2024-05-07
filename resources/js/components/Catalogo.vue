@@ -7,26 +7,32 @@
     </div>
     </div>
     <div class="container">
-
-    <div class="catalogo">
-      <div class="informacionCatalogo">
-        <img id="imgCatalogo" src="../../img/catalogo.jpg" alt="">
-      </div>
-      <div class="catalogoBotones">
-        <p class="catalogoTitle">Catálogo de productos</p>
-        <div class="catalogoText">
-          <p>Descargá nuestro catálogo actualizado con todos nuestros artículos en venta</p>
+      <div class="row d-flex justify-content-center" style="margin-bottom: 330px;">
+        <div class="col-lg-4" style="width: 270px; height: 339px; padding-right: 0px; margin-right: 0px;">
+          <div style="background-image: url('../../img/catalogo.jpg'); background-size: cover; width: 100%; height: 100%;">
+          </div>
         </div>
-        <div class="botones">
+
+        <div class="col-lg-5" style="background-color: green; padding-left: 50px; padding-right: 120px; background-color: #FAFAFA;">
+          <div style="margin-top: 50px;">
+            <p class="catalogoTitle">Catálogo de productos</p>
+          </div>
+
+          <div style="margin-top: 40px;">
+            <p class="catalogoText">Descargá nuestro catálogo actualizado con todos nuestros artículos en venta</p>
+          </div>
+
+          <div class="botones">
           <button @click="descargarArchivo()" type="button" id="descargar" class="btn">Descargar</button>
           <a href="/api/obtenerCatalogo" target="_blank">
             <button type="button" id="visualizar" class="btn">Visualizar</button>
           </a>
         </div>
 
-      </div>
+        </div>
 
-    </div>
+
+      </div>
   </div>
 
 
@@ -102,7 +108,6 @@ line-height: normal;
   font-weight: 400;
   font-family: "Montserrat", sans-serif;
   font-size: 16px;
-  margin-top: 20px;
 }
 
 .catalogoBotones {
@@ -136,7 +141,7 @@ line-height: normal;
   justify-content: center;
   margin-left: 32%;
   margin-right: auto;
-  width: 40%;
+  width: 55%;
   margin-bottom: 311px;
   height: 339px;
 

@@ -84,6 +84,9 @@
 .aplicacion img:hover{
   width: 300px;
   height: 298px;
+  transition: 0.5s;
+  filter: grayscale(50%);
+
 }
 .aplicacion{
   margin-top: 50px;

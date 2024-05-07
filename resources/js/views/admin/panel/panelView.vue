@@ -285,7 +285,8 @@
         </nav>
 
             </div>
-            <div class="componentesV">
+            <div class="componentesV" style=" max-height: 800px; 
+    overflow-y: auto;">
                 
                             <Alerta style="position: fixed; z-index: 5;" v-if="mostrarAlerta === true"/>
                             <InicioAdmin v-if="mostrarComponente === 0"/>

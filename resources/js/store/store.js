@@ -84,8 +84,14 @@ export default createStore({
     eliminarRegistro(state, idRegistro ) {
       state.registros = state.registros.filter(registro => registro.idRegistro !== idRegistro);
       localStorage.setItem('registros', JSON.stringify(state.registros));
-
     },
+
+    updateRegistros(state, registros) {
+      state.registros = registros;
+      localStorage.setItem('registros', JSON.stringify(registros));
+        },
+
+
     setSelectedProductId(state, productId) {
         state.selectedProductId = productId;
     },
