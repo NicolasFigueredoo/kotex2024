@@ -4,8 +4,8 @@
         <div class="w-100 border-bottom d-flex justify-content-between">
             <h1>SLIDER</h1>
 
-            <button @click="crearSlider()" type="button" class="btn"
-                 id="crearSlider"   style="background-color: rgb(52, 68, 127); color: white;">Crear Slider</button>
+            <button id="crearSlider" @click="crearSlider()" type="button" class="btn"
+                    style="background-color: rgb(52, 68, 127); color: white;">Crear Slider</button>
         </div>
 
         <table class="table table-bordered mt-3">
@@ -86,7 +86,7 @@ export default {
                 });
     },
         crearSlider(){
-            this.$store.commit('setSliderIdComponent', 'home');
+            this.$store.commit('setSliderIdComponent', 'nosotros');
             this.$store.commit('mostrarComponente', 29);
         },
         getImagen(fileName) {
@@ -152,6 +152,4 @@ h1 {
     font-family: "Montserrat", sans-serif;
     font-weight: 700;
 }
-
-
 </style>

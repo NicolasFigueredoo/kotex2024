@@ -2,14 +2,14 @@
   <div>
 
     <nav class="navbar navbar-expand-lg"
-    :style="{ height: navHeight, backgroundColor: 'white', boxShadow: '0 3px 23px 0 rgba(0, 0, 0, 0.1)' }">
+      :style="{ height: navHeight, backgroundColor: 'white', boxShadow: '0 3px 23px 0 rgba(0, 0, 0, 0.1)' }">
       <div class="container">
         <a class="navbar-brand" href="#">
           <router-link class="route" to="/home" :style="{ fontWeight: isRouteActive('/home') ? 'bold' : '500' }">
-            <img class="logoNavbar"  :src="getImagen(this.imagenLogo)" alt="">
+            <img class="logoNavbar" :src="getImagen(this.imagenLogo)" alt="">
           </router-link>
         </a>
-        <button  class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -29,24 +29,25 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">
-                <div class="d-flex align-items-center">
-                <a target="_blank" :href="'https://wa.me/' + whatsappLink">
-                  <svg  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                <div class="d-flex align-items-center" @click="abrirWsp()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-whatsapp iconNavbar2" viewBox="0 0 16 16">
                     <path
                       d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232" />
                   </svg>
-                </a>
-                <p class="title">{{ whatsapp }}</p> 
+                  <p class="title">{{ whatsapp }}</p>
                 </div>
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">
-                <div class="d-flex align-items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" height="16" fill="currentColor" class="iconNavbar2">
-                    <path d="M64 112c-8.8 0-16 7.2-16 16v22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16H64zM48 212.2V384c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64H448c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z"/></svg>   
-                     <p class="title">{{ email }}</p>
+                <div class="d-flex align-items-center" @click="abrirEmail()">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" height="16"
+                    fill="currentColor" class="iconNavbar2">
+                    <path
+                      d="M64 112c-8.8 0-16 7.2-16 16v22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16H64zM48 212.2V384c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64H448c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z" />
+                  </svg>
+                  <p class="title">{{ email }}</p>
                 </div>
               </a>
             </li>
@@ -60,9 +61,9 @@
             </li>
 
             <li class="nav-item">
-              
+
               <a class="nav-link" href="#" style="margin: 0px; margin-top: 16px;">
-                  |
+                |
               </a>
             </li>
 
@@ -70,8 +71,11 @@
               <a class="nav-link" href="#">
                 <div class="d-flex align-items-center" style="padding-top:15px">
                   <a :href="facebook" target="_blank">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="16" height="16" fill="currentColor" class="iconNavbar2">
-                      <path d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="16" height="16"
+                      fill="currentColor" class="iconNavbar2">
+                      <path
+                        d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z" />
+                    </svg>
                   </a>
                 </div>
               </a>
@@ -90,36 +94,28 @@
             <div class="navbar-nav">
             </div>
             <div class="navbar-nav">
-              <ul class="navbar-nav ml-auto pb-3" >
-           
+              <ul class="navbar-nav ml-auto pb-3">
+
 
                 <li class="nav-item">
                   <a class="nav-link" href="#">
                     <div class="d-flex align-items-center">
                       <router-link class="route" to="/nosotros"
-                        :style="{ fontWeight: isRouteActive('/nosotros') ? 'bold' : '500' }"><p class="textoR">Nosotros</p>
+                        :style="{ fontWeight: isRouteActive('/nosotros') ? 'bold' : '500' }">
+                        <p class="textoR">Nosotros</p>
                       </router-link>
                     </div>
                   </a>
                 </li>
 
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    <div class="d-flex align-items-center">
-                      <router-link class="route" to="/productosdelinea" @click="deleteProduct()"
-                        :style="{ fontWeight: isRouteActive('/productosdelinea') ? 'bold' : '500' }">
-                        <p class="textoR">Productos de línea</p>
-                        </router-link>
-                    </div>
-                  </a>
-                </li>
 
-                <li class="nav-item">
+                <li v-for="categoria in categorias" :key="categoria.id" class="nav-item">
+
                   <a class="nav-link" href="#">
                     <div class="d-flex align-items-center">
-                      <router-link class="route" to="/productosespeciales" @click="deleteProduct()"
-                        :style="{ fontWeight: isRouteActive('/productosespeciales') ? 'bold' : '500' }">
-                        <p class="textoR">Productos Especiales</p>
+                      <router-link class="route" :to="categoria.route" @click="deleteProduct()"
+                        :style="{ fontWeight: isRouteActive(categoria.route) ? 'bold' : '500' }">
+                        <p class="textoR">{{ categoria.texto }}</p>
                       </router-link>
                     </div>
                   </a>
@@ -132,7 +128,7 @@
                         :style="{ fontWeight: isRouteActive('/catalogo') ? 'bold' : '500' }">
                         <p class="textoR">Catálogo</p>
 
-                        </router-link>
+                      </router-link>
                     </div>
                   </a>
                 </li>
@@ -144,7 +140,7 @@
                         :style="{ fontWeight: isRouteActive('/aplicaciones') ? 'bold' : '500' }">
                         <p class="textoR">Aplicaciones</p>
 
-                        </router-link>
+                      </router-link>
                     </div>
                   </a>
                 </li>
@@ -156,7 +152,7 @@
                         :style="{ fontWeight: isRouteActive('/presupuesto') ? 'bold' : '500' }">
                         <p class="textoR">Presupuesto</p>
 
-                        </router-link>
+                      </router-link>
                     </div>
                   </a>
                 </li>
@@ -168,7 +164,7 @@
                         :style="{ fontWeight: isRouteActive('/contacto') ? 'bold' : '500' }">
                         <p class="textoR">Contacto</p>
 
-                        </router-link>
+                      </router-link>
                     </div>
                   </a>
                 </li>
@@ -209,7 +205,7 @@
                 <div class="containerInfo">
                   <p class="categoria">{{ producto.nombre_categoria.toUpperCase() }}</p>
                   <p class="nombre">{{ producto.nombre_producto.charAt(0).toUpperCase() +
-            producto.nombre_producto.slice(1) }}</p>
+        producto.nombre_producto.slice(1) }}</p>
                 </div>
               </div>
 
@@ -241,19 +237,48 @@ export default {
       whatsappLink: null,
       imagenLogo: null,
       isExpanded: false,
+      categorias: [],
       navHeight: $('.navbar').height(),
 
     }
   },
   methods: {
-    agrandarNav(){
+    obtenerCategoriasHome() {
+
+      axios
+        .get("/api/obtenerCategoriasHome")
+        .then((response) => {
+          this.categorias = response.data;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
+    },
+
+    abrirWsp() {
+      const url = 'https://wa.me/' + this.whatsappLink;
+      const nuevaVentana = window.open(url, '_blank');
+      nuevaVentana.focus();
+    },
+
+    abrirEmail() {
+      const destinatario = 'kotexsrl@hotmail.com';
+      const asunto = 'Contacto desde la web de kotex';
+      const cuerpo = 'Hola queria consultar';
+
+      const mailtoLink = `mailto:${destinatario}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
+      window.location.href = mailtoLink;
+
+    },
+    agrandarNav() {
       if (this.isExpanded) {
-        this.navHeight = '164px'; 
+        this.navHeight = '164px';
       } else {
-        this.navHeight = '600px'; 
+        this.navHeight = '600px';
       }
       this.isExpanded = !this.isExpanded;
-    
+
 
     },
     getImagen(fileName) {
@@ -317,6 +342,7 @@ export default {
   mounted() {
     this.obtenerLogo();
     this.obtenerContacto();
+    this.obtenerCategoriasHome();
   }
 }
 </script>
@@ -328,7 +354,7 @@ export default {
 
 
 
-.title{
+.title {
   display: flex;
   font-weight: 500;
   font-family: "Montserrat", sans-serif;
@@ -336,15 +362,14 @@ export default {
   font-size: 16px;
   padding-top: 20px;
   padding-left: 10px
-  
 }
 
-.route{
+.route {
   font-weight: 500;
   font-family: "Montserrat", sans-serif;
   line-height: 18px;
   font-size: 16px;
-  
+
 }
 
 
@@ -352,7 +377,7 @@ export default {
   align-items: center;
   font-size: 20px;
   color: #33447F;
-  
+
 }
 
 .iconNavbar2 {
@@ -474,18 +499,18 @@ export default {
   height: 150px;
 }
 
-.logoNavbar{
+.logoNavbar {
   width: 245px;
   height: 92px
 }
 
-.textoR:hover{
+.textoR:hover {
   font-weight: 600;
 }
 
 @media only screen and (max-width: 1000px) {
 
-  .columaOne{
+  .columaOne {
     display: none;
   }
 
@@ -495,19 +520,13 @@ export default {
 
 @media only screen and (max-width: 400px) {
 
-  .logoNavbar{
+  .logoNavbar {
     width: 100%;
   }
 
-  
 
 
-  
+
+
 }
-
-
-
-
-
-
 </style>

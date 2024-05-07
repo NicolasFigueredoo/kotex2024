@@ -13,6 +13,7 @@ use App\Models\Servicio;
 use App\Models\SliderHome;
 use App\Models\Suscripcion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
@@ -49,6 +50,36 @@ class AdminController extends Controller
 
     }
 
+    public function deleteSlider(Request $request){
+        $slider = SliderHome::find($request->idSlider);
+        $slider->delete();
+
+        return response()->json(['message' => 'Producto Eliminada'], 200);
+    }
+
+    public function crearSlider(Request $request)
+    {
+        $slider = new SliderHome();
+        $slider->orden = $request->orden;
+        $slider->texto = $request->jsonCodigoSlider;
+        $slider->seccion = $request->seccion;
+
+        if ($request->hasFile('foto')) {
+          
+            if (!Storage::exists('public/fotos')) {
+                Storage::makeDirectory('public/fotos');
+            }
+        
+            $photoPath = $request->file('foto')->store('fotos');
+            $slider->imagen = $photoPath;
+        }
+
+        $slider->save();
+
+        return response()->json(['message' => 'Datos subidos correctamente'], 200);
+
+    }
+
     public function obtenerSliderHome($idSlider)
     {
         $slider = SliderHome::find($idSlider);
@@ -66,6 +97,7 @@ class AdminController extends Controller
     {
         $categoria = CategoriaHome::find($request->idCategoria);
         $categoria->orden = $request->orden;
+        $categoria->texto = $request->texto;
 
         if ($request->hasFile('foto')) {
           
@@ -182,6 +214,7 @@ class AdminController extends Controller
 
     public function updateLogo(Request $request)
     {
+        
         $logo = Logo::first();
 
         if ($request->hasFile('logoNav')) {
@@ -238,6 +271,7 @@ class AdminController extends Controller
     public function obtenerCatalogo(){
         $catalogo = Catalogo::first();
         $rutaArchivo = $catalogo->file;
+        
         if (Storage::exists($rutaArchivo)) {
             $tipoMime = Storage::mimeType($rutaArchivo);
 
@@ -249,19 +283,19 @@ class AdminController extends Controller
     }
 
     public function updateCatalogo(Request $request){
-
-
-
-        
+        $catalogo = Catalogo::first();
         if ($request->hasFile('file')) {
           
-            return response()->json('entro');
-
-        }else{
-            return response()->json($request);
-
-        }
+            if (!Storage::exists('public/fotos')) {
+                Storage::makeDirectory('public/fotos');
+            }
         
+            $photoPath = $request->file('file')->store('fotos');
+            $catalogo->file = $photoPath;
+        }
+        $catalogo->save();
+
+        return response()->json($catalogo);
     }
 
     //METADATOS

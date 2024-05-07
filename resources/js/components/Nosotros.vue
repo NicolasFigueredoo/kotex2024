@@ -3,36 +3,22 @@
         <div class="indicador">
             <p><b>Inicio > </b> Empresa</p>
         </div>
-        <div v-for="slider in sliders" :key="slider.id">
+        <div v-for="(slider, index) in sliders" :key="slider.id">
             <div  class="textoImg">
-                <div v-html="this.sliders[0].texto"></div>
+            <div v-if="index === 0" v-html="this.sliders[0].texto" class="textoS"></div>
             </div>
         </div>
 
         <div id="carouselExampleIndicators" class="carousel slide">
             <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
+                <button type="button" v-for="(slider, index) in sliders" :key="slider.id" @click="setCurrentSlider(slider.texto, index)" :class="{ active: index === 0 }" data-bs-target="#carouselExampleIndicators" :data-bs-slide-to="index" aria-label="Slide {{ index + 1 }}"></button>
+
             </div>
             <div class="carousel-inner">
                 <div v-for="(slider,index) in sliders" :key="slider.id" :class="['carousel-item', { 'active': index === 0}]" style="height: 100%;" >
                     <div class="degradado"></div>
                     <img :src="getImagen(slider.imagen)"  class="d-block w-100" alt="..." style=" width: 100%;height: 100%; object-fit: cover;" >                </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
         </div>
 
         <div class="container informacionNosotros">
@@ -90,6 +76,11 @@ export default {
         }
     },
     methods: {
+        setCurrentSlider(texto, index) {
+      $('.textoSlider').html(texto);
+      $('.carousel-indicators button').removeClass('active');
+      $('.carousel-indicators button[data-bs-slide-to="' + index + '"]').addClass('active');
+  },
         obtenerSliders() {
             axios.get('/api/obtenerSliders')
                 .then(response => {

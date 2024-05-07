@@ -299,7 +299,7 @@
                             <EditBanner v-if="mostrarComponente === 5"/>
                 
                             <!--COMPONENTES NOSOTROS -->
-                            <ShowSlider v-if="mostrarComponente === 6"/>
+                            <ShowSliderN v-if="mostrarComponente === 6"/>
                             <EditBanner v-if="mostrarComponente === 7"/>
                             <ShowSeccionesNosotros v-if="mostrarComponente === 8"/>
                             <EditSeccionesNosotros v-if="mostrarComponente === 9"/>
@@ -342,6 +342,9 @@
                             <MetaDatos v-if="mostrarComponente === 27"/>
                             <EditMetadatos v-if="mostrarComponente === 28"/>
 
+                            <CrearSlider v-if="mostrarComponente === 29"/>
+
+
             </div>
 
 
@@ -360,6 +363,7 @@
 <script>
 
 import ShowSlider from "@/components/admin/home/sliderHome/ShowSlider.vue";
+import ShowSliderN from "@/components/admin/home/sliderHome/ShowSliderN.vue";
 import EditSlider from "@/components/admin/home/sliderHome/EditSlider.vue";
 import ShowCategorias from "@/components/admin/home/categorias/ShowCategorias.vue";
 import EditCategoria from "@/components/admin/home/categorias/EditCategoria.vue";
@@ -388,10 +392,12 @@ import MetaDatos from "@/components/admin/metadatos/MetaDatos.vue";
 import EditMetadatos from "@/components/admin/metadatos/EditMetadatos.vue";
 
 import axios from "axios";
+import CrearSlider from "@/components/admin/home/sliderHome/CrearSlider.vue";
 
 export default {
     components: {
         InicioAdmin,
+        ShowSliderN,
         ShowSlider,
         EditSlider,
         ShowCategorias,
@@ -417,7 +423,8 @@ export default {
         ShowProductos,
         EditProducto,
         MetaDatos,
-        EditMetadatos
+        EditMetadatos,
+        CrearSlider
     },
 
     data(){

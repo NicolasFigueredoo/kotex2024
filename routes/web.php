@@ -53,6 +53,8 @@ Route::post('/api/verificarLogin', [UserController::class, 'show']);
 Route::get('/api/obtenerSliders', [AdminController::class, 'obtenerSliders']);
 Route::post('/api/updateSlider', [AdminController::class, 'updateSlider']);
 Route::get('/api/obtenerSliderHome/{idSlider}', [AdminController::class, 'obtenerSliderHome']);
+Route::post('/api/crearSlider', [AdminController::class, 'crearSlider']);
+Route::post('/api/deleteSlider', [AdminController::class, 'deleteSlider']);
 
 //getimagen
 Route::get('/api/getImage/{fileName}', [ImagenController::class, 'getImage']);

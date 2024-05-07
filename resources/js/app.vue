@@ -40,3 +40,9 @@ export default {
   }
 };
 </script>
+
+<style>
+.grecaptcha-badge {
+    margin-bottom: 100px;
+}
+</style>

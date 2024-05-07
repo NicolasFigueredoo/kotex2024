@@ -11,6 +11,10 @@
                 <input type="text" class="form-control" id="orden" :value="this.orden">
             </div>
             <div class="mb-3">
+                <label class="form-label">nombre de categoria</label>
+                <input type="text" class="form-control" id="texto" :value="this.texto">
+            </div>
+            <div class="mb-3">
                 <label class="form-label">Imagen (Tamaño recomendado 600x288)</label>
                 <input type="file" ref="fotoCategoria" class="form-control" @change="guardarFoto()">
             </div>
@@ -38,7 +42,8 @@ export default {
         return {
             foto: null,
             categoria: null,
-            orden: null
+            orden: null,
+            texto: null
         }
 
     },
@@ -57,7 +62,8 @@ export default {
             axios.post('/api/updateCategoriaHome', {
                 idCategoria: this.idCategoria,
                 foto: this.foto,
-                orden: $('#orden').val()
+                orden: $('#orden').val(),
+                texto: $('#texto').val(),
             }
                 , {
                     headers: {
@@ -85,6 +91,8 @@ export default {
                 .then(response => {
                     this.categoria = response.data;
                     this.orden = this.categoria.orden
+                    this.texto = this.categoria.texto
+
                 })
                 .catch(error => {
                     console.error(error);

@@ -55,8 +55,10 @@ export default {
                 }
             })
                 .then(response => {
-                    console.log(this.file)
-                    console.log(response)
+                    this.$store.commit('setMostrarAlerta', true);
+                    this.$store.commit('setClaseAlerta', 1);
+                    this.$store.commit('setMensajeAlerta', 'Catalogo actualizado con éxito'); 
+                    this.obtenerCatalogo();
                     
                 })
                 .catch(error => {

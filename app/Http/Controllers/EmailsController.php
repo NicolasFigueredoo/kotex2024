@@ -16,8 +16,11 @@ class EmailsController extends Controller
     public function enviarCorreoContacto(Request $request){
 
 
-        $recaptcha = new ReCaptcha(config('services.recaptcha.secret'));
-        $response = $recaptcha->verify($request->input('recaptchaToken'), $request->ip());
+        $recaptchaSecret = $request->recaptchaSecret;
+        $recaptchaToken = $request->recaptchaToken;
+
+        $recaptcha = new ReCaptcha($recaptchaSecret);
+        $response = $recaptcha->verify($recaptchaToken, $request->ip());
 
         if ($response->isSuccess()) {
 
@@ -56,6 +59,14 @@ class EmailsController extends Controller
 
     public function enviarPresupuesto(Request $request){
 
+        $recaptchaSecret = $request->recaptchaSecret;
+        $recaptchaToken = $request->recaptchaToken;
+
+        $recaptcha = new ReCaptcha($recaptchaSecret);
+        $response = $recaptcha->verify($recaptchaToken, $request->ip());
+
+        if ($response->isSuccess()) {
+
         $nombre = $request->nombre;
         $apellido = $request->apellido;
         $celular = $request->celular;
@@ -68,6 +79,10 @@ class EmailsController extends Controller
         Mail::to($contacto->email)->send(new PresupuestoMail($nombre, $apellido,$email,$celular,$mensaje,$productos,$file));
 
         return response()->json(['message' => 'mensajes enviados'], 200);
+        }else{
+            return response()->json(['error' => 'El reCAPTCHA no se validó correctamente.']);
+
+        }
 
     }
 }
