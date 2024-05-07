@@ -44,20 +44,20 @@ export default {
         },
 
         updateCatalogo() {
-            axios.post('/api/updateCatalogo', {
-                file: this.file,
-                link: $('#link').val()
-            }, {
 
+            let formData = new FormData(); 
+            formData.append('file', this.file);
+    
+            axios.post('/api/updateCatalogo', formData
+            , {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             })
                 .then(response => {
-                    this.$store.commit('setMostrarAlerta', true);
-                    this.$store.commit('setClaseAlerta', 1);
-                    this.$store.commit('setMensajeAlerta', 'Catalogo actualizado con éxito');
-                    this.obtenerCatalogo();
+                    console.log(this.file)
+                    console.log(response)
+                    
                 })
                 .catch(error => {
                     console.error(error);

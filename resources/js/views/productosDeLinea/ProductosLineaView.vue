@@ -1,8 +1,8 @@
 <template>
-  <div class="ProductosLinea-view">
-    <div class="indicador">
-      <p v-if="nombreProducto">{{`Inicio > Productos de línea > ${nombreProducto}`}}</p>
-      <p v-else>Inicio > Productos de línea</p>
+  <div class="container ProductosLinea-view">
+    <div class="indicador" style="margin-left: 0px;">
+      <p v-if="nombreProducto"><b>Inicio >  Productos de línea ></b> {{nombreProducto}}</p>
+      <p v-else><b>Inicio > </b>Productos de línea</p>
     </div>
 
     <ProductosLinea v-if="!idProducto" @ver-producto="mostrarProducto"/>
@@ -47,7 +47,6 @@ export default {
 .indicador{
   color: black;
   margin-top: 10px;
-  margin-left: 17%;
   font-size: 15px;
   font-weight: 500;
   font-family: "Montserrat", sans-serif;

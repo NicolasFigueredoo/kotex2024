@@ -61,9 +61,7 @@ export default {
 .productoslinea {
   display: flex;
   justify-content: left;
-  margin-left: 16.2%;
   margin-right: auto;
-  width: 69%;
   margin-bottom: 100px;
 }
 .nombre{
@@ -81,8 +79,6 @@ export default {
   color: #33447F;
   line-height: 17px;
   margin-top: 20px;
-  margin-left: 10px;
-
 }
 
 

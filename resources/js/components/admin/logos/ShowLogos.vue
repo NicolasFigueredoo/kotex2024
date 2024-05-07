@@ -8,11 +8,11 @@
         <form class="mt-3">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="form-label">LOGO NAVBAR</label>
+                    <label class="form-label">LOGO NAVBAR (Tamaño recomendado 245x92)</label>
                     <input type="file" class="form-control" ref="img1" @change="guardarFotoNavbar()">
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label">LOGO FOOTER</label>
+                    <label class="form-label">LOGO FOOTER (Tamaño recomendado 245x92)</label>
                     <input type="file" class="form-control" ref="img2" @change="guardarFotoFooter()">
                 </div>
             </div>

@@ -15,7 +15,7 @@
                 <input type="text" class="form-control"  v-model="this.nombre"> 
             </div>
             <div class="mb-3">
-                <label class="form-label">Imagen</label>
+                <label class="form-label">Imagen (Tamaño recomendado 220x223)</label>
                 <input type="file" ref="fotoAplicacion" class="form-control" @change="guardarFoto()">
             </div>
 

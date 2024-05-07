@@ -1,8 +1,8 @@
 <template>
     <div>
-      <div class="aplicacionesDiv">
-        <div class="aplicaciones" >
-          <div  v-for="aplicacion in aplicaciones" :key="aplicacion.id">
+      <div class="container aplicacionesDiv">
+        <div class="row d-flex aplicaciones" >
+          <div  v-for="aplicacion in aplicaciones" :key="aplicacion.id" class="col-lg-2">
             <div class="aplicacion" @click="verAplicacion(aplicacion.id, aplicacion.nombre)"> 
               <img :src="getImagen(aplicacion.imagen)"  alt="imagen" class="imgAplicacion" >
               <p class="nombre">{{ (aplicacion.nombre).toUpperCase() }}</p>
@@ -52,15 +52,7 @@
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
   
   
-.aplicacionesDiv{
-  display: flex;
-  justify-content: left;
-  margin-left: 16.8%;
-  margin-right: auto;
-  width: 75%;
-  margin-bottom: 100px;
 
-}
 .nombre{
   text-align: center;
   font-size: 19px;
@@ -77,24 +69,23 @@
 }
 
 .aplicacion img{
-  width: 285px;
-  height: 273px;
+  width: 220px;
+  height: 223px;
   cursor: pointer;
 }
 .aplicacion img:hover{
-  width: 300px;
-  height: 298px;
+  width: 255px;
+  height: 243px;
   transition: 0.5s;
   filter: grayscale(50%);
 
 }
 .aplicacion{
-  margin-top: 50px;
-  width: 288px;
-  height: 410px;
+  width: 220px;
+  height: 223px;
   background-color: white;
   color: #33447F;
-  margin-right: 43px;
+  margin-bottom: 100px;
 
 }  
   </style>

@@ -4,7 +4,7 @@
             <div class="imgMinis">
                 <div>
                     <img v-if="this.producto" :src="getImagen(this.producto.imagen)" alt="" ref="imgMiniUno" @click="imagenClick(1, this.producto.imagen)"
-                        style="cursor: pointer;" />
+                        style="cursor: pointer; border: 2px solid rgba(51, 68, 127, 1);" />
                 </div>
                 <div>
                     <img v-if="this.producto" :src="getImagen(this.producto.imagen2)" alt="" ref="imgMiniDos"
@@ -12,7 +12,7 @@
                 </div>
             </div>
 
-            <div id="divP" class="d-flex">
+            <div id="divP" class="d-flex mt-2">
 
             <div class="contenedor-imagen">
                 <img id="imgP" v-if="this.producto" :src="getImagen(this.producto.imagen)" ref="imgenPrincipal" alt="" />
@@ -25,15 +25,15 @@
                     <p>{{ nombreProducto.charAt(0).toUpperCase() + nombreProducto.slice(1) }}</p>
                 </div>
                 <div class="material">
-                    <span>Material</span>
+                    <span>Material:</span>
                     <p>{{ this.producto.material }}</p>
                 </div>
                 <div class="tipo">
-                    <span>Tipo</span>
+                    <span>Tipo:</span>
                     <p>{{ this.producto.tipo }}</p>
                 </div>
                 <div class="aplicaciones">
-                    <p>Aplicaciones</p>
+                    <p>Aplicaciones:</p>
                     <div class="botonesAplicacion">
                         <div v-for="aplicacion in aplicaciones" :key="aplicacion.id">
                             <div>
@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="medidas">
-                    <p>Medidas</p>
+                    <p>Medidas:</p>
                     <div class="botonesMedidas">
                         <div v-for="medida in medidas" :key="medida.id">
                             <div>
@@ -63,7 +63,7 @@
 
     <div class="container">
         <div class="tabla table-responsive">
-            <p>Presupuesto</p>
+            <p class="presupuestoText">Presupuesto</p>
             <table class="table">
                 <thead style="height: 40px">
                     <tr>
@@ -187,7 +187,7 @@
 
         <div class="container" style="padding-top: 80px; padding-bottom:100px">
   <div>
-      <p class="titleServicio">Productos destacados</p>
+      <p class="titleServicio">Productos relacionados</p>
   </div>
 
   <div id="carouselProductos" class="carousel slide" data-bs-ride="carousel">
@@ -210,7 +210,7 @@
 
 
   
-  <div class="justify-content-center carousel-indicators carousel-slider" style="bottom:-80px">
+  <div class="justify-content-center carousel-indicators carousel-slider" style="bottom: -50px">
         <button v-for="(grupo, index) in productosRelacionados.slice(0,3)" type="button" :key="index" data-bs-target="#carouselProductos" :data-bs-slide-to="index" :class="{ 'active': index === 0 }" aria-label="Slide {{ index + 1 }}"></button>
     
         <!-- Agrega más botones según la cantidad de grupos de productos -->
@@ -538,14 +538,60 @@ export default {
 </script>
 
 <style scoped>
+
+#carouselExampleIndicators{
+  height: 614px;
+}
+
+.carousel-slider .active {
+    opacity: 1;
+    height: 7px;
+    width: 35px;
+    background-color: #939393;
+
+}
+
+.carousel-slider button {
+    opacity: 1;
+    height: 7px;
+    width: 35px;
+    background-color: #939393;
+    opacity: 50%;
+
+}
+.carousel-slider {
+ bottom: -370px;
+ height: 10px;
+ margin-bottom: 0;
+ margin-left: 0;
+ margin-right: 0;
+}
+
+
+.carousel-control-prev,
+.carousel-control-next {
+  display: none; 
+}
+
+.carousel-inner{
+  gap: 0px;
+  opacity: 0px;
+}
+
+
+.carousel-item img {
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+
+
 .informacionProducto {
     display: flex;
-    margin-left: 17%;
 }
 
 .textos {
     width: 600px;
-    margin-left: 20px;
     margin-top: 20px;
 }
 
@@ -805,7 +851,20 @@ export default {
     width: 60px;
 }
 
+.titleServicio{
+  font-size: 28px;
+  font-weight: 500;
+  text-align: left;
+  font-family: "Montserrat", sans-serif;
 
+}
+
+.presupuestoText{
+    font-size: 28px;
+  font-weight: 500;
+  text-align: left;
+  font-family: "Montserrat", sans-serif;
+}
 
 .productosDestacados {
     height: 800px;
@@ -816,7 +875,6 @@ export default {
     font-weight: 600;
     text-align: left;
     font-family: "Montserrat", sans-serif;
-    margin-left: 17%;
     padding-top: 70px;
 }
 
@@ -843,7 +901,7 @@ export default {
 .producto {
     cursor: pointer;
     width: 288px;
-    height: 500px;
+    height: 411px;
     background-color: white;
     color: #33447F;
     border-bottom: 1px solid rgba(147, 147, 147, 0.3);
@@ -966,6 +1024,13 @@ export default {
 
     .textos{
         width: 100px;
+    }
+
+  }
+
+  @media only screen and  (max-width: 350px){
+    .informacionProducto{
+        flex-direction: column;
     }
 
   }

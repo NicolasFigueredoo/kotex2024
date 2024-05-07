@@ -97,7 +97,8 @@
                   <a class="nav-link" href="#">
                     <div class="d-flex align-items-center">
                       <router-link class="route" to="/nosotros"
-                        :style="{ fontWeight: isRouteActive('/nosotros') ? 'bold' : '500' }">Nosotros</router-link>
+                        :style="{ fontWeight: isRouteActive('/nosotros') ? 'bold' : '500' }"><p class="textoR">Nosotros</p>
+                      </router-link>
                     </div>
                   </a>
                 </li>
@@ -106,8 +107,9 @@
                   <a class="nav-link" href="#">
                     <div class="d-flex align-items-center">
                       <router-link class="route" to="/productosdelinea" @click="deleteProduct()"
-                        :style="{ fontWeight: isRouteActive('/productosdelinea') ? 'bold' : '500' }">Productos de
-                        línea</router-link>
+                        :style="{ fontWeight: isRouteActive('/productosdelinea') ? 'bold' : '500' }">
+                        <p class="textoR">Productos de línea</p>
+                        </router-link>
                     </div>
                   </a>
                 </li>
@@ -116,8 +118,9 @@
                   <a class="nav-link" href="#">
                     <div class="d-flex align-items-center">
                       <router-link class="route" to="/productosespeciales" @click="deleteProduct()"
-                        :style="{ fontWeight: isRouteActive('/productosespeciales') ? 'bold' : '500' }">Productos
-                        Especiales</router-link>
+                        :style="{ fontWeight: isRouteActive('/productosespeciales') ? 'bold' : '500' }">
+                        <p class="textoR">Productos Especiales</p>
+                      </router-link>
                     </div>
                   </a>
                 </li>
@@ -126,7 +129,10 @@
                   <a class="nav-link" href="#">
                     <div class="d-flex align-items-center">
                       <router-link class="route" to="/catalogo"
-                        :style="{ fontWeight: isRouteActive('/catalogo') ? 'bold' : '500' }">Catálogo</router-link>
+                        :style="{ fontWeight: isRouteActive('/catalogo') ? 'bold' : '500' }">
+                        <p class="textoR">Catálogo</p>
+
+                        </router-link>
                     </div>
                   </a>
                 </li>
@@ -135,7 +141,10 @@
                   <a class="nav-link" href="#">
                     <div class="d-flex align-items-center">
                       <router-link class="route" to="/aplicaciones"
-                        :style="{ fontWeight: isRouteActive('/aplicaciones') ? 'bold' : '500' }">Aplicaciones</router-link>
+                        :style="{ fontWeight: isRouteActive('/aplicaciones') ? 'bold' : '500' }">
+                        <p class="textoR">Aplicaciones</p>
+
+                        </router-link>
                     </div>
                   </a>
                 </li>
@@ -144,7 +153,10 @@
                   <a class="nav-link" href="#">
                     <div class="d-flex align-items-center">
                       <router-link class="route" to="/presupuesto"
-                        :style="{ fontWeight: isRouteActive('/presupuesto') ? 'bold' : '500' }">Presupuesto</router-link>
+                        :style="{ fontWeight: isRouteActive('/presupuesto') ? 'bold' : '500' }">
+                        <p class="textoR">Presupuesto</p>
+
+                        </router-link>
                     </div>
                   </a>
                 </li>
@@ -153,7 +165,10 @@
                   <a class="nav-link" href="#">
                     <div class="d-flex align-items-center">
                       <router-link class="route" to="/contacto"
-                        :style="{ fontWeight: isRouteActive('/contacto') ? 'bold' : '500' }">Contacto</router-link>
+                        :style="{ fontWeight: isRouteActive('/contacto') ? 'bold' : '500' }">
+                        <p class="textoR">Contacto</p>
+
+                        </router-link>
                     </div>
                   </a>
                 </li>
@@ -267,8 +282,9 @@ export default {
           this.instagram = response.data[0].instagram
 
           const trimmedText = this.whatsapp.trim();
-          const textWithoutSpaces = trimmedText.replace(/\s/g, '');
-          this.whatsappLink = textWithoutSpaces
+          const textWithoutSpacesAndHyphens = trimmedText.replace(/[\s-]/g, '');
+          this.whatsappLink = textWithoutSpacesAndHyphens;
+
 
 
         })
@@ -461,6 +477,10 @@ export default {
 .logoNavbar{
   width: 245px;
   height: 92px
+}
+
+.textoR:hover{
+  font-weight: 600;
 }
 
 @media only screen and (max-width: 1000px) {

@@ -1,8 +1,8 @@
 <template>
     <div class="Aplicaciones-view">
 
-      <div v-if="!idAplicacion" class="indicador">
-        <p>Inicio > Aplicaciones</p>
+      <div v-if="!idAplicacion" class="container indicador">
+        <p><b>Inicio > </b>Aplicaciones</p>
       </div>
   
       <Aplicaciones v-if="!idAplicacion"  @ver-aplicacion="mostrarProductosAplicaciones"/>
@@ -44,7 +44,6 @@
   .indicador{
     color: black;
     margin-top: 10px;
-    margin-left: 17%;
     font-size: 15px;
     font-weight: 500;
     font-family: "Montserrat", sans-serif;

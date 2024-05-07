@@ -22,7 +22,7 @@
    
 
       <div  class="carousel-inner" >
-        <div v-for="slider in sliders" :key="slider.id" :class="['carousel-item', { 'active': slider.orden === 'aa'}]" >
+        <div v-for="(slider,index) in sliders" :key="slider.id" :class="['carousel-item', { 'active': index === 0}]" >
           <div class="degradado"></div>
           <img :src="getImagen(slider.imagen)" class="d-block" loading="lazy" alt="..." style="background-size: contain; background-position: center; height: 800px;"   >
         </div>
@@ -101,7 +101,7 @@
     <div v-for="(grupo, index) in Math.ceil(productos.length / 4)" :key="index" :class="['carousel-item', index === 0 ? 'active' : '']">
       <div class="row">
         <div v-for="(producto, innerIndex) in productos.slice(index * 4, (index + 1) * 4)" :key="producto.id_producto" class="col-lg-3">
-          <div class="producto"> 
+          <div class="producto" @click="verProducto(producto.id_producto)"> 
             <div>
               <img :src="getImagen(producto.imagen)" alt="imagen" loading="lazy">
             </div>

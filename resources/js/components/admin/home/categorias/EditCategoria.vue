@@ -11,7 +11,7 @@
                 <input type="text" class="form-control" id="orden" :value="this.orden">
             </div>
             <div class="mb-3">
-                <label class="form-label">Imagen</label>
+                <label class="form-label">Imagen (Tamaño recomendado 600x288)</label>
                 <input type="file" ref="fotoCategoria" class="form-control" @change="guardarFoto()">
             </div>
             <div class="w-100 d-flex justify-content-end">

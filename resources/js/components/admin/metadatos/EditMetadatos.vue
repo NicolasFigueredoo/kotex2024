@@ -11,7 +11,7 @@
                 <input type="text" class="form-control" :value="this.metadato.seccion">
             </div>
             <div class="mb-3">
-                <label class="form-label">Keyswords</label>
+                <label class="form-label">Keyword</label>
                 <div class="form-floating">
                     <textarea class="form-control" placeholder="Leave a comment here" :value="this.metadato.claves" id="floatingTextarea" style="height: 300px; "></textarea>
                 </div>

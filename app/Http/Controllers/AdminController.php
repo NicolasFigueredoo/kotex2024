@@ -249,20 +249,19 @@ class AdminController extends Controller
     }
 
     public function updateCatalogo(Request $request){
-        $catalogo = Catalogo::first();
+
+
+
+        
         if ($request->hasFile('file')) {
           
-            if (!Storage::exists('public/fotos')) {
-                Storage::makeDirectory('public/fotos');
-            }
-        
-            $photoPath = $request->file('file')->store('fotos');
-            $catalogo->file = $photoPath;
-        }
-        $catalogo->link = $request->link;
-        $catalogo->save();
+            return response()->json('entro');
 
-        return response()->json($catalogo);
+        }else{
+            return response()->json($request);
+
+        }
+        
     }
 
     //METADATOS

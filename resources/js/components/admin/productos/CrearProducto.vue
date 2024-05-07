@@ -57,11 +57,11 @@
 
             <div class="row mt-2">
                 <div class="col-md-6">
-                    <label class="form-label">Imagen</label>
+                    <label class="form-label">Imagen (Tamaño recomendado 285x273)</label>
                     <input @change="guardarFoto()" type="file" ref="fotoProduct" class="form-control" id="imagen">
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label mt-2">Imagen 2</label>
+                    <label class="form-label mt-2">Imagen secundaria (Tamaño recomendado 285x273)</label>
                     <input @change="guardarFoto2()" type="file" ref="fotoProduct2" class="form-control" id="imagen">
                 </div>
 
@@ -111,7 +111,7 @@
 
             </div>
             <div class="w-100 d-flex justify-content-end">
-                <button @click="crearProducto()" type="submit" class="btn mt-3"
+                <button @click="crearProducto()" type="button" class="btn mt-3"
                     style="background-color: rgb(52, 68, 127); color: white;">Crear</button>
             </div>
 

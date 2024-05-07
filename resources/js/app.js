@@ -2,6 +2,7 @@ import { createApp } from 'vue';
 import App from './app.vue';
 import router from './router/index.js';
 import store from './store/store.js';
+import VueRecaptcha from 'vue-recaptcha-v3';
 
 
 
@@ -27,5 +28,12 @@ const app = createApp(App);
 app.component('font-awesome-icon', FontAwesomeIcon)
 app.use(router);
 app.use(store);
+app.use(VueRecaptcha, {
+    siteKey: '6LeJzdQpAAAAAI3K6I4CjWYz0c0dRO3K3GOfqBpc',
+    loaderOptions: {
+      useRecaptchaNet: true,
+      autoHideBadge: true
+    }
+  });
 app.mount('#app'); 
 

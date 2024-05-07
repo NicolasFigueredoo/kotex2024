@@ -25,6 +25,8 @@
         "summernote": "^0.8.20",
         "vue": "^3.4.23",
         "vue-axios": "^2.1.5",
+        "vue-recaptcha": "^3.0.0-alpha.6",
+        "vue-recaptcha-v3": "^2.0.1",
         "vue-router": "^4.0.13",
         "vue3-carousel": "^0.3.1",
         "vuex": "^4.1.0"

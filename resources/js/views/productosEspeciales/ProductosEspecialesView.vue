@@ -1,8 +1,8 @@
 <template>
   <div class="productosEspeciales-view">
     <div class="indicador">
-      <p v-if="nombreProducto">{{`Inicio > Productos Especiales > ${nombreProducto}`}}</p>
-      <p v-else>Inicio > Productos Especiales</p>
+      <p v-if="nombreProducto"><b> Inicio > Productos Especiales ></b> {{nombreProducto}}</p>
+      <p v-else><b>Inicio > </b>Productos Especiales</p>
     </div>
 
     <ProductosEspeciales v-if="!idProducto" @ver-producto="mostrarProducto"/>

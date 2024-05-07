@@ -9,10 +9,17 @@ use App\Models\Contacto;
 use App\Models\Suscripcion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use ReCaptcha\ReCaptcha;
 
 class EmailsController extends Controller
 {
     public function enviarCorreoContacto(Request $request){
+
+
+        $recaptcha = new ReCaptcha(config('services.recaptcha.secret'));
+        $response = $recaptcha->verify($request->input('recaptchaToken'), $request->ip());
+
+        if ($response->isSuccess()) {
 
         $nombre = $request->nombre;
         $apellido = $request->apellido;
@@ -23,9 +30,14 @@ class EmailsController extends Controller
         $contacto = Contacto::first();
 
         Mail::to($contacto->email)->send(new ContactoMail($nombre, $apellido, $email,$celular,$mensaje));
+        return response()->json(['message' => 'mensajes enviados'], 200);
+
+    }
+    else{
+        return response()->json(['error' => 'El reCAPTCHA no se validó correctamente.']);
+    }
         
 
-        return response()->json(['message' => 'mensajes enviados'], 200);
 
     }
     public function enviarMensajeSub(Request $request){

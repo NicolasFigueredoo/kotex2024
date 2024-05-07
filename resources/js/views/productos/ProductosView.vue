@@ -1,8 +1,8 @@
 <template>
     <div>
       <div class="indicador">
-      <p v-if="nombreProducto">{{`Inicio > Aplicaciones > ${nombreAplicacion} > ${nombreProducto}`}}</p>
-      <p v-else>{{`Inicio > Aplicaciones > ${nombreAplicacion}`}}</p>
+      <p v-if="nombreProducto"><b>Inicio > Aplicaciones > {{nombreAplicacion}} </b> > {{nombreProducto}}</p>
+      <p v-else><b>Inicio > Aplicaciones > </b>{{nombreAplicacion}}</p>
 
     </div>
 

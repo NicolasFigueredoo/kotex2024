@@ -237,27 +237,25 @@ class VariacionesController extends Controller
 
     public function obtenerProductosIdAplicacion($aplicacionId){
        
+        $variaciones = Variacion::select('productos.nombre as nombre_producto', 
+        'variaciones.imagen',
+        DB::raw('MIN(categorias.nombre) as nombre_categoria'), 'v.id as id_producto')
+        ->join('variacion_categoria as vc', 'variaciones.id', '=', 'vc.variacion_id')
+        ->join('categorias', 'vc.categoria_id', '=', 'categorias.id')
+        ->join('productos', 'variaciones.producto_id', '=', 'productos.id')
+        ->join('variacion_aplicacion', 'variaciones.id', '=', 'variacion_aplicacion.variacion_id')
+        ->join(DB::raw('(SELECT MIN(id) as id FROM variaciones GROUP BY producto_id) as v'), function ($join) {
+            $join->on('variaciones.id', '=', 'v.id');
+        })
+        ->where('variacion_aplicacion.aplicacion_id', $aplicacionId)
+        ->groupBy('productos.nombre', 'v.id','variaciones.imagen',        )
+        ->get();
 
-        $variaciones = Variacion::select(
-            'productos.nombre as nombre_producto',
-            'categorias.nombre as nombre_categoria',
-            'variaciones.imagen',
-            DB::raw('MIN(variaciones.id) as id_producto')
-        )
-            ->join('variacion_categoria', 'variaciones.id', '=', 'variacion_categoria.variacion_id')
-            ->join('categorias', 'variacion_categoria.categoria_id', '=', 'categorias.id')
-            ->join('productos', 'variaciones.producto_id', '=', 'productos.id')
-            ->join('variacion_aplicacion', 'variaciones.id', '=', 'variacion_aplicacion.variacion_id')
-            ->where('variacion_aplicacion.aplicacion_id', $aplicacionId)
-            ->where('variacion_categoria.categoria_id','!=', 3)
-            ->groupBy('productos.nombre', 'categorias.nombre','variaciones.imagen')
-            ->get();
-            return $variaciones;
+        return $variaciones;
+
     }
 
     public function crearProducto(Request $request){
-
-    
 
         $variacion = new Variacion();
         $variacion->orden = $request->orden;
@@ -390,6 +388,35 @@ class VariacionesController extends Controller
         }
 
         $variacion->save();
+
+        $variaciones = Variacion::all();
+        
+        foreach ($variaciones as $variacionF) {
+
+
+            if($variacionF->producto_id == $variacion->producto_id ){
+
+                if ($request->hasFile('imagen')) {
+                    if (!Storage::exists('public/fotos')) {
+                        Storage::makeDirectory('public/fotos');
+                    }
+                    $photoPath = $request->file('imagen')->store('fotos');
+                    $variacionF->imagen = $photoPath;
+                }
+    
+                if ($request->hasFile('imagen2')) {
+                    if (!Storage::exists('public/fotos')) {
+                        Storage::makeDirectory('public/fotos');
+                    }
+                    $photoPath = $request->file('imagen2')->store('fotos');
+                    $variacionF->imagen2 = $photoPath;
+                }
+    
+                $variacionF->save();
+            }
+
+            
+        }
 
         $variacion->aplicaciones()->detach();
 

@@ -1,7 +1,7 @@
 <template>
   <div class="presupuestoDiv">
     <div class="container indicador">
-      <p>Inicio > Presupuesto</p>
+      <p><b> Inicio ></b> Presupuesto</p>
     </div>
 
     <div class="container">
@@ -20,7 +20,7 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="row" style="margin-top: 20px;">
           <div class="col-md-6">
             <span>Email*</span>
             <input class="form-control" id="email" type="text">
@@ -101,9 +101,9 @@
 
         <div class="d-flex justify-content-end">
           <button @click="enviarPresupuesto()" id="presupuesto" type="button" style="border-radius: 0%;" class="btn btn-primary">ENVIAR PRESUPUESTO</button>
-          <div id="mensajePresupuesto">
+        </div>
+        <div id="mensajePresupuesto">
 
-          </div>
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@
     <div class="container d-flex">
 
     <div class="justify-content-start indicador" style="margin-left: 0%">
-      <p>Inicio > Catalogo</p>
+      <p><b>Inicio ></b> Catalogo </p>
     </div>
     </div>
     <div class="container">

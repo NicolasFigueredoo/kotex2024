@@ -72,6 +72,7 @@
                 <div class="col-lg-6">
                   <div style="margin-top: 20px;">
                     <p>*Datos Obligatorios</p>
+                    <vue-recaptcha ref="recaptcha" action="nombre_de_la_acción"></vue-recaptcha>
                   </div>
                   <div>
                     <button id="enviarContacto" type="button" style="border-radius: 0%; width: 100%"
@@ -129,27 +130,29 @@ export default {
     },
     enviarCorreo() {
 
+      this.$refs.recaptcha.execute().then(token => {
+    if (!this.nombre || !this.apellido || !this.email) {
+      $('#mensajePresupuesto').html('<p class="text-danger">Presupuesto fallido faltan rellenar campos obligatorios</p>')
+    } else {
+      $('#mensajePresupuesto').html('<p class="text-success">Enviando..</p>')
 
-      if (!this.nombre || !this.apellido || !this.email) {
-        $('#mensajePresupuesto').html('<p class="text-danger">Presupuesto fallido faltan rellenar campos obligatorios</p>')
-      } else {
-        $('#mensajePresupuesto').html('<p class="text-success">Enviando..</p>')
-
-        axios.post('/enviarCorreo', {
-          nombre: this.nombre,
-          apellido: this.apellido,
-          email: this.email,
-          celular: this.celular,
-          mensaje: this.mensaje
+      axios.post('/enviarCorreo', {
+        nombre: this.nombre,
+        apellido: this.apellido,
+        email: this.email,
+        celular: this.celular,
+        mensaje: this.mensaje,
+        recaptchaToken: token 
+      })
+        .then(response => {
+          $('#mensajePresupuesto').html('<p class="text-success">Presupuesto enviado correctamente</p>')
         })
-          .then(response => {
-            $('#mensajePresupuesto').html('<p class="text-success">Presupuesto enviado correctamente</p>')
-          })
-          .catch(error => {
-            $('#mensajePresupuesto').html('<p class="text-danger">Presupuesto fallido revisar campos</p>')
-          });
-      }
+        .catch(error => {
+          $('#mensajePresupuesto').html('<p class="text-danger">Presupuesto fallido revisar campos</p>')
+        });
     }
+  });
+  },
   },
   mounted() {
     this.obtenerContacto()
@@ -222,6 +225,7 @@ export default {
 
 .iconContacto:hover {
   transform: scale(1.2);
+  transition: 0.50s;
 }
 
 
