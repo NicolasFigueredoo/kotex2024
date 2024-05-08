@@ -4,20 +4,35 @@
             <p><b>Inicio > </b> Empresa</p>
         </div>
         <div v-for="(slider, index) in sliders" :key="slider.id">
-            <div  class="textoImg">
-            <div v-if="index === 0" v-html="this.sliders[0].texto" class="textoS"></div>
+            <div class="textoImg">
+                <div v-if="index === 0" v-html="this.sliders[0].texto" class="textoS"></div>
             </div>
         </div>
 
         <div id="carouselExampleIndicators" class="carousel slide">
             <div class="carousel-indicators">
-                <button type="button" v-for="(slider, index) in sliders" :key="slider.id" @click="setCurrentSlider(slider.texto, index)" :class="{ active: index === 0 }" data-bs-target="#carouselExampleIndicators" :data-bs-slide-to="index" aria-label="Slide {{ index + 1 }}"></button>
+                <button type="button" v-for="(slider, index) in sliders" :key="slider.id"
+                    @click="setCurrentSlider(slider.texto, index)" :class="{ active: index === 0 }"
+                    data-bs-target="#carouselExampleIndicators" :data-bs-slide-to="index"
+                    aria-label="Slide {{ index + 1 }}"></button>
 
             </div>
             <div class="carousel-inner">
-                <div v-for="(slider,index) in sliders" :key="slider.id" :class="['carousel-item', { 'active': index === 0}]" style="height: 100%;" >
-                    <div class="degradado"></div>
-                    <img :src="getImagen(slider.imagen)"  class="d-block w-100" alt="..." style=" width: 100%;height: 100%; object-fit: cover;" >                </div>
+                <div v-for="(slider, index) in sliders" :key="slider.id" :class="['carousel-item', { 'active': index === 0 }]" style="height: 100%;">
+                    <div v-if="isImage(slider.imagen)">
+                        <div class="degradado"></div>
+                        <img :src="getImagen(slider.imagen)" class="d-block w-100" alt="..." style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+
+                <div v-else>
+                    <video class="d-block w-100" style="width: 100%; height: 100%; object-fit: cover;" controls autoplay muted>
+                        <source :src="getImagen(slider.imagen)" type="video/mp4">
+                        Tu navegador no soporta la etiqueta de video.
+                    </video>
+                </div>
+
+
+                </div>
             </div>
         </div>
 
@@ -28,29 +43,29 @@
                     <div class="infotext">
                         <div class="text" v-html="this.banner.texto"></div>
                     </div>
-    
+
                 </div>
                 <div class="col-lg-6 imgInfo">
-                    <img :src="getImagen(this.imagenBanner)" alt="" style="width: 597px; height:568px" >
+                    <img :src="getImagen(this.imagenBanner)" alt="" style="width: 597px; height:568px">
                 </div>
             </div>
 
 
         </div>
         <div class="container-fluid textoElegirnos  w-100">
-            <div class="container" >
+            <div class="container">
 
-            <div>
-                <p class="titulo2">¿Porque elegirnos?</p>
-            </div>
-            <div class="row d-flex tarjetas">
-                <div v-for="seccion in secciones" :key="seccion.id" class="col-lg-3 m-2 tarjeta">
-                    <div class="iconNosotros" v-html="seccion.icono"></div>
-                    <p class="textoIcon">{{ seccion.titulo }}</p>
-                    <div  class="infoIcon w-100" v-html="seccion.texto"> </div>
+                <div>
+                    <p class="titulo2">¿Porque elegirnos?</p>
+                </div>
+                <div class="row d-flex tarjetas">
+                    <div v-for="seccion in secciones" :key="seccion.id" class="col-lg-3 m-2 tarjeta">
+                        <div class="iconNosotros" v-html="seccion.icono"></div>
+                        <p class="textoIcon">{{ seccion.titulo }}</p>
+                        <div class="infoIcon w-100" v-html="seccion.texto"> </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
         </div>
 
@@ -66,21 +81,30 @@ import 'bootstrap';
 
 export default {
     name: 'Nosotros',
-    data(){
-        return{
+    data() {
+        return {
             sliders: [],
-            imagenBanner:'',
-            banner:[],
+            imagenBanner: '',
+            banner: [],
             secciones: []
 
         }
     },
     methods: {
+
+        isImage(url) {
+            if(url){
+
+                const extension = url.split('.').pop().toLowerCase();
+    
+                return ['jpg', 'jpeg', 'png', 'gif'].includes(extension);
+            }
+        },
         setCurrentSlider(texto, index) {
-      $('.textoSlider').html(texto);
-      $('.carousel-indicators button').removeClass('active');
-      $('.carousel-indicators button[data-bs-slide-to="' + index + '"]').addClass('active');
-  },
+            $('.textoS').html(texto);
+            $('.carousel-indicators button').removeClass('active');
+            $('.carousel-indicators button[data-bs-slide-to="' + index + '"]').addClass('active');
+        },
         obtenerSliders() {
             axios.get('/api/obtenerSliders')
                 .then(response => {
@@ -91,7 +115,7 @@ export default {
                     console.error(error);
                 });
         },
-        obtenerBannerInformacion(){
+        obtenerBannerInformacion() {
             axios.get(`/api/obtenerBanners`)
                 .then(response => {
                     this.banner = response.data[1];
@@ -111,17 +135,17 @@ export default {
                 });
         },
         getImagen(fileName) {
-            if(fileName){
+            if (fileName) {
                 const filePath = fileName.split('/').pop();
                 return '/api/getImage/' + filePath
             }
         }
 
     },
-    mounted(){
+    mounted() {
         this.obtenerSliders();
         this.obtenerBannerInformacion();
-        this.obtenerSecciones() 
+        this.obtenerSecciones()
     }
 }
 </script>
@@ -213,11 +237,11 @@ export default {
 
 .titulo {
     color: #000;
-font-family: Montserrat;
-font-size: 35px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
+    font-family: Montserrat;
+    font-size: 35px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
     margin-top: 60px;
 }
 
@@ -285,41 +309,33 @@ line-height: normal;
     height: 500px;
 }
 
-.degradado{
-  position: absolute;
+.degradado {
+    position: absolute;
     top: 0;
     left: 0;
-    width: 50%; 
+    width: 50%;
     height: 100%;
-    background: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,100)); 
+    background: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 100));
 }
 
 
 @media only screen and (max-width: 1000px) {
-   .tarjeta{
-    margin-top: 20px;
+    .tarjeta {
+        margin-top: 20px;
+    }
 }
-} 
 
 @media only screen and (max-width: 780px) {
-    .imgInfo{
+    .imgInfo {
         width: 400px;
     }
 
 }
 
 @media only screen and (max-width: 400px) {
-    .imgInfo{
+    .imgInfo {
         width: 250px;
         height: 250px;
     }
 }
-
-
-
-
-
-
-
-
 </style>

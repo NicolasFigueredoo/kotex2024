@@ -24,9 +24,19 @@
 
       <div class="carousel-inner">
         <div v-for="(slider, index) in sliders" :key="slider.id" :class="['carousel-item', { 'active': index === 0 }]">
+          <div v-if="isImage(slider.imagen)">
+
           <div class="degradado"></div>
           <img :src="getImagen(slider.imagen)" class="d-block" loading="lazy" alt="..."
             style="background-size: contain; background-position: center; height: 800px;">
+          </div>
+          <div v-else>
+                    <video class="d-block w-100" style="width: 100%; height: 100%; object-fit: cover;" controls autoplay muted>
+                        <source :src="getImagen(slider.imagen)" type="video/mp4">
+                        Tu navegador no soporta la etiqueta de video.
+                    </video>
+                </div>
+
         </div>
       </div>
 
@@ -197,6 +207,14 @@ export default defineComponent({
   },
 
   methods: {
+    isImage(url) {
+            if(url){
+
+                const extension = url.split('.').pop().toLowerCase();
+    
+                return ['jpg', 'jpeg', 'png', 'gif'].includes(extension);
+            }
+        },
     obtenerCategoriasHomeP() {
 
       axios

@@ -13,7 +13,7 @@
                 <tr>
                     <th scope="col" class="col-sm-1 encabezado">Orden</th>
                     <th scope="col" class="encabezado">Texto</th>
-                    <th scope="col" class="col-sm-2 encabezado">Imagen</th>
+                    <th scope="col" class="col-sm-2 encabezado">Archivo</th>
                     <th scope="col" class="col-sm-1 encabezado">Acciones</th>
                 </tr>
             </thead>
@@ -23,7 +23,20 @@
                     <td>
                         <div v-html="slider.texto"></div>
                     </td>
-                    <th><img class="imagen" :src="getImagen(slider.imagen)" alt=""></th>
+                    <th>
+                        <template v-if="!isImage(slider.imagen)">
+
+                            <img class="imagen" :src="getImagen(slider.imagen)" alt="">
+
+                        </template>
+
+                        <template v-else>
+                            <p>Video</p>
+
+                        </template>
+                        
+                    
+                    </th>
                     <td>
                         <button type="button" class="btn btn-sm" style="background-color: rgb(52, 68, 127);"
                             @click="editarSlider(2, slider.id)">
@@ -70,6 +83,14 @@ export default {
         }
     },
     methods: {
+        isImage(url) {
+            if(url){
+
+                const extension = url.split('.').pop().toLowerCase();
+    
+                return ['mp4','mov'].includes(extension);
+            }
+        },
 
         eliminarSlider(idSlider){
         axios.post('/api/deleteSlider',{
