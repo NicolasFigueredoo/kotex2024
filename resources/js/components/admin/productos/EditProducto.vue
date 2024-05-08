@@ -34,13 +34,12 @@
                     <label class="form-label">Categorias</label>
                     <div class="d-flex mt-2">
 
-                        <div class="form-group form-check">
-                            <input type="checkbox" class="form-check-input" id="linea">
-                            <label class="form-check-label" for="checkbox1">Productos de linea</label>
-                        </div>
-                        <div class="form-group form-check" style="margin-left: 20px;">
-                            <input type="checkbox" class="form-check-input" id="especial">
-                            <label class="form-check-label" for="checkbox2">Productos especiales</label>
+                        <div v-for="categoria in categorias" :key="categoria.id">
+                            <div style="margin-left: 10px;">
+                                <input style="margin-right: 8px;" type="checkbox" class="form-check-input"
+                                    :id="categoria.valor">
+                                <label class="form-check-label" for="checkbox1">{{ categoria.texto }}</label>
+                            </div>
                         </div>
                         <div class="form-group form-check" style="margin-left: 20px;">
                             <input type="checkbox" class="form-check-input" id="destacado">
@@ -128,9 +127,9 @@ export default {
             orden: '',
             nombre: '',
             tipo: '',
-            medida:'',
+            medida: '',
             unidad: '',
-            material:'',
+            material: '',
             foto: null,
             producto: [],
             aplicacionProducto: [],
@@ -140,7 +139,9 @@ export default {
             fotoProducto2: null,
             productoLinea: null,
             productoEspecial: null,
-            productoDestacado: null
+            productoDestacado: null,
+            categorias: []
+
         }
     },
 
@@ -150,19 +151,30 @@ export default {
         },
     },
     methods: {
+        obtenerCategoriasHome() {
 
-        updateProducto(){
+            axios
+                .get("/api/obtenerCategoriasHome")
+                .then((response) => {
+                    this.categorias = response.data;
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+
+        },
+        updateProducto() {
             let linea = $('#linea').prop("checked");
             let especial = $('#especial').prop("checked");
             let destacado = $('#destacado').prop("checked");
 
-            if(linea === true){
+            if (linea === true) {
                 this.productoLinea = 1;
             }
-            if(especial === true){
+            if (especial === true) {
                 this.productoEspecial = 1;
             }
-            if(destacado === true){
+            if (destacado === true) {
                 this.productoDestacado = 1;
             }
 
@@ -172,9 +184,9 @@ export default {
                 nombre: $('#nombre').val(),
                 material: $('#material').val(),
                 tipo: $('#tipo').val(),
-                linea:   this.productoLinea,
-                especial:   this.productoEspecial,
-                destacado:   this.productoDestacado,
+                linea: this.productoLinea,
+                especial: this.productoEspecial,
+                destacado: this.productoDestacado,
                 color: $('#color').val(),
                 medida: $('#medida').val(),
                 imagen: this.fotoProducto,
@@ -182,19 +194,19 @@ export default {
                 unidad: $('#unidad').val(),
                 aplicaciones: this.aplicacionProducto
             },
-            {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-            }
-            }
-        
-        )
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
+
+            )
                 .then(response => {
                     this.$store.commit('setMostrarAlerta', true);
                     this.$store.commit('setClaseAlerta', 1);
-                    this.$store.commit('setMensajeAlerta', 'Producto actualizado con éxito');            
+                    this.$store.commit('setMensajeAlerta', 'Producto actualizado con éxito');
                     this.$store.commit('mostrarComponente', 25);
-     
+
                 })
                 .catch(error => {
                     console.error('Error ingresar Admin:', error);
@@ -209,7 +221,7 @@ export default {
             const file = this.$refs.fotoProduct2;
             this.fotoProducto2 = file.files[0]
         },
-        obtenerAplicaciones(){
+        obtenerAplicaciones() {
             axios.get('/api/aplicaciones')
                 .then(response => {
                     this.aplicaciones = response.data
@@ -218,12 +230,12 @@ export default {
                     console.error(error);
                 });
         },
-        deleteApp(id){
+        deleteApp(id) {
             this.aplicacionProducto = this.aplicacionProducto.filter(app => app.id !== id);
         },
         aplicacionSelect() {
             let app = this.aplicaciones.find(aplicacion => aplicacion.id == $('#aplicacionSelect').val());
-            let aplicacion = {id: app.id, nombre: app.nombre}
+            let aplicacion = { id: app.id, nombre: app.nombre }
             this.aplicacionProducto.push(aplicacion);
         },
         obtenerProducto() {
@@ -251,14 +263,14 @@ export default {
                             }
                         });
                     }, 100);
-                    
+
 
                     response.data[0].aplicaciones.forEach(element => {
-                        let aplicacion = {id: element.id, nombre: element.nombre}
+                        let aplicacion = { id: element.id, nombre: element.nombre }
                         this.aplicacionProducto.push(aplicacion);
 
-                        });
-                
+                    });
+
                 })
                 .catch(error => {
                     console.error(error);
@@ -266,6 +278,7 @@ export default {
         }
     },
     mounted() {
+        this.obtenerCategoriasHome();
         this.obtenerProducto()
         this.obtenerAplicaciones()
     }
@@ -279,20 +292,17 @@ export default {
     border-color: rgba(51, 68, 127, 1);
 }
 
-*{
-   font-size: 16px;
-  color: black;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 600;
+* {
+    font-size: 16px;
+    color: black;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
 }
 
-h1{
-  font-size: 28px;
-  color: black;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 700;
+h1 {
+    font-size: 28px;
+    color: black;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
 }
 </style>
-
-
-

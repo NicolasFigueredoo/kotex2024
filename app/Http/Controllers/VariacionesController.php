@@ -48,7 +48,7 @@ class VariacionesController extends Controller
         ->join('variacion_categoria', 'variaciones.id', '=', 'variacion_categoria.variacion_id')
         ->join('categorias', 'variacion_categoria.categoria_id', '=', 'categorias.id')
         ->join('productos', 'variaciones.producto_id', '=', 'productos.id')
-        ->where('categorias.nombre', 'Productos de linea')
+        ->where('categorias.id', 1)
         ->whereIn('variaciones.id', function ($query) {
             $query->select(DB::raw('MIN(variaciones.id)'))
                   ->from('variaciones')
@@ -70,7 +70,7 @@ class VariacionesController extends Controller
         ->join('variacion_categoria', 'variaciones.id', '=', 'variacion_categoria.variacion_id')
         ->join('categorias', 'variacion_categoria.categoria_id', '=', 'categorias.id')
         ->join('productos', 'variaciones.producto_id', '=', 'productos.id')
-        ->where('categorias.nombre', 'Productos Especiales')
+        ->where('categorias.id', 2)
         ->whereIn('variaciones.id', function ($query) {
             $query->select(DB::raw('MIN(variaciones.id)'))
                   ->from('variaciones')

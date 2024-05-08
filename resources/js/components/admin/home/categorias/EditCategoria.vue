@@ -43,7 +43,8 @@ export default {
             foto: null,
             categoria: null,
             orden: null,
-            texto: null
+            texto: null,
+            categoriaProduct: null
         }
 
     },
@@ -64,6 +65,8 @@ export default {
                 foto: this.foto,
                 orden: $('#orden').val(),
                 texto: $('#texto').val(),
+                categoriaProduct: this.categoriaProduct,
+
             }
                 , {
                     headers: {
@@ -92,6 +95,7 @@ export default {
                     this.categoria = response.data;
                     this.orden = this.categoria.orden
                     this.texto = this.categoria.texto
+                    this.categoriaProduct = this.categoria.categoriaProducto
 
                 })
                 .catch(error => {

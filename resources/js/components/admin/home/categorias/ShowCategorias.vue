@@ -3,6 +3,16 @@
         <div class="w-100 border-bottom">
             <h1>CATEGORÍAS</h1>
         </div>
+        <form class="mt-3">
+            <div class="mb-3">
+                <label class="form-label">Titulo</label>
+                <input type="text" class="form-control" id="titulo" :value="this.titulo">
+            </div>
+            <div class="w-100 d-flex justify-content-end">
+                <button @click="updateTitulo()" type="button" class="btn"
+                    style="background-color: rgb(52, 68, 127); color: white;">Guardar</button>
+            </div>
+        </form>
 
         <table class="table table-bordered mt-3">
             <thead>
@@ -45,10 +55,24 @@ export default {
     data() {
         return {
             categorias: [],
+            titulo: ''
         };
     },
 
     methods: {
+
+         updateTitulo() {
+            let titulo = $('#titulo').val()
+            axios.get(`/api/updateTitulo/${titulo}`)
+                .then(response => {
+                    this.$store.commit('setMostrarAlerta', true);
+                    this.$store.commit('setClaseAlerta', 1);
+                    this.$store.commit('setMensajeAlerta', 'Titulo actualizado con éxito');
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        },
         getImagen(fileName) {
             if(fileName){
                 const filePath = fileName.split('/').pop();
@@ -64,6 +88,8 @@ export default {
                 .get("/api/obtenerCategoriasHome")
                 .then((response) => {
                     this.categorias = response.data;
+                    this.titulo = response.data[0].titulo
+
                 })
                 .catch((error) => {
                     console.error(error);

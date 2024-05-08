@@ -34,9 +34,9 @@
 
     <div class="container seccion2">
       <div class="contenido">
-        <p class="titleSeccion">Productos</p>
+        <p class="titleSeccion">{{ this.tituloCategoria }}</p>
         <div class="row d-flex imagenes"> 
-          <div v-for="categoria in categorias" :key="categoria.id" class="col-lg-6">
+          <div v-for="categoria in categoriasP" :key="categoria.id" class="col-lg-6">
 
             <div data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="2000">
             <router-link class="route" to="/productosdelinea"
@@ -174,7 +174,10 @@ export default defineComponent({
       imagen2: '',
       banner: [],
       categorias: [],
+      categoriasP: [],
+
       servicios: [],
+      tituloCategoria: '',
       settings: {
         itemsToShow: 1,
         snapAlign: 'center',
@@ -194,12 +197,13 @@ export default defineComponent({
   },
 
   methods: {
-    obtenerCategoriasHome() {
+    obtenerCategoriasHomeP() {
 
       axios
         .get("/api/obtenerCategoriasHome")
         .then((response) => {
-          this.categorias = response.data;
+          this.categoriasP = response.data;
+          this.tituloCategoria = this.categoriasP[0].titulo
         })
         .catch((error) => {
           console.error(error);
@@ -284,7 +288,7 @@ export default defineComponent({
     this.obtenerCategoriasHome();
     this.obtenerProductosDestacados();
     this.obtenerServiciosInformacion();
-    this.obtenerCategoriasHome();
+    this.obtenerCategoriasHomeP();
   }
 });
 

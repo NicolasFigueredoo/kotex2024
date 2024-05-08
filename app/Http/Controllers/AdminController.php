@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\Catalogo;
+use App\Models\Categoria;
 use App\Models\CategoriaHome;
 use App\Models\Contacto;
 use App\Models\Logo;
@@ -111,6 +112,18 @@ class AdminController extends Controller
 
         $categoria->save();
 
+        if($request->categoriaProduct == 1){
+            $categoriaProducto = Categoria::find(1);
+            $categoriaProducto->nombre = $categoria->texto;
+            $categoriaProducto->save();
+        }
+        
+        if($request->categoriaProduct == 2){
+            $categoriaProducto = Categoria::find(2);
+            $categoriaProducto->nombre = $categoria->texto;
+            $categoriaProducto->save();
+        }
+
         return response()->json(['message' => 'Categoría actualizada con éxito'], 200);
 
     }
@@ -119,6 +132,17 @@ class AdminController extends Controller
     {
         $categoria = CategoriaHome::find($idCategoria);
         return response()->json($categoria);
+    }
+
+    public function updateTitulo($titulo){
+        $categorias = CategoriaHome::all();
+
+        foreach ($categorias as $categoria) {
+            $categoria->titulo = $titulo;
+            $categoria->save();
+        }
+        return response()->json(true);
+
     }
 
     //BANNERS
@@ -266,6 +290,25 @@ class AdminController extends Controller
 
         return response()->json(['message' => 'Datos subidos correctamente'], 200);
     }
+
+    public function deleteServicio(Request $request){
+        $servicio = Servicio::find($request->idServicio);
+        $servicio->delete();
+
+        return response()->json(['message' => 'Servicio Eliminado'], 200);
+    }
+
+    public function crearServicio(Request $request)
+    {
+        $servicio = new Servicio();
+        $servicio->orden = $request->orden;    
+        $servicio->texto = $request->texto;    
+        $servicio->icono = $request->icono;    
+        $servicio->save();
+
+        return response()->json(['message' => 'Datos subidos correctamente'], 200);
+    }
+
 
     //CATALOGO
     public function obtenerCatalogo(){

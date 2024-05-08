@@ -343,6 +343,7 @@
                             <EditMetadatos v-if="mostrarComponente === 28"/>
 
                             <CrearSlider v-if="mostrarComponente === 29"/>
+                            <CrearServicio v-if="mostrarComponente === 30"/>
 
 
             </div>
@@ -393,6 +394,7 @@ import EditMetadatos from "@/components/admin/metadatos/EditMetadatos.vue";
 
 import axios from "axios";
 import CrearSlider from "@/components/admin/home/sliderHome/CrearSlider.vue";
+import CrearServicio from "@/components/admin/home/servicios/CrearServicio.vue";
 
 export default {
     components: {
@@ -424,7 +426,8 @@ export default {
         EditProducto,
         MetaDatos,
         EditMetadatos,
-        CrearSlider
+        CrearSlider,
+        CrearServicio
     },
 
     data(){

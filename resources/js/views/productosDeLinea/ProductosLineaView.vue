@@ -1,8 +1,8 @@
 <template>
   <div class="container ProductosLinea-view">
     <div class="indicador" style="margin-left: 0px;">
-      <p v-if="nombreProducto"><b>Inicio >  Productos de línea ></b> {{nombreProducto}}</p>
-      <p v-else><b>Inicio > </b>Productos de línea</p>
+      <p v-if="nombreProducto"><b>Inicio >  {{nombreCat}}></b> {{nombreProducto}}</p>
+      <p v-else><b>Inicio > </b>{{nombreCat}}</p>
     </div>
 
     <ProductosLinea v-if="!idProducto" @ver-producto="mostrarProducto"/>
@@ -13,6 +13,7 @@
 <script>
 import ProductosLinea from "@/components/ProductosLinea.vue";
 import InformacionProducto from "@/components/InformacionProducto.vue";
+import axios from 'axios';
 
 export default {
   components: {
@@ -23,9 +24,22 @@ export default {
     return {
       idProducto: null,
       nombreProducto: '',
+      nombreCat: ''
     };
   },
   methods: {
+    obtenerCategoriasHome() {
+
+axios
+  .get("/api/obtenerCategoriasHome")
+  .then((response) => {
+    this.nombreCat = response.data[0].texto;
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+},
     mostrarProducto(datosProducto) {
       this.idProducto = datosProducto[0];
       this.nombreProducto = datosProducto[1].charAt(0).toUpperCase() + datosProducto[1].slice(1);
@@ -38,6 +52,8 @@ export default {
     if (selectedProductId !== null) {
       this.idProducto = selectedProductId;
     }
+
+    this.obtenerCategoriasHome();
     
   }
 };

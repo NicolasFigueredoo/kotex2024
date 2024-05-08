@@ -63,6 +63,7 @@ Route::get('/api/getImage/{fileName}', [ImagenController::class, 'getImage']);
 Route::get('/api/obtenerCategoriasHome', [AdminController::class, 'obtenerCategorias']);
 Route::post('/api/updateCategoriaHome', [AdminController::class, 'updateCategoria']);
 Route::get('/api/obtenerCategoriaHome/{idCategoria}', [AdminController::class, 'obtenerCategoriaHome']);
+Route::get('/api/updateTitulo/{titulo}', [AdminController::class, 'updateTitulo']);
 
 //banners
 Route::get('/api/obtenerBanner', [AdminController::class, 'obtenerBanner']);
@@ -102,6 +103,8 @@ Route::post('/api/updateLogo', [AdminController::class, 'updateLogo']);
 Route::get('/api/obtenerServicios', [AdminController::class, 'obtenerServicios']);
 Route::get('/api/obtenerServicio/{idServicio}', [AdminController::class, 'obtenerServicio']);
 Route::post('/api/updateServicio', [AdminController::class, 'updateServicio']);
+Route::post('/api/deleteServicio', [AdminController::class, 'deleteServicio']);
+Route::post('/api/crearServicio', [AdminController::class, 'crearServicio']);
 
 //aplicaciones
 Route::get('/api/aplicaciones', [AplicacionController::class, 'index']);
