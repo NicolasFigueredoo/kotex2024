@@ -5,11 +5,32 @@
             <h1>CATALOGO</h1>
         </div>
 
-        <form class="mt-3">
-            <div class="mb-3">
-                <label class="form-label">Archivo descarga</label>
-                <input type="file" class="form-control" id="file" @change="guardarFile()" ref="fileArchive">
+        <form class="row mt-3">
+            <div class="col-md-11">
+                <label class="form-label">Titulo</label>
+                <input type="text" class="form-control" id="titulo">
             </div>
+            <div class="col-md-1">
+                <img class="imagen" :src="getImagen(this.imagenC)" alt="">
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <label class="form-label">Imagen (Tamaño recomendado 265x340)</label>
+                    <input type="file" ref="fotoCatalogo" class="form-control" @change="guardarFoto()">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Archivo descarga</label>
+                <input type="file" class="form-control" id="file" @change="guardarFile()" ref="foto">
+                </div>
+            </div>
+
+        
+
+            <div class="mb-3 mt-3">
+                <label for="exampleInputPassword1" class="form-label">Texto</label>
+                <textarea class="summernote" id="editor"></textarea>
+            </div>
+        
 
             <div class="w-100 d-flex justify-content-end">
 
@@ -25,6 +46,8 @@
 </template>
 
 <script>
+import 'jquery';
+
 import axios from 'axios';
 
 export default {
@@ -32,11 +55,27 @@ export default {
     data() {
         return {
             catalogo: [],
-            file: null
+            file: null,
+            foto: null,
+            imagenC: null
         }
     },
 
     methods: {
+
+
+
+        getImagen(fileName) {
+            if (fileName) {
+                const filePath = fileName.split('/').pop();
+                return '/api/getImage/' + filePath
+            }
+        },
+
+        guardarFoto() {
+            const file = this.$refs.fotoCatalogo;
+            this.foto = file.files[0]
+        },
 
         guardarFile() {
             const file = this.$refs.fileArchive;
@@ -45,21 +84,25 @@ export default {
 
         updateCatalogo() {
 
-            let formData = new FormData(); 
+
+            let formData = new FormData();
             formData.append('file', this.file);
-    
+            formData.append('foto', this.foto);
+            formData.append('titulo', $('#titulo').val());
+            formData.append('texto', $('#editor').summernote('code').toString());
+
             axios.post('/api/updateCatalogo', formData
-            , {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            })
+                , {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
                 .then(response => {
                     this.$store.commit('setMostrarAlerta', true);
                     this.$store.commit('setClaseAlerta', 1);
-                    this.$store.commit('setMensajeAlerta', 'Catalogo actualizado con éxito'); 
+                    this.$store.commit('setMensajeAlerta', 'Catalogo actualizado con éxito');
                     this.obtenerCatalogo();
-                    
+
                 })
                 .catch(error => {
                     console.error(error);
@@ -68,17 +111,33 @@ export default {
         },
 
         obtenerCatalogo() {
-            axios.get('/api/obtenerCatalogo')
+            axios.get('/api/obtenerCatalogoDate')
                 .then(response => {
                     this.catalogo = response.data
+                    this.imagenC = response.data.imagen
+
+                    $('#titulo').val(response.data.titulo);
+                    $('#editor').summernote('code', response.data.texto);
+
                 })
                 .catch(error => {
                     console.error(error);
                 });
-        }
+        },
+        summerNote() {
+            $('#editor').summernote({
+                height: 300,
+            });
+            $('.summernote').summernote();
+            var noteBar = $('.note-toolbar');
+            noteBar.find('[data-toggle]').each(function () {
+                $(this).attr('data-bs-toggle', $(this).attr('data-toggle')).removeAttr('data-toggle');
+            });
+        },
     },
     mounted() {
         this.obtenerCatalogo();
+        this.summerNote();
 
     }
 }
@@ -107,7 +166,7 @@ h1 {
 }
 
 .imagen {
-    width: 200px;
-    height: 100px;
+    width: 100%;
+    height: 100%;
 }
 </style>

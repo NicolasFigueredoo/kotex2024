@@ -20,11 +20,16 @@ export default createStore({
     mensajeAlerta: null,
     mostrarAlerta: null,
     alertaClase: null,
+    summer: null,
     idLogin: JSON.parse(localStorage.getItem('idLogin')) || null,
     
 
   },
   mutations: {
+
+    setSummer(state,bool){
+      state.summer = bool
+    },
     setMetadatoId(state,idMetadato){
       state.idMetadato = idMetadato
     },
@@ -102,6 +107,11 @@ export default createStore({
   },
  
   getters: {
+
+    getSummer(state){
+      return state.summer;
+
+    },
     getIdMetadato(state){
       return state.idMetadato;
     },

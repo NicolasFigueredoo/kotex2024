@@ -125,8 +125,8 @@ h1 {
     font-weight: 700;
 }
 .imagen {
-    width: 200px;
-    height: 100px;
+    width: 100%;
+    height: 100%;
 }
 
 </style>

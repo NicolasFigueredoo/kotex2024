@@ -44,7 +44,7 @@
                 <p class="titulo2">¿Porque elegirnos?</p>
             </div>
             <div class="row d-flex tarjetas">
-                <div v-for="seccion in secciones" :key="seccion.id" class="tarjeta">
+                <div v-for="seccion in secciones" :key="seccion.id" class="col-lg-3 m-2 tarjeta">
                     <div class="iconNosotros" v-html="seccion.icono"></div>
                     <p class="textoIcon">{{ seccion.titulo }}</p>
                     <div  class="infoIcon w-100" v-html="seccion.texto"> </div>

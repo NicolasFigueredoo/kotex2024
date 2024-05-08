@@ -74,6 +74,8 @@ Route::post('/api/updateBanner', [AdminController::class, 'updateBanner']);
 Route::get('/api/obtenerSecciones', [AdminController::class, 'obtenerSecciones']);
 Route::post('/api/updateSeccion', [AdminController::class, 'updateSeccion']);
 Route::get('/api/obtenerSeccion/{idSeccion}', [AdminController::class, 'obtenerSeccion']);
+Route::post('/api/deleteValor', [AdminController::class, 'deleteSeccion']);
+Route::post('/api/crearSeccion', [AdminController::class, 'crearSeccion']);
 
 
 //usuarios
@@ -116,6 +118,7 @@ Route::post('/api/deleteAplicacion', [AplicacionController::class, 'delete']);
 //catalogo
 Route::get('/api/obtenerCatalogo', [AdminController::class, 'obtenerCatalogo']);
 Route::post('/api/updateCatalogo', [AdminController::class, 'updateCatalogo']);
+Route::get('/api/obtenerCatalogoDate', [AdminController::class, 'obtenerCatalogoDate']);
 
 //productos
 Route::post('/api/crearProducto', [VariacionesController::class, 'crearProducto']);

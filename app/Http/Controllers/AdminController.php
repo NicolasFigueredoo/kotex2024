@@ -201,6 +201,25 @@ class AdminController extends Controller
 
     }
 
+    public function deleteSeccion(Request $request){
+        $seccion = Seccion::find($request->idValor);
+        $seccion->delete();
+
+        return response()->json(['message' => 'Valor Eliminado'], 200);
+    }
+
+    public function crearSeccion(Request $request)
+    {
+        $seccion = new Seccion();
+        $seccion->orden = $request->orden;
+        $seccion->titulo = $request->titulo;
+        $seccion->texto = $request->texto;
+        $seccion->icono = $request->icono;
+        $seccion->save();
+
+        return response()->json(['message' => 'Datos subidos correctamente'], 200);
+
+    }
    //CONTACTO
 
     public function obtenerContacto(){
@@ -325,8 +344,27 @@ class AdminController extends Controller
         
     }
 
+    public function obtenerCatalogoDate(){
+        $catalogo = Catalogo::first();
+        return response()->json($catalogo);
+
+      
+        
+    }
+
     public function updateCatalogo(Request $request){
         $catalogo = Catalogo::first();
+
+        if ($request->hasFile('foto')) {
+          
+            if (!Storage::exists('public/fotos')) {
+                Storage::makeDirectory('public/fotos');
+            }
+        
+            $photoPath = $request->file('foto')->store('fotos');
+            $catalogo->imagen = $photoPath;
+        }
+
         if ($request->hasFile('file')) {
           
             if (!Storage::exists('public/fotos')) {
@@ -336,6 +374,8 @@ class AdminController extends Controller
             $photoPath = $request->file('file')->store('fotos');
             $catalogo->file = $photoPath;
         }
+        $catalogo->titulo = $request->titulo;
+        $catalogo->texto = $request->texto;
         $catalogo->save();
 
         return response()->json($catalogo);

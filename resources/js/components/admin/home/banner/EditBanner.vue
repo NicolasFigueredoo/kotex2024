@@ -10,7 +10,7 @@
                 <label class="form-label">Imagen (Tamaño recomendado 670x566) </label>
                 <input type="file" ref="fotoBanner" class="form-control" @change="guardarFoto()">
             </div>
-            <div class="mb-3">
+            <div class="mb-3 col-md-3">
                 <th><img class="imagen" :src="getImagen(this.imagen)" alt=""></th>
             </div>
             <div class="mb-3">
@@ -91,12 +91,12 @@ export default {
                         this.$store.commit('setMostrarAlerta', true);
                         this.$store.commit('setClaseAlerta', 1);
                         this.$store.commit('setMensajeAlerta', 'Banner actualizado con éxito');
-                        this.$store.commit('mostrarComponente', 1);
+                        this.$store.commit('mostrarComponente', 5);
                     } else {
                         this.$store.commit('setMostrarAlerta', true);
                         this.$store.commit('setClaseAlerta', 1);
                         this.$store.commit('setMensajeAlerta', 'Banner actualizado con éxito');
-                        this.$store.commit('mostrarComponente', 1);
+                        this.$store.commit('mostrarComponente', 7);
                     }
                 })
                 .catch(error => {
@@ -120,7 +120,7 @@ export default {
         obtenerBannerInformacion() {
             axios.get(`/api/obtenerBanner`)
                 .then(response => {
-                    if (this.idComponente === 5) {
+                    if (this.idComponente == 5) {
                         this.bannerTexto = response.data[0].texto
                         this.bannerTitulo = response.data[0].titulo
                         this.idBanner = response.data[0].id
@@ -130,8 +130,8 @@ export default {
                         this.bannerTexto = response.data[1].texto
                         this.bannerTitulo = response.data[1].titulo
                         this.idBanner = response.data[1].id
-                        this.imagen = response.data[0].imagen
-                        this.seccion = response.data[0].seccion
+                        this.imagen = response.data[1].imagen
+                        this.seccion = response.data[1].seccion
                     }
 
                     $('#editor').summernote('code', this.bannerTexto);
@@ -174,7 +174,7 @@ h1 {
 }
 
 .imagen {
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    height: 100%;
 }
 </style>

@@ -4,7 +4,7 @@
         <div class="w-100 border-bottom d-flex justify-content-between">
             <h1>SLIDER</h1>
 
-            <button @click="crearSlider()" type="button" class="btn"
+            <button @click="crearSlider()" type="button" class="btn mb-1"
                  id="crearSlider"   style="background-color: rgb(52, 68, 127); color: white;">Crear Slider</button>
         </div>
 
@@ -13,7 +13,7 @@
                 <tr>
                     <th scope="col" class="col-sm-1 encabezado">Orden</th>
                     <th scope="col" class="encabezado">Texto</th>
-                    <th scope="col" class="col-sm-1 encabezado">Imagen</th>
+                    <th scope="col" class="col-sm-2 encabezado">Imagen</th>
                     <th scope="col" class="col-sm-1 encabezado">Acciones</th>
                 </tr>
             </thead>
@@ -142,16 +142,11 @@ h1 {
 }
 
 .imagen {
-    width: 200px;
-    height: 100px;
+    width: 100%;
+    height: 100%;
 }
 
-#crearSlider{
-    font-size: 14px;
-    color: black;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 700;
-}
+
 
 
 </style>

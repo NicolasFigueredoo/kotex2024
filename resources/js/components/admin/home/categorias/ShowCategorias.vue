@@ -19,7 +19,7 @@
                 <tr>
                     <th scope="col" class="col-sm-1 encabezado">Orden</th>
                     <th scope="col" class="encabezado">Texto</th>
-                    <th scope="col" class="col-sm-1 encabezado">Imagen</th>
+                    <th scope="col" class="col-sm-2 encabezado">Imagen</th>
                     <th scope="col" class="col-sm-1 encabezado">Acciones</th>
                 </tr>
             </thead>
@@ -123,7 +123,7 @@ h1 {
 }
 
 .imagen {
-    width: 200px;
-    height: 100px;
+    width: 100%;
+    height: 100%;
 }
 </style>

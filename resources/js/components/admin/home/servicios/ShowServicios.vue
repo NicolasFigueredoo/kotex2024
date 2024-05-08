@@ -3,7 +3,7 @@
         <div class="w-100 border-bottom d-flex justify-content-between">
             <h1>SERVICIOS</h1>
 
-            <button @click="crearServicio()" type="button" class="btn"
+            <button @click="crearServicio()" type="button" class="btn mb-1"
                  id="crearServicio"   style="background-color: rgb(52, 68, 127); color: white;">Crear Servicio</button>
         </div>
 
@@ -86,7 +86,6 @@ export default {
     
         },
         crearServicio(){
-            this.$store.commit('setServicioId', null);
             this.$store.commit('mostrarComponente', 30);
         },
         getImagen(fileName) {
@@ -143,10 +142,5 @@ h1 {
 }
 
 
-#crearServicio{
-    font-size: 14px;
-    color: black;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 700;
-}
+
 </style>

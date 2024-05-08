@@ -11,7 +11,7 @@
                     <th scope="col" class="col-sm-1 encabezado">orden</th>
                     <th scope="col" class="encabezado">Nombre</th>
                     <th scope="col" class="col-sm-1 encabezado">Imagen</th>
-                    <th scope="col" class="col-sm-1 encabezado">Acciones</th>
+                    <th scope="col" class="col-sm-2 encabezado">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,7 +20,7 @@
                     <th >{{ aplicacion.nombre }}</th>
                     <th><img class="imagen" :src="getImagen(aplicacion.imagen)" alt=""></th>
                     
-                    <td>
+                    <td style="display: flex; justify-content: center;">
                         <button type="button" class="btn btn-sm" style="background-color: rgb(52, 68, 127);" @click="editarAplicacion(11, aplicacion.id)">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="15" height="15"
                                 style="cursor: pointer">
@@ -121,7 +121,7 @@ h1 {
     font-weight: 700;
 }
 .imagen {
-    width: 200px;
-    height: 100px;
+    width: 100%;
+    height: 100%;
 }
 </style>

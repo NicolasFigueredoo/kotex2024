@@ -9,17 +9,16 @@
     <div class="container">
       <div class="row d-flex justify-content-center" style="margin-bottom: 330px;">
         <div class="col-lg-4" style="width: 270px; height: 339px; padding-right: 0px; margin-right: 0px;">
-          <div style="background-image: url('../../img/catalogo.jpg'); background-size: cover; width: 100%; height: 100%;">
-          </div>
+          <img :src="getImagen(catalogoImagen)" alt="" style="width: 100%; height: 100%;">
         </div>
 
         <div class="col-lg-5" style="background-color: green; padding-left: 50px; padding-right: 120px; background-color: #FAFAFA;">
           <div style="margin-top: 50px;">
-            <p class="catalogoTitle">Catálogo de productos</p>
+            <p class="catalogoTitle">{{ catalogoTitulo }}</p>
           </div>
 
           <div style="margin-top: 40px;">
-            <p class="catalogoText">Descargá nuestro catálogo actualizado con todos nuestros artículos en venta</p>
+            <div class="catalogoText" v-html="catalogoTexto"> </div>
           </div>
 
           <div class="botones">
@@ -46,11 +45,21 @@ export default {
   data() {
     return {
       catalogo: null,
-      link: null
+      link: null,
+      catalogoTitulo: null,
+      catalogoTexto: null,
+      catalogoImagen: null
     }
   },
 
   methods: {
+    getImagen(fileName){
+      if(fileName){
+      const filePath = fileName.split('/').pop();
+      return '/api/getImage/' + filePath
+    }
+
+    },
     descargarArchivo() {
       axios.get('/api/obtenerCatalogo',{ responseType: 'blob' })
         .then(response => {
@@ -67,6 +76,24 @@ export default {
           console.error(error);
         });
     },
+
+    obtenerCatalogoInformacion(){
+      axios.get('/api/obtenerCatalogoDate',)
+        .then(response => {
+          this.catalogoTitulo = response.data.titulo;
+          this.catalogoTexto = response.data.texto;
+          this.catalogoImagen = response.data.imagen
+
+        
+
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+  },
+  mounted(){
+    this.obtenerCatalogoInformacion()
   }
 }
 </script>

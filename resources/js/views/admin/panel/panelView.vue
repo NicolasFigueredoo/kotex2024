@@ -285,7 +285,7 @@
         </nav>
 
             </div>
-            <div class="componentesV" style=" max-height: 800px; 
+            <div class="componentesV" style=" max-height: 850px; 
     overflow-y: auto;">
                 
                             <Alerta style="position: fixed; z-index: 5;" v-if="mostrarAlerta === true"/>
@@ -344,6 +344,7 @@
 
                             <CrearSlider v-if="mostrarComponente === 29"/>
                             <CrearServicio v-if="mostrarComponente === 30"/>
+                            <CrearSeccion v-if="mostrarComponente === 31"/>
 
 
             </div>
@@ -395,6 +396,7 @@ import EditMetadatos from "@/components/admin/metadatos/EditMetadatos.vue";
 import axios from "axios";
 import CrearSlider from "@/components/admin/home/sliderHome/CrearSlider.vue";
 import CrearServicio from "@/components/admin/home/servicios/CrearServicio.vue";
+import CrearSeccion from "@/components/admin/nosotros/seccion/CrearSeccion.vue";
 
 export default {
     components: {
@@ -427,7 +429,8 @@ export default {
         MetaDatos,
         EditMetadatos,
         CrearSlider,
-        CrearServicio
+        CrearServicio,
+        CrearSeccion
     },
 
     data(){
