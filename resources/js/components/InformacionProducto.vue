@@ -3,11 +3,11 @@
         <div class="container informacionProducto">
             <div class="imgMinis">
                 <div>
-                    <img v-if="this.producto" :src="getImagen(this.producto.imagen)" alt="" ref="imgMiniUno" @click="imagenClick(1, this.producto.imagen)"
+                    <img v-if="this.producto" :src="getImagen(this.producto.imagen)" alt="producto" ref="imgMiniUno" @click="imagenClick(1, this.producto.imagen)"
                         style="cursor: pointer; border: 2px solid rgba(51, 68, 127, 1);" />
                 </div>
                 <div>
-                    <img v-if="this.producto" :src="getImagen(this.producto.imagen2)" alt="" ref="imgMiniDos"
+                    <img v-if="this.producto" :src="getImagen(this.producto.imagen2)" alt="producto" ref="imgMiniDos"
                         @click="imagenClick(2, this.producto.imagen2)" style="cursor: pointer;" />
                 </div>
             </div>
@@ -15,7 +15,7 @@
             <div id="divP" class="d-flex mt-2">
 
             <div class="contenedor-imagen">
-                <img id="imgP" v-if="this.producto" :src="getImagen(this.producto.imagen)" ref="imgenPrincipal" alt="" />
+                <img id="imgP" v-if="this.producto" :src="getImagen(this.producto.imagen)" ref="imgenPrincipal" alt="producto" @click="MostrarProducto()" />
             </div>
             <div class="textos" v-if="this.producto" style="width: 100%">
                 <div class="categoriaI">
@@ -182,10 +182,12 @@
             </div>
         </div>
     </div>
+    <div class="contenedorModal">
 
+</div>
    
 
-        <div class="container" style="padding-top: 80px; padding-bottom:100px">
+<div class="container" style="padding-top: 80px; padding-bottom:100px">
   <div>
       <p class="titleServicio">Productos relacionados</p>
   </div>
@@ -195,7 +197,7 @@
     <div v-for="(grupo, index) in Math.ceil(productosRelacionados.length / 4)" :key="index" :class="['carousel-item', index === 0 ? 'active' : '']">
       <div class="row">
         <div v-for="(producto, innerIndex) in productosRelacionados.slice(index * 4, (index + 1) * 4)" :key="producto.id_producto" class="col-lg-3">
-          <div class="producto"> 
+          <div class="producto" @click="verProducto(producto.id_producto)"> 
             <div>
               <img :src="getImagen(producto.imagen)" alt="imagen" loading="lazy">
             </div>
@@ -218,6 +220,7 @@
 
 </div>
 </div>
+
     </div>
 </template>
 
@@ -258,6 +261,8 @@ export default {
             unidadSeleccionada: '',
             cantidadSeleccionada: '',
             producto: null,
+            clicAgregado: false,
+        clicEnImagenPrincipal: null,
             settings: {
                 itemsToShow: 1,
                 snapAlign: 'center',
@@ -287,6 +292,63 @@ export default {
         }
     },
     methods: {
+
+        imagenClick(idImagen, imagen) {
+            this.clicAgregado = true;
+            let elemento = this.$refs.imgMiniUno;
+            let elemento2 = this.$refs.imgMiniDos;
+            let elemento3 = this.$refs.imgenPrincipal;
+
+
+            if (idImagen === 1) {
+                elemento2.style.border = 'none';
+                elemento.style.border = '2px solid rgba(51, 68, 127, 1)';
+                elemento3.src = this.getImagen(imagen);
+
+                
+     
+            } else {
+                elemento.style.border = 'none';
+                elemento2.style.border = '2px solid rgba(51, 68, 127, 1)';
+                elemento3.src = this.getImagen(imagen);
+                
+                
+  
+
+            }
+ 
+
+
+        },
+
+    MostrarProducto(){
+
+
+        let elemento3 = this.$refs.imgenPrincipal;
+
+            $('.contenedorModal').html(`
+                <div class="modal fade modal-lg" tabindex="-1" id="myModal" ref="myModal">
+                    <div class="container-fluid modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">${this.nombreProducto}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <img style="width:100%; height: 100%"   src="${elemento3.src}" ref="imgenPrincipal" alt="producto"  />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `);
+            $('#myModal').modal('show');
+        
+
+
+
+
+
+    },
         
     getImagen(fileName) {
       if (fileName) {
@@ -499,24 +561,6 @@ export default {
             }
         },
 
-        imagenClick(idImagen, imagen) {
-            let elemento = this.$refs.imgMiniUno;
-            let elemento2 = this.$refs.imgMiniDos;
-            let elemento3 = this.$refs.imgenPrincipal;
-
-            if (idImagen === 1) {
-                elemento2.style.border = 'none';
-                elemento.style.border = '2px solid rgba(51, 68, 127, 1)';
-                elemento3.src = this.getImagen(imagen);
-            } else {
-                elemento.style.border = 'none';
-                elemento2.style.border = '2px solid rgba(51, 68, 127, 1)';
-                elemento3.src = this.getImagen(imagen);
-
-            }
-
-
-        },
 
 
 
@@ -528,6 +572,9 @@ export default {
         this.obtenerCategorias();
         this.obtenerInformacionProducto();
 
+        this.clicEnImagenPrincipal = () => {
+            this.MostrarProducto(this.$refs.imgenPrincipal.src);
+        };
 
 
 
@@ -819,6 +866,7 @@ export default {
     width: 496px;
     height: 496px;
     flex-shrink: 0;
+    cursor:zoom-in;
 }
 
 
