@@ -17,7 +17,7 @@
             <div class="contenedor-imagen">
                 <img id="imgP" v-if="this.producto" :src="getImagen(this.producto.imagen)" ref="imgenPrincipal" alt="producto" @click="MostrarProducto()" />
             </div>
-            <div class="textos" v-if="this.producto" style="width: 100%">
+            <div class="textos" v-if="this.producto">
                 <div class="categoriaI">
                     <p>{{ this.categoria.toUpperCase() }}</p>
                 </div>
@@ -638,8 +638,9 @@ export default {
 }
 
 .textos {
-    width: 600px;
     margin-top: 20px;
+    margin-left:20px; 
+    width: 100%;
 }
 
 .categoriaI {
@@ -986,7 +987,7 @@ export default {
   }
   .textos{
     width:300px;
-    margin-left: 0px;
+    margin-left: 0px !important;
   }
 
   

@@ -113,9 +113,9 @@
 
                   <a class="nav-link" href="#">
                     <div class="d-flex align-items-center">
-                      <router-link class="route" :to="categoria.route" @click="deleteProduct()"
+                      <router-link class="route" :to="categoria.route" @click="deleteProduct(categoria.route)"
                         :style="{ fontWeight: isRouteActive(categoria.route) ? 'bold' : '500' }">
-                        <p class="textoR">{{ categoria.texto }}</p>
+                        <p class="textoR categoria-text">{{ categoria.texto }}</p>
                       </router-link>
                     </div>
                   </a>
@@ -242,6 +242,13 @@ export default {
 
     }
   },
+  computed:{
+    idProductoCategoria() {
+            const idProductoCategoria = this.$store.getters['getSelectedProductId'];
+            return idProductoCategoria;
+        }
+
+  },
   methods: {
     obtenerCategoriasHome() {
 
@@ -335,8 +342,10 @@ export default {
     isRouteActive(route) {
       return this.$route.path === route;
     },
-    deleteProduct() {
-      this.$store.commit('setSelectedProductId', null);
+    deleteProduct(route) {
+      if(this.idProductoCategoria != null){
+        location.reload();
+      }
     }
   },
   mounted() {
@@ -507,6 +516,37 @@ export default {
 .textoR:hover {
   font-weight: 600;
 }
+
+.navbar-nav .nav-item .nav-link .route .textoR {
+    white-space: nowrap;
+  }
+
+  .navbar-nav .nav-item .nav-link .d-flex {
+    white-space: nowrap;
+  }
+
+  .navbar-nav .nav-item .nav-link .d-flex .categoria-text {
+    white-space: nowrap;
+  }
+
+
+  @media only screen and (max-width: 1200px) {
+
+    .navbar-nav .nav-item .nav-link .route .textoR {
+    white-space: normal;
+  }
+
+  .navbar-nav .nav-item .nav-link .d-flex {
+    white-space: normal;
+  }
+
+  .navbar-nav .nav-item .nav-link .d-flex .categoria-text {
+    white-space: normal;
+  }
+
+
+}
+
 
 @media only screen and (max-width: 1000px) {
 
